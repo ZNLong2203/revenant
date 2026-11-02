@@ -1,0 +1,40 @@
+# ─────────────────────────────────────────────────────────────
+#  Private — never pushed. The repo goes public; these do not.
+#  (submission drafts, demo script, video sources, notes)
+# ─────────────────────────────────────────────────────────────
+/private/
+*.private.md
+
+# ─── Secrets ─────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ─── Dependencies ────────────────────────────────────────────
+/node_modules
+/.pnp
+.pnp.*
+
+# ─── Build output ────────────────────────────────────────────
+/.next/
+/out/
+/build
+/dist
+*.tsbuildinfo
+next-env.d.ts
+
+# ─── Test / coverage ─────────────────────────────────────────
+/coverage
+/test-results
+/playwright-report
+/benchmark/raw/
+
+# ─── Tooling ─────────────────────────────────────────────────
+.vercel
+.DS_Store
+npm-debug.log*
+.claude/settings.local.json
+
+# NOTE: /.kiro is committed on purpose (hackathon requirement). Never ignore it.
