@@ -22,7 +22,7 @@ export const PARKING_PHRASES = [
   "the owner of this domain", "hugedomains", "domain name is for sale", "this page is provided courtesy of godaddy",
   "check out the domain", "premium domain", "lease to own", "domain registered", "this domain is registered",
   "this domain was recently registered", "registered at dynadot", "dynadot", "namecheap parking", "parkingpage",
-  "domain parking", "parked by", "is parked free", "courtesy of namecheap", "future home of something quite cool",
+  "domain parking", "parked by", "is parked free", "courtesy of namecheap", "future home of something quite cool", "this website is for sale", "website is for sale", "this site is for sale",
 ];
 
 /**
@@ -43,6 +43,7 @@ export const SPAM_TERMS = [
   "crypto signals", "forex signals", "binary options", "cheap jerseys", "seo backlinks", "buy followers",
   // brand names that only ever appear on gambling pages
   "ufabet", "pg slot", "w88", "fun88", "188bet", "dafabet", "betflik", "jili", "joker123", "slot pg",
+  "superliga168", "ligaciputra", "game online terbaru", "slot online terbaru", "situs game online",
   "sv388", "ae888", "kubet", "jun88", "okvip", "789bet", "new88", "shbet", "f8bet", "hi88",
   // Thai
   "สล็อต", "คาสิโน", "บาคาร่า", "เว็บตรง", "แทงบอล", "หวย", "เครดิตฟรี", "ฝากถอน", "แตกหนัก", "ยูฟ่าเบท",

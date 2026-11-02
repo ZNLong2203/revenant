@@ -77,3 +77,21 @@ describe("false ghosts found on live-tagged controls (seed 3110)", () => {
     expect(d.verdict).not.toBe("ghost");
   });
 });
+
+describe("misses on the held-out seed 4040 (fixed after the run, not counted in the published numbers)", () => {
+  it("a 'This website is for sale!' page is possessed", () => {
+    const d = decide({
+      url: "http://theblock-mag.com/interview-refinery29/",
+      live: { ok: true, status: 200, finalUrl: "http://theblock-mag.com/", redirects: ["http://theblock-mag.com/"], title: "theblock-mag.com - This website is for sale! - theblock mag Resources and Information.", text: "This website is for sale! theblock-mag.com is your first and best source for information about theblock mag.", fetchedAt: "x" },
+    });
+    expect(d.verdict).toBe("possessed");
+  });
+
+  it("an Indonesian game-site page on a metal review domain is possessed", () => {
+    const d = decide({
+      url: "http://www.live-metal.net/cdreviews_typeonegative_deadagain",
+      live: { ok: true, status: 200, finalUrl: "https://www.live-metal.net/", redirects: ["https://www.live-metal.net/"], title: "Superliga168 & Ligaciputra | Ragam Game Online Terbaru 2026", text: "Superliga168 Ligaciputra situs game online terbaru daftar slot online terbaru", fetchedAt: "x" },
+    });
+    expect(d.verdict).toBe("possessed");
+  });
+});

@@ -1,6 +1,6 @@
 # Bugfix: benchmark misses (seeds 2026, 1031 and 3110)
 
-The first label-blind benchmark against Wikipedia citations that editors had tagged `usurped` exposed eight defects. Each is reproduced by a test that quotes the real page.
+The first label-blind benchmark against Wikipedia citations that editors had tagged `usurped` exposed ten defects. Each is reproduced by a test that quotes the real page.
 
 ## Current Behavior (Defect)
 
@@ -12,6 +12,8 @@ The first label-blind benchmark against Wikipedia citations that editors had tag
 6. WHEN a site answered 402 (paywall) THEN the system classified it as buried.
 7. WHEN a site served a bot challenge (`Client Challenge`) instead of the page THEN the system classified the link as a ghost (found on a `live`-tagged control, seed 3110).
 8. WHEN a JavaScript-rendered site returned the same near-empty shell for every path THEN the sibling probe called the link a ghost (seed 3110 control).
+9. WHEN a page said "This website is for sale!" THEN the system classified it as alive (held-out seed 4040; fixed after the published run).
+10. WHEN an Indonesian game-site page used brand names outside the lexicon (`Superliga168`, `Ligaciputra`) THEN the system classified it as alive (held-out seed 4040; fixed after the published run).
 
 ## Expected Behavior (Correct)
 
@@ -23,9 +25,11 @@ The first label-blind benchmark against Wikipedia citations that editors had tag
 6. WHEN a site answers 402 THEN the system SHALL classify the link as unknown.
 7. WHEN a page is a bot challenge THEN the system SHALL classify the link as unknown and SHALL NOT judge it further.
 8. WHEN the live page has less than 600 characters of server-rendered text THEN the system SHALL NOT use the sibling probe as evidence.
+9. WHEN a page says the website or site is for sale THEN the system SHALL treat it as a parking page.
+10. WHEN a page uses known Indonesian game-site brand names THEN the system SHALL count them as gambling vocabulary.
 
 ## Unchanged Behavior (Regression Prevention)
 
 1. WHEN a page mentions one gambling word in ordinary prose (a history of the Monte Carlo Casino) THEN the system SHALL CONTINUE TO classify it as alive.
 2. WHEN a page answers 404 or its domain does not resolve THEN the system SHALL CONTINUE TO classify it as buried.
-3. WHEN a citation tagged `live` is examined THEN the system SHALL CONTINUE TO produce no possessed verdict on it (0 of 60 on seed 1031).
+3. WHEN a citation tagged `live` is examined THEN the system SHALL CONTINUE TO produce no possessed verdict on it (0 of 60 on seed 1031, 0 of 80 on seeds 3110 and 4040).

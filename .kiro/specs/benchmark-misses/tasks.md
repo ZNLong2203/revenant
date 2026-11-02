@@ -16,3 +16,5 @@
   - _Bugfix: Expected Behavior 7, 8_
 - [x] 8. Re-run the benchmark on a fresh seed (4040) and confirm controls stay free of possessed verdicts
   - _Bugfix: Unchanged Behavior 3_
+- [x] 9. Held-out misses on seed 4040: "website is for sale" phrasing and Indonesian game-site brands, with regression tests; numbers stay as published
+  - _Bugfix: Expected Behavior 9, 10_
