@@ -10,7 +10,7 @@ sequenceDiagram
   participant R as RDAP
   participant C as CDX
   participant W as Wayback id_
-  participant L as Claude / lexical
+  participant L as Gemini / Claude / lexical
   E->>R: registration date
   E->>C: 12 captures closest to access date (or takeover)
   C-->>E: snapshots
@@ -28,7 +28,8 @@ sequenceDiagram
 
 ## Claim check
 
-- Model: `claude-opus-5-5` (override `REVENANT_MODEL`), effort `low`, `client.beta.messages.parse` with a zod schema `{archive, live, quote, rationale}`, `fallbacks: "default"`.
+- Provider (`claim/llm.ts`, `claimProvider`): Gemini when `GEMINI_API_KEY` is set (default model `gemini-3.8-flash`, `responseJsonSchema`, thinking level low), otherwise Claude when `ANTHROPIC_API_KEY` is set (`claude-opus-5-5`, `client.beta.messages.parse` with a zod schema, effort low, `fallbacks: "default"`), otherwise lexical. `REVENANT_LLM` forces a provider or `off`; `REVENANT_MODEL` overrides the model.
+- Both providers share `claim/prompt.ts`: one system prompt, one schema `{archive, live, quote, rationale}`, one user message layout and one post-check (`toClaimCheck`).
 - Prompt puts page text inside `<archived_page>`/`<live_page>` tags and says it is untrusted data. The quote is kept only if its first 40 characters really occur in the archived text.
 - Fallback: `claim/lexical.ts` (coverage of the claim's tokens; quote match ≥ 85% counts as supported).
 

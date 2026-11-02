@@ -66,7 +66,7 @@ export default function MethodPage() {
           capture is spam Revenant searches three years further back.
         </li>
         <li>
-          The chosen copy is checked against the citing sentence: by Claude with a fixed JSON schema when an API key is configured, by word overlap otherwise. Page
+          The chosen copy is checked against the citing sentence: by Gemini (or Claude) with a fixed JSON schema when an API key is configured, by word overlap otherwise. Page
           text is passed as untrusted data, and quotes are kept only if they appear verbatim in the archived text.
         </li>
         <li>

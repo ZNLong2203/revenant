@@ -29,6 +29,8 @@
     - _Requirements: 2.1, 2.4_
   - [x] 3.2 Claude structured-output check with untrusted-data framing and fallback
     - _Requirements: 2.2, 2.3, 2.4_
+  - [x] 3.4 Gemini provider (default when `GEMINI_API_KEY` is set) sharing one prompt, schema and quote check with Claude
+    - _Requirements: 2.2, 2.3, 2.4_
   - [x] 3.3 Warn in the remedy when the copy does not support the claim
     - _Requirements: 2.5_
 

@@ -9,7 +9,7 @@ inclusion: always
 - **TypeScript**, ES modules (`"type": "module"`). Run scripts with `tsx`.
 - **zod 4** for every request body and MCP tool input.
 - **@modelcontextprotocol/sdk 1.32**: `registerTool` (not the deprecated `tool`), `WebStandardStreamableHTTPServerTransport` for the HTTP route, stateless.
-- **@anthropic-ai/sdk**: claim checks via `client.beta.messages.parse` with `betaZodOutputFormat`, `fallbacks: "default"`, effort `low`. Default model `claude-opus-5-5`, overridable with `REVENANT_MODEL`. Always fall back to the lexical check on any error.
+- **Claim checks**: `@google/genai` is the default provider (`models.generateContent`, `responseMimeType: "application/json"` + `responseJsonSchema`, `thinkingLevel: LOW`, model `gemini-3.8-flash`); `@anthropic-ai/sdk` is the alternative (`beta.messages.parse` + `betaZodOutputFormat`, effort `low`, `fallbacks: "default"`). Both share `claim/prompt.ts`. Always fall back to the lexical check on any error, and never trust a quote that is not verbatim in the archived text.
 - **Tests: vitest + fast-check.** Property tests live in `tests/property/`, named `Property N: <invariant>` and linked to a spec requirement. Regression tests from real pages live in `tests/unit/`. Never return the result of `expect(...)` from a fast-check predicate (a falsy return fails the property).
 - **Cache**: `src/core/net/cache.ts` (memory, or Upstash Redis when configured). Never cache a failure (see `web-politeness.md`).
 

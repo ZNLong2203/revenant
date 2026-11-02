@@ -26,7 +26,7 @@ For every link that is not alive, the resurrection engine finds the archived cop
 #### Acceptance Criteria
 
 1. WHEN an archived copy is found for a non-alive link THE SYSTEM SHALL judge whether its text supports the citing sentence: supported, partial, unsupported or unknown.
-2. WHEN an Anthropic API key is configured THE SYSTEM SHALL use Claude with a JSON schema and treat page text as untrusted data; OTHERWISE THE SYSTEM SHALL use a word-overlap check.
+2. WHEN a Gemini or Anthropic API key is configured THE SYSTEM SHALL use that model (Gemini first) with a JSON schema and treat page text as untrusted data; OTHERWISE THE SYSTEM SHALL use a word-overlap check.
 3. WHEN the model call fails or is declined THE SYSTEM SHALL fall back to the word-overlap check and say so.
 4. THE SYSTEM SHALL return a short verbatim quote from the archived text that backs the claim, when one exists.
 5. WHEN the archived copy does not clearly support the claim THE SYSTEM SHALL say so next to the proposed fix.

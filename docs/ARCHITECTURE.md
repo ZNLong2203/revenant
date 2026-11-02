@@ -21,7 +21,7 @@ flowchart TB
     X2 --> EX[examine.ts]
     EX --> N[net: live page, RDAP, Wayback CDX, snapshots]
     EX --> D[signals/verdict.ts: pure decision]
-    EX --> CL[claim: Claude or lexical]
+    EX --> CL[claim: Gemini, Claude or lexical]
     D --> R[remedy: CS1 url-status]
     R --> PA[patch: edits + unified diff]
   end
@@ -49,7 +49,7 @@ flowchart TB
 - **Honest identity:** `RevenantBot/0.1` with a link to this repo. Bot walls become `unknown`; Revenant never tries to get past them. A Kiro `PreToolUse` hook blocks agents from spoofing browsers while working on this repo.
 - **No cached failures:** upstream errors throw inside the cache wrapper, so an outage is never remembered as "no snapshots".
 - **Rate limits:** `/api/exhume`, `/api/examine` and `/api/mcp` are limited per IP.
-- **Prompt injection:** page text reaches Claude only inside data tags with a fixed JSON schema; quotes are accepted only if they appear verbatim in the archived text.
+- **Prompt injection:** page text reaches the model (Gemini or Claude) only inside data tags with a fixed JSON schema; quotes are accepted only if they appear verbatim in the archived text.
 
 ## Caching
 

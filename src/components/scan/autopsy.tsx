@@ -171,7 +171,7 @@ export function Autopsy({ link, ex, onClose }: { link: ExtractedLink; ex?: Exami
               · {ex.claim.rationale}
             </p>
             {ex.claim.quote && <p className="mt-2 border-l border-seam-strong pl-3 text-sm italic text-bone-dim">“{ex.claim.quote}”</p>}
-            <p className="mt-2 text-[11px] text-ash">{ex.claim.method === "llm" ? `Checked by ${ex.claim.model ?? "Claude"}` : "Checked by word overlap (no model)"}</p>
+            <p className="mt-2 text-[11px] text-ash">{ex.claim.method === "llm" ? `Checked by ${ex.claim.model ?? "a language model"}` : "Checked by word overlap (no model)"}</p>
           </section>
         )}
 

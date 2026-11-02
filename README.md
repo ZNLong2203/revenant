@@ -34,7 +34,7 @@ Link checkers ask one question: does the URL answer 200? Wikipedia's PHP article
    | ✓ alive | still there, still what was cited | `live` |
 
    Evidence comes from the live page, **RDAP** registration dates (a domain registered after the citation date has a new owner), the **Wayback Machine** capture nearest the access date, multilingual spam and parking signatures, and a soft-404 sibling probe.
-3. **Raise the dead.** Revenant picks the archived copy closest to when the author read the page, **never one captured after the takeover** (the archive keeps crawling squatters). It checks with Claude, or by word overlap without a key, that the copy supports the citing sentence. Then it writes the fix: `archive-url`, `archive-date` in the citation's own date style, and `url-status`. Every other byte is untouched. You copy the patch, download a `.patch`, or open the Wikipedia or GitHub editor. Revenant never edits anything for you.
+3. **Raise the dead.** Revenant picks the archived copy closest to when the author read the page, **never one captured after the takeover** (the archive keeps crawling squatters). It checks with Gemini (or Claude), or by word overlap without a key, that the copy supports the citing sentence. Then it writes the fix: `archive-url`, `archive-date` in the citation's own date style, and `url-status`. Every other byte is untouched. You copy the patch, download a `.patch`, or open the Wikipedia or GitHub editor. Revenant never edits anything for you.
 
 ![Scanning the PHP article: a graveyard of 347 links and the autopsy of a possessed citation](docs/images/scan.jpg)
 
@@ -69,7 +69,7 @@ npm run dev        # http://localhost:3000
 npm test           # 46 tests, including 23 fast-check properties
 ```
 
-Everything works without keys. Optional: `ANTHROPIC_API_KEY` for model claim checks, Upstash Redis for a shared cache. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+Everything works without keys. Optional: `GEMINI_API_KEY` (or `ANTHROPIC_API_KEY`) for model claim checks, Upstash Redis for a shared cache. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Good citizenship
 

@@ -11,7 +11,8 @@ src/core/            the engine, shared by web, CLI and MCP (no Next imports)
   signals/           lexicon.ts (phrase data) + verdict.ts (pure decision)
   archive/select.ts  snapshot ranking (pure)
   patch/             citation patcher + unified diff (pure, runs in the browser)
-  claim/             lexical.ts (pure) + llm.ts (Claude, server-only)
+  claim/             lexical.ts (pure), prompt.ts (shared prompt + schema),
+                     gemini.ts / anthropic.ts (providers), llm.ts (selection)
   net/               fetch (SSRF guard, limits), cache, RDAP + Wayback sources
   examine.ts         one link end to end, network injected (testable)
   server.ts          production wiring + caching

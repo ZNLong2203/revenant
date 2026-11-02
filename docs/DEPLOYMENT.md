@@ -17,9 +17,10 @@ All optional. See [`.env.example`](../.env.example).
 
 | Variable | Effect |
 |---|---|
-| `ANTHROPIC_API_KEY` | Claim checks use Claude (default `claude-opus-5-5`) instead of word overlap |
-| `REVENANT_MODEL` | Override the claim-check model, e.g. `claude-haiku-5-5` for lower cost |
-| `REVENANT_LLM=off` | Force the lexical claim check |
+| `GEMINI_API_KEY` | Claim checks use Gemini (default `gemini-3.8-flash`) instead of word overlap. Preferred when set |
+| `ANTHROPIC_API_KEY` | Claim checks use Claude (default `claude-opus-5-5`) when no Gemini key is set |
+| `REVENANT_LLM` | `auto` (default), `gemini`, `anthropic` or `off` (word overlap only) |
+| `REVENANT_MODEL` | Override the model id for the chosen provider |
 | `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` | Shared cache across serverless instances (Vercel KV variables also work) |
 | `GITHUB_TOKEN` | Higher GitHub API limit for README lookups (read-only, no scopes needed) |
 | `APP_URL` | Public URL, used for metadata and the MCP snippet on /agents |
@@ -29,7 +30,7 @@ All optional. See [`.env.example`](../.env.example).
 ## Vercel
 
 1. Import the GitHub repository in Vercel (framework: Next.js, defaults are fine).
-2. Add the variables you want (at least `APP_URL`; `ANTHROPIC_API_KEY` and Upstash for the full experience).
+2. Add the variables you want (at least `APP_URL`; `GEMINI_API_KEY` and Upstash for the full experience).
 3. Deploy. `/api/examine` runs up to 60 s and `/api/mcp` up to 300 s.
 4. Update `powers/revenant/mcp.json` if the deployment URL differs from `https://revenant-links.vercel.app`.
 
