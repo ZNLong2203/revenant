@@ -66,7 +66,7 @@ The [`/.kiro`](.kiro) directory holds what Kiro reads: seven steering files (alw
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm test           # 46 tests, including 23 fast-check properties
+npm test           # 52 tests, including 23 fast-check properties
 ```
 
 Everything works without keys. Optional: `GEMINI_API_KEY` (or `ANTHROPIC_API_KEY`) for model claim checks, Upstash Redis for a shared cache. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
