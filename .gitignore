@@ -38,3 +38,4 @@ npm-debug.log*
 .claude/settings.local.json
 
 # NOTE: /.kiro is committed on purpose (hackathon requirement). Never ignore it.
+/.revenant/
