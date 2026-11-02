@@ -56,3 +56,24 @@ describe("takeover patterns found by the benchmark", () => {
     expect(isSpamHost("https://rejekibetapkslot.com/")).toBe(true);
   });
 });
+
+describe("false ghosts found on live-tagged controls (seed 3110)", () => {
+  it("a bot challenge page is unknown, not a ghost", () => {
+    const d = decide({
+      url: "https://www.ctpost.com/entertainment/article/danny-glover-university-of-bridgeport.php",
+      live: { ok: true, status: 200, finalUrl: "https://www.ctpost.com/entertainment/article/danny-glover-university-of-bridgeport.php", redirects: [], title: "Client Challenge", text: "Client Challenge", fetchedAt: "x" },
+      sibling: { ok: true, status: 200, redirects: [], title: "Client Challenge", text: "Client Challenge", fetchedAt: "x" },
+    });
+    expect(d.verdict).toBe("unknown");
+  });
+
+  it("a JavaScript shell that looks the same on every path is not a ghost", () => {
+    const shell = "Hibernian FC Loading";
+    const d = decide({
+      url: "https://www.hibernianfc.co.uk/news/2024/june/10/david-marshall-retires",
+      live: { ok: true, status: 200, finalUrl: "https://www.hibernianfc.co.uk/news/2024/june/10/david-marshall-retires", redirects: [], title: "", text: shell, fetchedAt: "x" },
+      sibling: { ok: true, status: 200, redirects: [], title: "", text: shell, fetchedAt: "x" },
+    });
+    expect(d.verdict).not.toBe("ghost");
+  });
+});

@@ -15,7 +15,7 @@ import type {
 } from "../types";
 import { coverage, jaccard } from "../text";
 import { crossedDomains, isRootRedirect, timestampToIsoDate, waybackUrl } from "../url";
-import { isParkingHost, isSpamHost, parkingHits, soft404Hits, spamScore } from "./lexicon";
+import { botWallHits, isParkingHost, isSpamHost, parkingHits, soft404Hits, spamScore } from "./lexicon";
 
 export interface Observations {
   url: string;
@@ -115,6 +115,13 @@ export function decide(o: Observations): Decision {
   const archiveText = `${o.archive?.title ?? ""} ${o.archive?.text ?? ""}`;
   const hasArchive = Boolean(o.archive?.snapshot && (o.archive.text || o.archive.title));
 
+  // a bot check instead of the page: nothing below can be judged from it
+  const wall = botWallHits(live.title, live.text);
+  if (wall.length && !isParkingHost(finalUrl) && spamScore(liveText).score < 0.5) {
+    add("bot-wall", "unknown", 0.9, `The site showed a bot check ("${wall[0]}") instead of the page, so a person should look.`);
+    return finish(ev, { ...o, live: { ...live, ok: false } }, takeoverDate);
+  }
+
   // parked / for sale
   if (isParkingHost(finalUrl)) {
     add("parking-host", "possessed", 0.93, `The link now redirects to ${new URL(finalUrl).hostname}, a domain marketplace.`);
@@ -171,7 +178,9 @@ export function decide(o: Observations): Decision {
   if (isRootRedirect(o.url, finalUrl) && !crossedDomains(o.url, finalUrl)) {
     add("redirect-to-home", "ghost", 0.75, "The deep link now quietly redirects to the site's home page.");
   }
-  if (o.sibling?.ok && o.sibling.status === 200 && live.text && o.sibling.text) {
+  // JavaScript-rendered sites serve the same near-empty shell for every path, so
+  // the probe only counts when the page has real server-rendered text
+  if (o.sibling?.ok && o.sibling.status === 200 && live.text && o.sibling.text && live.text.length >= 600) {
     const same = jaccard(live.text, o.sibling.text);
     if (same >= 0.9) {
       add(

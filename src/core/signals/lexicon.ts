@@ -66,6 +66,17 @@ export const SOFT_404_PHRASES = [
   "account suspended", "website is not available", "this site is under construction", "site not found",
 ];
 
+/** Interstitials served to bots instead of the page (we never try to get past them). */
+export const BOT_WALL_PHRASES = [
+  "client challenge", "just a moment", "attention required", "checking your browser", "verify you are human",
+  "are you a robot", "access denied", "please enable javascript and cookies", "ddos protection by",
+  "request unsuccessful. incapsula", "pardon our interruption", "bot verification", "security check",
+];
+
+export function botWallHits(title: string | undefined, text: string | undefined): string[] {
+  return countHits(`${title ?? ""} ${(text ?? "").slice(0, 400)}`, BOT_WALL_PHRASES);
+}
+
 export function isParkingHost(url: string): boolean {
   const host = hostOf(url);
   return PARKING_HOSTS.some((p) => (p.endsWith(".") ? host.startsWith(p) : host === p || host.endsWith(`.${p}`)));
