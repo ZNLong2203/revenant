@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Verdict changes need a real page",
+      "description": "Changing how verdicts are decided must start from a real misjudged page, keep the property invariants and be re-measured on a fresh benchmark seed.",
+      "trigger": "PostFileSave",
+      "matcher": "src/core/signals/.*\\.ts$",
+      "action": {
+        "type": "agent",
+        "prompt": "You just changed the verdict logic or lexicon. Follow #verdict-rules: (1) name the real page (URL and live title) that motivated the change and make sure tests/unit/takeover-patterns.test.ts has a regression test quoting it; (2) confirm no property in tests/property/verdict.test.ts was weakened; (3) run `npm test`; (4) if weights changed, say which benchmark seed you will use next. It must not be 2026, 1031, 3110 or 4040, which are already spent."
+      },
+      "enabled": true
+    }
+  ]
+}

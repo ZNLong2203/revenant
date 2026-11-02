@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "revenant": {
+      "command": "npx",
+      "args": ["tsx", "bin/revenant-mcp.ts"],
+      "env": {},
+      "disabled": false,
+      "autoApprove": ["examine_link", "scan_document", "scan_source"]
+    },
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "disabled": false,
+      "autoApprove": ["resolve-library-id", "get-library-docs"]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Guard: no bot-check circumvention, no private files in git",
+      "description": "Blocks shell commands that spoof a browser user agent or use anti-bot-bypass tooling against third-party sites, and commands that would stage private/ or .env files. A non-zero exit blocks the tool call and the reason goes back to the agent.",
+      "trigger": "PreToolUse",
+      "matcher": "shell",
+      "action": { "type": "command", "command": "node scripts/hooks/guard-bot-etiquette.mjs" },
+      "timeout": 10,
+      "enabled": true
+    }
+  ]
+}

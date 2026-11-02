@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Revenant checks the links it just wrote",
+      "description": "Dogfooding: when the agent saves Markdown, Revenant reads the hook payload on stdin, scans the saved files and reports possessed, ghost, buried and changeling links with an archived copy. It never blocks the agent.",
+      "trigger": "PostFileSave",
+      "matcher": "\\.(md|mdx)$",
+      "action": { "type": "command", "command": "npx tsx bin/revenant.ts hook" },
+      "timeout": 120,
+      "enabled": true
+    }
+  ]
+}

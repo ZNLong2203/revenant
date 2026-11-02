@@ -17,6 +17,7 @@ import { examineLink } from "../src/core/server";
 import { loadDocument, parseInput } from "../src/core/sources";
 import type { DocumentFormat, Examination, Verdict } from "../src/core/types";
 import { normalizeUrl } from "../src/core/url";
+import { pathsFromPayload } from "../src/cli/payload";
 
 const CACHE = resolve(process.env.REVENANT_CACHE ?? ".revenant/cache.json");
 
@@ -105,19 +106,6 @@ async function cmdCheck(args: string[]): Promise<number> {
     if (ex.remedy.archiveUrl) console.log(`   → ${ex.remedy.archiveUrl}`);
   }
   return ex.verdict === "possessed" ? 1 : 0;
-}
-
-/** Collect file paths from an arbitrary hook payload. */
-export function pathsFromPayload(payload: unknown): string[] {
-  const found = new Set<string>();
-  const walk = (v: unknown, key = "") => {
-    if (typeof v === "string") {
-      if (/(path|file)/i.test(key) && /\.(md|markdown|mdx|wiki|html?)$/i.test(v)) found.add(v);
-    } else if (Array.isArray(v)) v.forEach((x) => walk(x, key));
-    else if (v && typeof v === "object") for (const [k, x] of Object.entries(v)) walk(x, k);
-  };
-  walk(payload);
-  return [...found];
 }
 
 async function cmdHook(): Promise<number> {

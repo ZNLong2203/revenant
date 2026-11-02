@@ -1,0 +1,14 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Typecheck after UI edits",
+      "description": "Next 16 differs from older training data; a typecheck after each UI edit catches wrong API guesses (LayoutProps, route types, Cache Components rules) immediately.",
+      "trigger": "PostFileSave",
+      "matcher": "src/(app|components)/.*\\.tsx?$",
+      "action": { "type": "command", "command": "npx next typegen >/dev/null && npx tsc --noEmit -p ." },
+      "timeout": 180,
+      "enabled": true
+    }
+  ]
+}

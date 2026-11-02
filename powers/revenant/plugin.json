@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "revenant",
+  "version": "0.1.0",
+  "description": "Find cited links that came back wrong: domains taken over by squatters, soft 404s and rewritten pages that status-code checkers call alive. Raise the original from the Internet Archive, checked against the sentence that cites it, and get a ready citation fix.",
+  "author": { "name": "ZNLong2203", "url": "https://github.com/ZNLong2203" },
+  "homepage": "https://github.com/ZNLong2203/revenant",
+  "repository": "https://github.com/ZNLong2203/revenant",
+  "license": "MIT",
+  "keywords": ["dead link", "broken link", "link rot", "citation", "citations", "references", "wikipedia", "archive", "wayback", "usurped", "404", "readme links", "documentation links"]
+}

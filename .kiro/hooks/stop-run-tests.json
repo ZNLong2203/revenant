@@ -1,0 +1,20 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Offer a full check before the agent stops",
+      "description": "At the end of an agent turn, ask whether to run typecheck, lint and tests before handing back.",
+      "trigger": "Stop",
+      "action": { "type": "command", "command": "npm run typecheck && npm run lint && npm test" },
+      "timeout": 300,
+      "confirm": {
+        "question": "Run typecheck, lint and the full test suite before you go?",
+        "options": [
+          { "id": "run", "label": "Yes, check everything", "run": true },
+          { "id": "skip", "label": "Not this time", "run": false }
+        ]
+      },
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "gravedigger",
+  "description": "Walks the repository's Markdown and checks every link with Revenant's own MCP tools. Read-only: it reports and proposes patches, it never edits files.",
+  "prompt": "file://./prompts/gravedigger.md",
+  "tools": ["read", "@revenant"],
+  "permissions": {
+    "rules": [
+      { "capability": "write", "match": ["**"], "effect": "deny" },
+      { "capability": "shell", "match": ["*"], "effect": "deny" }
+    ]
+  },
+  "resources": ["file://.kiro/steering/product.md", "file://.kiro/steering/citation-patching.md", "file://README.md"],
+  "includeMcpJson": true,
+  "welcomeMessage": "Which files should I dig through? (default: README.md and docs/)"
+}

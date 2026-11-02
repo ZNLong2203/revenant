@@ -1,0 +1,35 @@
+name: revenant
+
+# Dogfooding: scan the Markdown a pull request touches and fail on possessed
+# links (domains that changed hands). Copy this file into any repository.
+on:
+  pull_request:
+    paths: ["**/*.md", "**/*.mdx"]
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Changed Markdown files
+        id: files
+        run: |
+          base="${{ github.event.pull_request.base.sha }}"
+          if [ -n "$base" ]; then
+            files=$(git diff --name-only --diff-filter=AM "$base" HEAD -- '*.md' '*.mdx' | grep -v '^private/' || true)
+          else
+            files="README.md"
+          fi
+          echo "list=$(echo $files | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
+      - name: Scan with Revenant
+        if: steps.files.outputs.list != ''
+        run: npx tsx bin/revenant.ts scan ${{ steps.files.outputs.list }} --fail-on possessed --max 80
