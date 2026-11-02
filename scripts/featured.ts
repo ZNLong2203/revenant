@@ -9,7 +9,10 @@
  * open instantly and keep the demo working when the archive is slow.
  */
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { examine } from "../src/core/examine";
+import { cdxPaused, findArchive } from "../src/core/net/sources";
 import { scanDocument } from "../src/core/scan";
+import { liveDeps } from "../src/core/server";
 import { loadDocument, parseInput } from "../src/core/sources";
 import type { Verdict } from "../src/core/types";
 
@@ -34,7 +37,26 @@ async function main() {
     const t0 = Date.now();
     console.log(`scanning ${src.slug}…`);
     const doc = await loadDocument(parseInput(src.input));
-    const scan = await scanDocument(doc, { concurrency: 4 });
+    const scan = await scanDocument(doc, { concurrency: 2 });
+    // second pass: problems that got no archived copy (usually a busy archive) are
+    // examined again one at a time, bypassing the caches
+    const retry = doc.links.filter((l) => {
+      const ex = scan.results[l.id];
+      return ex && ["possessed", "ghost", "buried", "changeling"].includes(ex.verdict) && !ex.remedy.archiveUrl;
+    });
+    let recovered = 0;
+    for (const l of retry) {
+      while (cdxPaused()) await new Promise((r) => setTimeout(r, 5000));
+      const ex = await examine(
+        { linkId: l.id, url: l.url, title: l.title, context: l.context, accessDate: l.accessDate, quote: l.quote },
+        { ...liveDeps, archive: findArchive },
+      );
+      if (ex.remedy.archiveUrl) recovered++;
+      scan.results[l.id] = ex;
+    }
+    if (retry.length) console.log(`  second pass: ${recovered} of ${retry.length} now have an archived copy`);
+    scan.counts = Object.fromEntries(Object.keys(scan.counts).map((v) => [v, 0])) as typeof scan.counts;
+    for (const l of doc.links) if (scan.results[l.id]) scan.counts[scan.results[l.id].verdict]++;
     const untagged = doc.links.filter((l) => scan.results[l.id]?.verdict === "possessed" && !["usurped", "unfit"].includes(l.existingStatus ?? "")).length;
     const counts = Object.fromEntries(Object.entries(scan.counts).filter(([, n]) => n > 0)) as Partial<Record<Verdict, number>>;
     const recordedOn = new Date().toISOString().slice(0, 10);

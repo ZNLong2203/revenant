@@ -27,6 +27,8 @@ export interface ExamineDeps {
     quote?: string;
   }) => Promise<ClaimCheck>;
   now?: () => Date;
+  /** True while the archive is unreachable (lets the remedy say so instead of "no copy exists"). */
+  archiveUnavailable?: () => boolean;
 }
 
 const YEAR_MS = 365 * 86_400_000;
@@ -122,6 +124,9 @@ export async function examine(req: ExamineRequest, deps: ExamineDeps): Promise<E
   }
 
   const remedy = remedyFor(decision, archive);
+  if (remedy.action === "manual" && decision.verdict !== "unknown" && deps.archiveUnavailable?.()) {
+    remedy.note = "The Wayback Machine is not answering right now, so no archived copy was looked up. Try again later.";
+  }
   if (remedy.action === "archive" && claim?.archive === "unsupported") {
     remedy.note = `${remedy.note ? `${remedy.note} ` : ""}The archived copy does not clearly support the cited sentence; review before saving.`;
   }

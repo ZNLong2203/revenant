@@ -41,20 +41,42 @@ class UpstreamBusy extends Error {}
  * Retry-After, capped) and throws on failure so callers never cache an
  * outage as "no snapshots".
  */
+// Circuit breaker: after three CDX failures in a row, leave the archive alone
+// for a minute. It is a shared public service, and a struggling archive should
+// not also make every scan wait 20 s per link.
+let cdxFailures = 0;
+let cdxPausedUntil = 0;
+
+export function cdxPaused(): boolean {
+  return Date.now() < cdxPausedUntil;
+}
+
 async function cdx(query: URLSearchParams): Promise<string> {
-  for (let attempt = 0; ; attempt++) {
-    const r = await safeFetch(`https://web.archive.org/cdx/search/cdx?${query}`, {
-      trusted: true,
-      timeoutMs: 20_000,
-      headers: { accept: "application/json" },
-    });
-    if (r.status === 200) return r.body;
-    if ((r.status === 429 || r.status === 503) && attempt < 2) {
-      const wait = Math.min(8, Number(r.headers.get("retry-after")) || 2 * (attempt + 1));
-      await new Promise((res) => setTimeout(res, wait * 1000));
-      continue;
+  if (cdxPaused()) throw new UpstreamBusy("CDX paused after repeated failures");
+  try {
+    for (let attempt = 0; ; attempt++) {
+      const r = await safeFetch(`https://web.archive.org/cdx/search/cdx?${query}`, {
+        trusted: true,
+        timeoutMs: 20_000,
+        headers: { accept: "application/json" },
+      });
+      if (r.status === 200) {
+        cdxFailures = 0;
+        return r.body;
+      }
+      if ((r.status === 429 || r.status === 503) && attempt < 2) {
+        const wait = Math.min(8, Number(r.headers.get("retry-after")) || 2 * (attempt + 1));
+        await new Promise((res) => setTimeout(res, wait * 1000));
+        continue;
+      }
+      throw new UpstreamBusy(`CDX answered ${r.status}`);
     }
-    throw new UpstreamBusy(`CDX answered ${r.status}`);
+  } catch (error) {
+    if (++cdxFailures >= 3) {
+      cdxPausedUntil = Date.now() + 60_000;
+      cdxFailures = 0;
+    }
+    throw error;
   }
 }
 

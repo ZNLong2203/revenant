@@ -4,10 +4,11 @@
  */
 import { checkClaim } from "./claim/llm";
 import { examine, type ExamineDeps } from "./examine";
-import { cached, cacheGet, cacheSet } from "./net/cache";
+import type { SelectOptions } from "./archive/select";
+import { cacheGet, cacheSet } from "./net/cache";
 import { observeLive } from "./net/fetch";
-import { findArchive, firstSeen, lookupDomain } from "./net/sources";
-import type { Examination, ExamineRequest, LiveObservation } from "./types";
+import { cdxPaused, findArchive, firstSeen, lookupDomain } from "./net/sources";
+import type { ArchiveObservation, Examination, ExamineRequest, LiveObservation } from "./types";
 
 /** Live pages: keep answers for 6 h, but retry timeouts and 5xx after 20 min. */
 async function liveCached(url: string) {
@@ -22,12 +23,23 @@ async function liveCached(url: string) {
   return obs;
 }
 
+/** Archive copies: keep a found copy for 3 days, an empty answer for 30 min (it may be an outage). */
+async function archiveCached(url: string, opts: SelectOptions) {
+  const key = `arch:${url}:${opts.target ?? ""}:${opts.notAfter ?? ""}`;
+  const hit = await cacheGet<ArchiveObservation>(key);
+  if (hit) return hit;
+  const obs = await findArchive(url, opts);
+  await cacheSet(key, obs, obs.snapshot ? 3 * 86_400 : 1800);
+  return obs;
+}
+
 export const liveDeps: ExamineDeps = {
   live: liveCached,
   domain: lookupDomain,
-  archive: (url, opts) => cached(`arch:${url}:${opts.target ?? ""}:${opts.notAfter ?? ""}`, 3 * 86_400, () => findArchive(url, opts)),
+  archive: archiveCached,
   firstSeen,
   claim: checkClaim,
+  archiveUnavailable: cdxPaused,
 };
 
 export async function examineLink(req: ExamineRequest): Promise<Examination> {
@@ -36,6 +48,7 @@ export async function examineLink(req: ExamineRequest): Promise<Examination> {
   if (hit) return { ...hit, linkId: req.linkId };
   const ex = await examine(req, liveDeps);
   // an "unknown" is usually a timeout or a bot wall; let it be retried soon
-  await cacheSet(key, ex, ex.verdict === "unknown" ? 600 : 12 * 3600);
+  const archiveSkipped = ex.remedy.action === "manual" && ex.verdict !== "unknown" && ex.verdict !== "alive" && cdxPaused();
+  await cacheSet(key, ex, ex.verdict === "unknown" || archiveSkipped ? 600 : 12 * 3600);
   return ex;
 }
