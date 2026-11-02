@@ -1,0 +1,1928 @@
+{
+  "summary": {
+    "ranAt": "2026-11-02T02:43:33.200Z",
+    "seed": 1031,
+    "claimCheck": "lexical",
+    "positives": {
+      "n": 60,
+      "by": {
+        "possessed": 10,
+        "buried": 22,
+        "unknown": 13,
+        "alive": 4,
+        "changeling": 5,
+        "ghost": 6
+      }
+    },
+    "controls": {
+      "n": 60,
+      "by": {
+        "alive": 38,
+        "buried": 4,
+        "ghost": 2,
+        "unknown": 16
+      }
+    },
+    "recallPossessed": 0.16666666666666666,
+    "recallPossessedOfDecided": 0.2127659574468085,
+    "recallAnyProblem": 0.7166666666666667,
+    "controlPossessedRate": 0,
+    "remedyWithArchive": 5,
+    "medianMs": 7231
+  },
+  "rows": [
+    {
+      "set": "positive",
+      "article": "Queen Máxima of the Netherlands",
+      "url": "https://chicagofreepress.com/",
+      "accessDate": "2023-03-28",
+      "verdict": "possessed",
+      "confidence": 0.77,
+      "signals": [
+        "spam-takeover"
+      ],
+      "summary": "Possessed: The page is now full of online-gambling terms (\"casino\", \"judi\", \"situs\").",
+      "liveTitle": "Situs Komunitas judi online 24jam terpercaya",
+      "finalUrl": "https://chicagofreepress.com/",
+      "registeredAt": "1999-06-17T20:18:04Z",
+      "ms": 11936
+    },
+    {
+      "set": "positive",
+      "article": "Associated Television",
+      "url": "http://www2.tv-ark.org.uk/itvmidlands/atv_idents.html",
+      "accessDate": "2011-10-08",
+      "verdict": "buried",
+      "confidence": 0.92,
+      "signals": [
+        "dns-gone"
+      ],
+      "summary": "Buried: The domain no longer resolves to any server.",
+      "registeredAt": "2023-11-26T13:21:14.046805Z",
+      "archiveDate": "2008-11-20",
+      "ms": 9001
+    },
+    {
+      "set": "positive",
+      "article": "Submarine Escape Immersion Equipment",
+      "url": "http://archive.rubicon-foundation.org/7553",
+      "accessDate": "2013-03-15",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "Page not found – Rubicon Foundation",
+      "finalUrl": "https://rubicon-foundation.org/7553",
+      "registeredAt": "2002-07-26T18:16:26.536Z",
+      "ms": 3171
+    },
+    {
+      "set": "positive",
+      "article": "Flag of Iran",
+      "url": "http://www.iraniansofmemphis.org/articles/Iranian%20Flag%20background%20-%20english.pdf",
+      "accessDate": "2010-11-12",
+      "verdict": "buried",
+      "confidence": 0.55,
+      "signals": [
+        "tls-broken"
+      ],
+      "summary": "Buried: The site's HTTPS certificate is broken or expired.",
+      "registeredAt": "2014-04-28T03:33:24.002Z",
+      "archiveDate": "2011-07-26",
+      "ms": 2900
+    },
+    {
+      "set": "positive",
+      "article": "Robert Enke",
+      "url": "http://www.highbeam.com/doc/1P2-9991660.html",
+      "accessDate": "2013-02-16",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "Not Found",
+      "finalUrl": "https://www.highbeam.com/doc/1P2-9991660.html",
+      "registeredAt": "2000-03-06T12:04:06Z",
+      "archiveDate": "2016-01-15",
+      "ms": 4340
+    },
+    {
+      "set": "positive",
+      "article": "Chinatown, Los Angeles",
+      "url": "http://www.lagoldendragonparade.com/",
+      "accessDate": "2013-08-17",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Just a moment...",
+      "finalUrl": "https://www.lagoldendragonparade.com/",
+      "registeredAt": "2000-05-19T23:20:13Z",
+      "ms": 5409
+    },
+    {
+      "set": "positive",
+      "article": "Indian art",
+      "url": "http://www.indoarch.org/arch_thr_ages.php",
+      "accessDate": "2006-12-21",
+      "verdict": "buried",
+      "confidence": 0.92,
+      "signals": [
+        "dns-gone"
+      ],
+      "summary": "Buried: The domain no longer resolves to any server.",
+      "registeredAt": "2023-01-27T15:15:28.638Z",
+      "archiveDate": "2006-12-11",
+      "ms": 2196
+    },
+    {
+      "set": "positive",
+      "article": "SEALAB",
+      "url": "http://archive.rubicon-foundation.org/6248",
+      "accessDate": "2011-07-29",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Immersion Hypothermia in Scuba Diving: Research Summary",
+      "finalUrl": "https://rubicon-foundation.org/6248",
+      "registeredAt": "2002-07-26T18:16:26.536Z",
+      "ms": 2208
+    },
+    {
+      "set": "positive",
+      "article": "Visa requirements for Russian citizens",
+      "url": "http://mfa-pmr.org/index.php?newsid=310",
+      "verdict": "possessed",
+      "confidence": 0.95,
+      "signals": [
+        "spam-takeover"
+      ],
+      "summary": "Possessed: The page is now full of online-gambling terms (\"slot online\", \"togel\", \"betting\") that the archived copy never used.",
+      "liveTitle": "M88 Indonesia – Platform Taruhan Online Populer di Asia",
+      "finalUrl": "https://m88verse.io/?newsid=310",
+      "registeredAt": "2005-06-29T17:21:05.857Z",
+      "archiveDate": "2026-01-10",
+      "ms": 10274
+    },
+    {
+      "set": "positive",
+      "article": "LaRouche movement",
+      "url": "http://www.highbeam.com/doc/1P2-1209420.html",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "Not Found",
+      "finalUrl": "https://www.highbeam.com/doc/1P2-1209420.html",
+      "registeredAt": "2000-03-06T12:04:06Z",
+      "archiveDate": "2018-11-20",
+      "ms": 8752
+    },
+    {
+      "set": "positive",
+      "article": "Cyclone Yasi",
+      "url": "http://www.radioaustralianews.net.au/stories/201102/3127065.htm?desktop",
+      "accessDate": "2011-02-01",
+      "verdict": "changeling",
+      "confidence": 0.94,
+      "signals": [
+        "claim-drift",
+        "content-replaced"
+      ],
+      "summary": "Changeling: The archived copy supports the cited sentence; the live page no longer does.",
+      "liveTitle": "Your Domains",
+      "finalUrl": "http://www.radioaustralianews.net.au/stories/201102/3127065.htm?desktop",
+      "archiveDate": "2011-02-05",
+      "ms": 5447
+    },
+    {
+      "set": "positive",
+      "article": "Jayant Narlikar",
+      "url": "http://meghnad.iucaa.ernet.in/~jvn/jvn-bio.html",
+      "accessDate": "2016-10-29",
+      "verdict": "buried",
+      "confidence": 0.92,
+      "signals": [
+        "dns-gone"
+      ],
+      "summary": "Buried: The domain no longer resolves to any server.",
+      "registeredAt": "2005-02-19T06:12:14.398Z",
+      "archiveDate": "2016-03-03",
+      "ms": 4602
+    },
+    {
+      "set": "positive",
+      "article": "I'm a Believer",
+      "url": "http://www.film365.co.uk/review/dvd/blood-simple",
+      "accessDate": "2014-10-05",
+      "verdict": "possessed",
+      "confidence": 0.8,
+      "signals": [
+        "rdap-reregistered"
+      ],
+      "summary": "Possessed: The domain's current registration began on 2025-04-26, after the citation was accessed (2014-10-05). Someone new owns it.",
+      "liveTitle": "Filmmaking – Video Editor",
+      "finalUrl": "https://videoeditor.uk/filmmaking/",
+      "registeredAt": "2025-04-26T21:37:51.039649Z",
+      "archiveDate": "2014-10-06",
+      "ms": 3213
+    },
+    {
+      "set": "positive",
+      "article": "John Edward",
+      "url": "http://findarticles.com/p/articles/mi_m2843/is_1_26/ai_80924575",
+      "accessDate": "2006-12-18",
+      "verdict": "changeling",
+      "confidence": 0.94,
+      "signals": [
+        "claim-drift",
+        "content-replaced"
+      ],
+      "summary": "Changeling: The archived copy supports the cited sentence; the live page no longer does.",
+      "liveTitle": "News Articles - FindArticles",
+      "finalUrl": "https://www.findarticles.com/news/",
+      "registeredAt": "2000-02-25T23:58:14Z",
+      "archiveDate": "2007-10-15",
+      "ms": 2086
+    },
+    {
+      "set": "positive",
+      "article": "Sun dog",
+      "url": "https://www.decodedscience.org/the-mortimers-cross-parhelion-how-a-meteorological-phenomenon-changed-english-history/3437",
+      "accessDate": "2017-05-16",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "403 - Forbidden",
+      "finalUrl": "https://www.decodedscience.org/the-mortimers-cross-parhelion-how-a-meteorological-phenomenon-changed-english-history/3437",
+      "registeredAt": "2015-09-25T11:01:51.62Z",
+      "ms": 2552
+    },
+    {
+      "set": "positive",
+      "article": "United States Fourth Fleet",
+      "url": "http://www.usswashington.com/coolbio.htm",
+      "verdict": "buried",
+      "confidence": 0.92,
+      "signals": [
+        "dns-gone"
+      ],
+      "summary": "Buried: The domain no longer resolves to any server.",
+      "registeredAt": "2000-06-02T14:48:03Z",
+      "archiveDate": "2013-07-21",
+      "ms": 2458
+    },
+    {
+      "set": "positive",
+      "article": "Detroit Masonic Temple",
+      "url": "https://www.emporis.com/buildings/158525",
+      "verdict": "buried",
+      "confidence": 0.75,
+      "signals": [
+        "connection-refused"
+      ],
+      "summary": "Buried: The server refuses connections.",
+      "registeredAt": "2000-06-01T04:02:17Z",
+      "ms": 2568
+    },
+    {
+      "set": "positive",
+      "article": "Maxwell D. Taylor",
+      "url": "http://findarticles.com/p/articles/mi_m0IAV/is_1_92/ai_114049389",
+      "verdict": "changeling",
+      "confidence": 0.94,
+      "signals": [
+        "claim-drift",
+        "content-replaced"
+      ],
+      "summary": "Changeling: The archived copy supports the cited sentence; the live page no longer does.",
+      "liveTitle": "News Articles - FindArticles",
+      "finalUrl": "https://www.findarticles.com/news/",
+      "registeredAt": "2000-02-25T23:58:14Z",
+      "archiveDate": "2012-03-23",
+      "ms": 3396
+    },
+    {
+      "set": "positive",
+      "article": "Marine propulsion",
+      "url": "http://findarticles.com/p/articles/mi_m0FCP/is_1_26/ai_n6100061",
+      "accessDate": "2009-04-21",
+      "verdict": "changeling",
+      "confidence": 0.94,
+      "signals": [
+        "claim-drift",
+        "content-replaced"
+      ],
+      "summary": "Changeling: The archived copy supports the cited sentence; the live page no longer does.",
+      "liveTitle": "News Articles - FindArticles",
+      "finalUrl": "https://www.findarticles.com/news/",
+      "registeredAt": "2000-02-25T23:58:14Z",
+      "archiveDate": "2006-02-24",
+      "ms": 1677
+    },
+    {
+      "set": "positive",
+      "article": "Ghosts in Bengali culture",
+      "url": "http://topyaps.com/7-haunted-places-kolkata-better-avoid-visiting-alone",
+      "accessDate": "2016-04-03",
+      "verdict": "unknown",
+      "confidence": 0.5,
+      "signals": [
+        "fetch-failed"
+      ],
+      "summary": "Unknown: The page could not be fetched: too many redirects.",
+      "registeredAt": "2010-03-09T17:53:26Z",
+      "ms": 4167
+    },
+    {
+      "set": "positive",
+      "article": "History of Nova Scotia",
+      "url": "http://angloboerwarmuseum.com/Boer70g_hero7_borden1.html",
+      "verdict": "possessed",
+      "confidence": 0.92,
+      "signals": [
+        "spam-redirect",
+        "rdap-reregistered"
+      ],
+      "summary": "Possessed: The link redirects to www.royalgacorr.com, a gambling-site domain.",
+      "liveTitle": "Just a moment...",
+      "finalUrl": "https://www.royalgacorr.com/",
+      "registeredAt": "2025-06-17T18:17:44Z",
+      "archiveDate": "2024-12-26",
+      "ms": 4354
+    },
+    {
+      "set": "positive",
+      "article": "Louie Anderson",
+      "url": "http://www.primenewswire.com/newsroom/news.html?d=103988",
+      "accessDate": "2025-12-28",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "finalUrl": "http://www.primenewswire.com/newsroom/news.html?d=103988",
+      "registeredAt": "2006-09-01T16:28:59Z",
+      "ms": 1911
+    },
+    {
+      "set": "positive",
+      "article": "Military personnel",
+      "url": "https://www.child-soldiers.org/Handlers/Download.ashx?IDMF=b7ae16e7-9977-4252-ac19-8e70265fb833",
+      "accessDate": "2017-12-09",
+      "verdict": "possessed",
+      "confidence": 0.95,
+      "signals": [
+        "spam-takeover",
+        "rdap-reregistered"
+      ],
+      "summary": "Possessed: The page is now full of online-gambling terms (\"สล็อต\", \"คาสิโน\", \"บาคาร่า\").",
+      "liveTitle": "สล็อตออนไลน์ ปั่นง่ายแตกไวรายวัน ลุ้นรับโบนัสทุกวัน บริการร้อนแรงปี 2026",
+      "finalUrl": "https://www.okcadventure.com/",
+      "registeredAt": "2021-08-28T14:30:21.924Z",
+      "archiveDate": "2018-09-07",
+      "ms": 3446
+    },
+    {
+      "set": "positive",
+      "article": "Coastal Carolina University",
+      "url": "http://www.ncate.org/tabid/178/Default.aspx?state=SC&CO_ID=13456",
+      "accessDate": "2014-07-29",
+      "verdict": "changeling",
+      "confidence": 0.94,
+      "signals": [
+        "claim-drift",
+        "content-replaced"
+      ],
+      "summary": "Changeling: The archived copy supports the cited sentence; the live page no longer does.",
+      "liveTitle": "Safe and Secure Online Casinos in the US 2026",
+      "finalUrl": "https://ncate.org/",
+      "registeredAt": "1994-12-08T05:00:00Z",
+      "archiveDate": "2014-08-09",
+      "ms": 5710
+    },
+    {
+      "set": "positive",
+      "article": "Pennsylvania Station (1910–1963)",
+      "url": "http://www.nyc-architecture.com/MID/Madison_Square_Garden_ad.jpg",
+      "accessDate": "2020-01-29",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "403 - Forbidden",
+      "finalUrl": "https://www.nyc-architecture.com/MID/Madison_Square_Garden_ad.jpg",
+      "registeredAt": "2003-07-29T16:16:32Z",
+      "ms": 2642
+    },
+    {
+      "set": "positive",
+      "article": "Aashiqui 2",
+      "url": "http://www.highbeam.com/doc/1P3-2806446211.html",
+      "accessDate": "2013-06-05",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "Not Found",
+      "finalUrl": "https://www.highbeam.com/doc/1P3-2806446211.html",
+      "registeredAt": "2000-03-06T12:04:06Z",
+      "archiveDate": "2013-11-05",
+      "ms": 3305
+    },
+    {
+      "set": "positive",
+      "article": "Northallerton",
+      "url": "https://www.ynydevolution.com/",
+      "accessDate": "2023-08-29",
+      "verdict": "possessed",
+      "confidence": 0.96,
+      "signals": [
+        "rdap-reregistered",
+        "spam-takeover"
+      ],
+      "summary": "Possessed: The domain's current registration began on 2024-09-30, after the citation was accessed (2023-08-29). Someone new owns it.",
+      "liveTitle": "Diamond138 = Platform Link Slot Fleksibel dengan Kecepatan Respons Paling Tinggi",
+      "finalUrl": "https://www.kerseyvalleyhighropes.com/faq/",
+      "registeredAt": "2024-09-30T18:40:42Z",
+      "archiveDate": "2023-08-29",
+      "ms": 4924
+    },
+    {
+      "set": "positive",
+      "article": "Coating",
+      "url": "https://www.mechanicalsite.com/2023/05/coating-process.html",
+      "accessDate": "2023-05-05",
+      "verdict": "unknown",
+      "confidence": 0.5,
+      "signals": [
+        "fetch-failed"
+      ],
+      "summary": "Unknown: The page could not be fetched: read ECONNRESET.",
+      "registeredAt": "2018-09-04T15:30:41Z",
+      "ms": 3740
+    },
+    {
+      "set": "positive",
+      "article": "Submarine Escape Training Facility (Australia)",
+      "url": "http://archive.rubicon-foundation.org/7662",
+      "accessDate": "2013-10-23",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "Page not found – Rubicon Foundation",
+      "finalUrl": "https://rubicon-foundation.org/7662",
+      "registeredAt": "2002-07-26T18:16:26.536Z",
+      "ms": 5871
+    },
+    {
+      "set": "positive",
+      "article": "2022 Alaska's at-large congressional district special election",
+      "url": "https://www.nrapvf.org/grades/alaska/",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "NRA-PVF | Grades | Alaska",
+      "finalUrl": "https://www.nrapvf.org/grades/alaska/",
+      "registeredAt": "2000-09-14T19:14:09.732Z",
+      "ms": 1417
+    },
+    {
+      "set": "positive",
+      "article": "Potential accession of Kosovo to the European Union",
+      "url": "http://www.worldbulletin.net/?aType=haber&ArticleID=121611",
+      "accessDate": "2013-10-27",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "finalUrl": "http://www.worldbulletin.net/?aType=haber&ArticleID=121611",
+      "registeredAt": "2024-11-29T19:37:17Z",
+      "ms": 5875
+    },
+    {
+      "set": "positive",
+      "article": "Bhajan Lal",
+      "url": "http://www.hinduonnet.com/2005/03/06/stories/2005030603290800.htm",
+      "accessDate": "2010-11-03",
+      "verdict": "ghost",
+      "confidence": 0.8,
+      "signals": [
+        "sibling-probe"
+      ],
+      "summary": "Ghost: A made-up address on the same site returns the same page (100% identical), so this URL no longer has content of its own.",
+      "liveTitle": "hinduonnet.com",
+      "finalUrl": "http://www.hinduonnet.com/2005/03/06/stories/2005030603290800.htm",
+      "registeredAt": "2024-12-03T19:17:11Z",
+      "ms": 8036
+    },
+    {
+      "set": "positive",
+      "article": "Ward Bond",
+      "url": "http://www.nebraskahistory.org/publish/markers/texts/ward_bond.htm",
+      "accessDate": "2011-10-05",
+      "verdict": "alive",
+      "confidence": 0.55,
+      "signals": [
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "finalUrl": "http://www.nebraskahistory.org/publish/markers/texts/ward_bond.htm",
+      "registeredAt": "1997-08-19T04:00:00Z",
+      "ms": 7256
+    },
+    {
+      "set": "positive",
+      "article": "Sri Lanka Police",
+      "url": "http://www.hinduonnet.com/fline/fl1627/16270220.htm",
+      "verdict": "ghost",
+      "confidence": 0.8,
+      "signals": [
+        "sibling-probe"
+      ],
+      "summary": "Ghost: A made-up address on the same site returns the same page (100% identical), so this URL no longer has content of its own.",
+      "liveTitle": "hinduonnet.com",
+      "finalUrl": "http://www.hinduonnet.com/fline/fl1627/16270220.htm",
+      "registeredAt": "2024-12-03T19:17:11Z",
+      "ms": 33587
+    },
+    {
+      "set": "positive",
+      "article": "Siopao",
+      "url": "https://www.choosephilippines.com/do/local-flavors/1261/snack-treats-from-socorro-paowaw-milledo",
+      "accessDate": "2019-07-28",
+      "verdict": "buried",
+      "confidence": 0.5,
+      "signals": [
+        "http-500"
+      ],
+      "summary": "Buried: The server is failing (HTTP 500). It may be temporary.",
+      "liveTitle": "Two Unique Snacks from Surigao: Paowaw & Milledo",
+      "finalUrl": "https://www.choosephilippines.com/do/local-flavors/1261/snack-treats-from-socorro-paowaw-milledo",
+      "registeredAt": "2010-05-28T06:20:12Z",
+      "ms": 10231
+    },
+    {
+      "set": "positive",
+      "article": "List of holiday horror films",
+      "url": "https://horrorfreaknews.com/solstice-2008-review/9202",
+      "accessDate": "2019-11-25",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "finalUrl": "https://horrorfreaknews.com/solstice-2008-review/9202",
+      "registeredAt": "2010-12-29T03:56:25Z",
+      "ms": 7263
+    },
+    {
+      "set": "positive",
+      "article": "Spanish Town",
+      "url": "http://findarticles.com/p/articles/mi_qa3884/is_200303/ai_n9209497/print",
+      "verdict": "ghost",
+      "confidence": 0.8,
+      "signals": [
+        "sibling-probe"
+      ],
+      "summary": "Ghost: A made-up address on the same site returns the same page (100% identical), so this URL no longer has content of its own.",
+      "liveTitle": "News Articles - FindArticles",
+      "finalUrl": "https://www.findarticles.com/news/",
+      "registeredAt": "2000-02-25T23:58:14Z",
+      "ms": 7231
+    },
+    {
+      "set": "positive",
+      "article": "Mortal Kombat (1995 film)",
+      "url": "https://www.allmovie.com/movie/mortal-kombat-v134992",
+      "accessDate": "2017-09-12",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Just a moment...",
+      "finalUrl": "https://www.allmovie.com/movie/mortal-kombat-v134992",
+      "registeredAt": "1994-12-09T05:00:00Z",
+      "ms": 22621
+    },
+    {
+      "set": "positive",
+      "article": "Lava Beds National Monument",
+      "url": "https://www.ijpr.org/show/as-it-was/2020-07-12/as-it-was-spelunker-becomes-father-of-the-lava-beds-monument",
+      "accessDate": "2024-02-20",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "ERROR: The request could not be satisfied",
+      "finalUrl": "https://www.ijpr.org/show/as-it-was/2020-07-12/as-it-was-spelunker-becomes-father-of-the-lava-beds-monument",
+      "registeredAt": "2000-03-15T18:43:14.353Z",
+      "ms": 13544
+    },
+    {
+      "set": "positive",
+      "article": "Carolyn Maloney",
+      "url": "http://www.familiesofseptember11.org/actionalert.aspx?item_id=139&tid=1",
+      "accessDate": "2012-01-11",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "404 Not Found",
+      "finalUrl": "https://www.familiesofseptember11.org/actionalert.aspx?item_id=139&tid=1",
+      "registeredAt": "2018-02-09T14:30:24.341Z",
+      "ms": 22857
+    },
+    {
+      "set": "positive",
+      "article": "Sunspot",
+      "url": "http://findarticles.com/p/articles/mi_m1310/is_1988_Oct/ai_6955852/",
+      "accessDate": "2010-07-14",
+      "verdict": "ghost",
+      "confidence": 0.8,
+      "signals": [
+        "sibling-probe"
+      ],
+      "summary": "Ghost: A made-up address on the same site returns the same page (100% identical), so this URL no longer has content of its own.",
+      "liveTitle": "News Articles - FindArticles",
+      "finalUrl": "https://www.findarticles.com/news/",
+      "registeredAt": "2000-02-25T23:58:14Z",
+      "ms": 18997
+    },
+    {
+      "set": "positive",
+      "article": "Serfdom in Russia",
+      "url": "https://erenow.com/biographies/catherinethegreat/47.html",
+      "verdict": "buried",
+      "confidence": 0.5,
+      "signals": [
+        "http-521"
+      ],
+      "summary": "Buried: The server is failing (HTTP 521). It may be temporary.",
+      "liveTitle": "erenow.com | 521: Web server is down",
+      "finalUrl": "https://erenow.com/biographies/catherinethegreat/47.html",
+      "registeredAt": "2015-02-05T18:41:58Z",
+      "ms": 11494
+    },
+    {
+      "set": "positive",
+      "article": "Controversial Reddit communities",
+      "url": "http://readwrite.com/2012/10/29/violentacrez-michael-brutsch-reddit-troll-public-shaming",
+      "accessDate": "2012-11-01",
+      "verdict": "possessed",
+      "confidence": 0.83,
+      "signals": [
+        "spam-takeover"
+      ],
+      "summary": "Possessed: The page is now full of online-gambling terms (\"casino\", \"poker online\", \"betting\").",
+      "liveTitle": "What's Behind The Public Shaming of Reddit's King Troll Violentacrez?",
+      "finalUrl": "https://readwrite.com/violentacrez-michael-brutsch-reddit-troll-public-shaming/",
+      "registeredAt": "2001-04-15T10:34:25Z",
+      "ms": 20825
+    },
+    {
+      "set": "positive",
+      "article": "Excalibur (film)",
+      "url": "http://dandalf.com/dandalf/hollywoodgrail.html",
+      "accessDate": "2006-07-08",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "404 Not Found",
+      "finalUrl": "https://dandalf.com/dandalf/hollywoodgrail.html",
+      "registeredAt": "2026-04-15T18:16:14Z",
+      "ms": 10586
+    },
+    {
+      "set": "positive",
+      "article": "Lompoc, California",
+      "url": "http://www.databasefootball.com/players/playerpage.htm?ilkid=GRAYJOH01",
+      "accessDate": "2012-12-27",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "403 - Forbidden",
+      "finalUrl": "https://www.databasefootball.com/players/playerpage.htm?ilkid=GRAYJOH01",
+      "registeredAt": "2005-05-16T22:08:51Z",
+      "ms": 11515
+    },
+    {
+      "set": "positive",
+      "article": "University of Malaya",
+      "url": "https://klikweb.dbp.my/?p=18442",
+      "accessDate": "2023-10-26",
+      "verdict": "buried",
+      "confidence": 0.75,
+      "signals": [
+        "connection-refused"
+      ],
+      "summary": "Buried: The server refuses connections.",
+      "ms": 20014
+    },
+    {
+      "set": "positive",
+      "article": "Dalmatian dog",
+      "url": "http://www.dalmatians.info/breed-faults-dalmatian-dog/",
+      "verdict": "ghost",
+      "confidence": 0.8,
+      "signals": [
+        "sibling-probe"
+      ],
+      "summary": "Ghost: A made-up address on the same site returns the same page (100% identical), so this URL no longer has content of its own.",
+      "liveTitle": "STRATO - Domain reserved",
+      "finalUrl": "http://www.dalmatians.info/breed-faults-dalmatian-dog/",
+      "registeredAt": "2004-11-22T09:40:16.36Z",
+      "ms": 11516
+    },
+    {
+      "set": "positive",
+      "article": "Phabricator",
+      "url": "http://readwrite.com/2011/09/28/a-look-at-phabricator-facebook",
+      "accessDate": "2013-10-24",
+      "verdict": "possessed",
+      "confidence": 0.83,
+      "signals": [
+        "spam-takeover"
+      ],
+      "summary": "Possessed: The page is now full of online-gambling terms (\"casino\", \"poker online\", \"betting\").",
+      "liveTitle": "A Look at Phabricator: Facebook's Web-Based Open Source Code Collaboration Tool",
+      "finalUrl": "https://readwrite.com/a-look-at-phabricator-facebook/",
+      "registeredAt": "2001-04-15T10:34:25Z",
+      "ms": 11994
+    },
+    {
+      "set": "positive",
+      "article": "Music sequencer",
+      "url": "https://www.synthmuseum.com/sequ/seqseq80001.html",
+      "verdict": "alive",
+      "confidence": 0.5,
+      "signals": [],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "finalUrl": "https://rays-wheels.net/about",
+      "registeredAt": "1996-09-01T04:00:00Z",
+      "ms": 11996
+    },
+    {
+      "set": "positive",
+      "article": "Charles Koch",
+      "url": "http://www.nnp.org/nni/Publications/Dutch-American/kochc.htm",
+      "accessDate": "2010-11-29",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "404 Not Found",
+      "finalUrl": "https://www.nnp.org/nni/Publications/Dutch-American/kochc.htm",
+      "registeredAt": "1998-04-30T04:00:00.549Z",
+      "ms": 8224
+    },
+    {
+      "set": "positive",
+      "article": "Rube Goldberg machine",
+      "url": "https://www.rubegoldberg.com/",
+      "accessDate": "2018-01-11",
+      "verdict": "buried",
+      "confidence": 0.92,
+      "signals": [
+        "dns-gone"
+      ],
+      "summary": "Buried: The domain no longer resolves to any server.",
+      "registeredAt": "1997-05-01T04:00:00Z",
+      "ms": 11491
+    },
+    {
+      "set": "positive",
+      "article": "American Psycho",
+      "url": "http://fora.tv/2010/08/07/American_Psycho_Author_Bret_Easton_Ellis_In_Conversation",
+      "accessDate": "2012-02-15",
+      "verdict": "unknown",
+      "confidence": 0.5,
+      "signals": [
+        "timeout"
+      ],
+      "summary": "Unknown: The server did not answer in time.",
+      "registeredAt": "2005-12-04T08:21:15Z",
+      "ms": 20768
+    },
+    {
+      "set": "positive",
+      "article": "Eon Productions",
+      "url": "http://www.mi6.co.uk/sections/articles/sony_past_007_attempts.php3?s=articles&t",
+      "accessDate": "2007-11-07",
+      "verdict": "unknown",
+      "confidence": 0.5,
+      "signals": [
+        "timeout"
+      ],
+      "summary": "Unknown: The server did not answer in time.",
+      "registeredAt": "2019-04-12T16:31:18Z",
+      "ms": 23491
+    },
+    {
+      "set": "positive",
+      "article": "Wadi Halfa",
+      "url": "http://www.ancientsudan.org/history_01_prehistory.htm",
+      "accessDate": "2016-11-19",
+      "verdict": "possessed",
+      "confidence": 0.95,
+      "signals": [
+        "spam-takeover"
+      ],
+      "summary": "Possessed: The page is now full of online-gambling terms (\"slot gacor\", \"judi\", \"jackpot\").",
+      "liveTitle": "SIHOKIBET : Tempat Situs Judi Slot Jackpot Bersama Slot Gacor Malam Ini Pasti Hoki Rekomendasi Sihoki bet",
+      "finalUrl": "https://authority-dogfood.com/",
+      "registeredAt": "2005-04-25T23:25:39.494Z",
+      "ms": 11996
+    },
+    {
+      "set": "positive",
+      "article": "Stirling engine",
+      "url": "http://www.airsport-corp.com/fourpartstirling.html",
+      "accessDate": "2009-01-19",
+      "verdict": "possessed",
+      "confidence": 1,
+      "signals": [
+        "parking-host",
+        "parking-page",
+        "rdap-reregistered"
+      ],
+      "summary": "Possessed: The link now redirects to www.hugedomains.com, a domain marketplace.",
+      "liveTitle": "airsport-corp.com is for sale | HugeDomains",
+      "finalUrl": "https://www.hugedomains.com/domain_profile.cfm?d=airsport-corp.com",
+      "registeredAt": "2026-03-25T18:30:11Z",
+      "ms": 12005
+    },
+    {
+      "set": "positive",
+      "article": "HM Prison Maze",
+      "url": "http://www.findarticles.com/p/articles/mi_m0FQP/is_4690_133/ai_n6155357",
+      "verdict": "ghost",
+      "confidence": 0.8,
+      "signals": [
+        "sibling-probe"
+      ],
+      "summary": "Ghost: A made-up address on the same site returns the same page (100% identical), so this URL no longer has content of its own.",
+      "liveTitle": "News Articles - FindArticles",
+      "finalUrl": "https://www.findarticles.com/news/",
+      "registeredAt": "2000-02-25T23:58:14Z",
+      "ms": 17003
+    },
+    {
+      "set": "positive",
+      "article": "Operation Euphrates Shield",
+      "url": "http://www.worldbulletin.net/america-canada/177056/turkeys-syria-operation-not-unexpected-putin",
+      "accessDate": "2016-09-11",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "finalUrl": "http://www.worldbulletin.net/america-canada/177056/turkeys-syria-operation-not-unexpected-putin",
+      "registeredAt": "2024-11-29T19:37:17Z",
+      "ms": 12998
+    },
+    {
+      "set": "positive",
+      "article": "RTÉ One",
+      "url": "http://www.radiowaves.fm/newsstand/irishindependent/050620.shtml",
+      "accessDate": "2010-06-13",
+      "verdict": "buried",
+      "confidence": 0.55,
+      "signals": [
+        "tls-broken"
+      ],
+      "summary": "Buried: The site's HTTPS certificate is broken or expired.",
+      "registeredAt": "2019-11-15T06:33:56.0Z",
+      "ms": 11994
+    },
+    {
+      "set": "positive",
+      "article": "Stan (song)",
+      "url": "http://www.rocklistmusic.co.uk/q150lists.htm",
+      "accessDate": "2011-08-25",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Attention Required! | Cloudflare",
+      "finalUrl": "http://www.rocklistmusic.co.uk/q150lists.htm",
+      "registeredAt": "2024-11-05T20:10:21.084405Z",
+      "ms": 6706
+    },
+    {
+      "set": "positive",
+      "article": "Garrett County, Maryland",
+      "url": "https://newsandtech.com/dateline/ncwv-media-buys-maryland-paper/article_b62d5820-70b8-11e7-b894-73c13ba26a6e.html",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "404 - Trang không tìm thấy",
+      "finalUrl": "https://bavelsbroodje.nl/dateline/ncwv-media-buys-maryland-paper/article_b62d5820-70b8-11e7-b894-73c13ba26a6e.html",
+      "registeredAt": "2024-01-07T19:16:40Z",
+      "ms": 22006
+    },
+    {
+      "set": "control",
+      "article": "Queen Máxima of the Netherlands",
+      "url": "https://paleishetloo.nl/en/maxima-zorreguieta",
+      "accessDate": "2023-08-25",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "The Orange family tree | Paleis Het Loo",
+      "finalUrl": "https://paleishetloo.nl/en/heritage#en-heritage-maxima-zorreguieta",
+      "registeredAt": "2000-05-25T01:11:17Z",
+      "ms": 2747
+    },
+    {
+      "set": "control",
+      "article": "Associated Television",
+      "url": "http://www.users.zetnet.co.uk/itw/ATV/history.html",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "ATV",
+      "finalUrl": "http://www.users.zetnet.co.uk/itw/ATV/history.html",
+      "registeredAt": "1994-11-22T07:59:20Z",
+      "ms": 1206
+    },
+    {
+      "set": "control",
+      "article": "Flag of Iran",
+      "url": "http://www.iranicaonline.org/articles/frataraka",
+      "accessDate": "2012-07-22",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "FRATARAKA - Encyclopaedia Iranica",
+      "finalUrl": "https://www.iranicaonline.org/articles/frataraka/",
+      "registeredAt": "2009-11-09T16:27:58.557Z",
+      "ms": 5586
+    },
+    {
+      "set": "control",
+      "article": "Robert Enke",
+      "url": "https://www.telegraph.co.uk/sport/columnists/simon-briggs/8921247/Ronaldo-Rengs-biography-of-German-goalkeeper-Robert-Enke-A-Life-Too-Short-named-Sports-Book-of-the-Year.html",
+      "accessDate": "2012-11-26",
+      "verdict": "buried",
+      "confidence": 0.7,
+      "signals": [
+        "http-402"
+      ],
+      "summary": "Buried: The server answers HTTP 402.",
+      "finalUrl": "https://www.telegraph.co.uk/sport/columnists/simon-briggs/8921247/Ronaldo-Rengs-biography-of-German-goalkeeper-Robert-Enke-A-Life-Too-Short-named-Sports-Book-of-the-Year.html",
+      "registeredAt": "1995-07-29T10:21:49Z",
+      "ms": 10797
+    },
+    {
+      "set": "control",
+      "article": "Chinatown, Los Angeles",
+      "url": "http://www.movie-locations.com/movies/c/chinatown.html",
+      "accessDate": "2013-08-17",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "404 Not Found",
+      "finalUrl": "https://www.movie-locations.com/movies/c/chinatown.html",
+      "registeredAt": "1999-12-24T09:32:54Z",
+      "ms": 12008
+    },
+    {
+      "set": "control",
+      "article": "Indian art",
+      "url": "https://zenodo.org/record/2170624",
+      "accessDate": "2019-09-06",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Art. V.—Cave Drawings in the Kaimūr Range, North-West Provinces | Zenodo",
+      "finalUrl": "https://zenodo.org/records/2170624",
+      "registeredAt": "2012-11-15T02:09:01.135Z",
+      "ms": 2869
+    },
+    {
+      "set": "control",
+      "article": "Visa requirements for Russian citizens",
+      "url": "http://www.mfa-ks.net/?page=2,20",
+      "verdict": "ghost",
+      "confidence": 0.75,
+      "signals": [
+        "redirect-to-home"
+      ],
+      "summary": "Ghost: The deep link now quietly redirects to the site's home page.",
+      "liveTitle": "Ministria e Punëve të Jashtme dhe Diasporës - MPJD | MFAD",
+      "finalUrl": "https://mfa-ks.net/",
+      "registeredAt": "2009-08-06T09:30:40Z",
+      "ms": 13604
+    },
+    {
+      "set": "control",
+      "article": "LaRouche movement",
+      "url": "http://www.abs-cbnnews.com/business/10/25/08/group-lists-bold-steps-rp-survive-financial-crisis",
+      "accessDate": "2008-12-03",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Access Denied",
+      "finalUrl": "https://news.abs-cbn.com/business/10/25/08/group-lists-bold-steps-rp-survive-financial-crisis",
+      "registeredAt": "1998-07-27T04:00:00Z",
+      "ms": 18005
+    },
+    {
+      "set": "control",
+      "article": "Cyclone Yasi",
+      "url": "https://www.theaustralian.com.au/nation/politics/damages-from-yasi-to-dwarf-larrys-costs/news-story/9971df1dda9018a70fe7afc603fab5d0",
+      "accessDate": "2011-02-05",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "finalUrl": "https://www.theaustralian.com.au/nation/politics/damages-from-yasi-to-dwarf-larrys-costs/news-story/9971df1dda9018a70fe7afc603fab5d0",
+      "ms": 10999
+    },
+    {
+      "set": "control",
+      "article": "I'm a Believer",
+      "url": "https://www.youtube.com/watch?v=EZUXVo9gJMQ",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "YouTube",
+      "finalUrl": "https://m.youtube.com/watch?v=EZUXVo9gJMQ",
+      "registeredAt": "2005-02-15T05:13:12Z",
+      "ms": 1080
+    },
+    {
+      "set": "control",
+      "article": "John Edward",
+      "url": "https://tvtonight.com.au/2025/10/sam-pang-tonight-oct-27.html",
+      "accessDate": "2025-10-28",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Sam Pang Tonight: Oct 27 | TV Tonight",
+      "finalUrl": "https://tvtonight.com.au/2025/10/sam-pang-tonight-oct-27.html",
+      "ms": 2923
+    },
+    {
+      "set": "control",
+      "article": "Marine propulsion",
+      "url": "https://maritime-executive.com/article/chinese-yard-launches-battery-powered-coal-carrier",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Chinese Yard Launches Battery-Powered Coal Carrier",
+      "finalUrl": "https://maritime-executive.com/article/chinese-yard-launches-battery-powered-coal-carrier",
+      "registeredAt": "2000-11-16T18:45:36Z",
+      "ms": 274
+    },
+    {
+      "set": "control",
+      "article": "Ghosts in Bengali culture",
+      "url": "https://www.outlookindia.com/poshan/poshan-news-a-day-before-diwali-choddo-shak-to-appease-the-ancestors-think-again-news-341124",
+      "accessDate": "2021-08-23",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "A Day Before Diwali, ‘Choddo Shak' To Appease The Ancestors? Think Again. | Outlook India",
+      "finalUrl": "https://www.outlookindia.com/poshan/poshan-news-a-day-before-diwali-choddo-shak-to-appease-the-ancestors-think-again-news-341124",
+      "registeredAt": "1996-08-15T04:00:00Z",
+      "ms": 824
+    },
+    {
+      "set": "control",
+      "article": "Coastal Carolina University",
+      "url": "https://www.usnews.com/best-colleges/coastal-carolina-university-3451/student-life",
+      "verdict": "unknown",
+      "confidence": 0.5,
+      "signals": [
+        "timeout"
+      ],
+      "summary": "Unknown: The server did not answer in time.",
+      "registeredAt": "1995-01-20T05:00:00Z",
+      "ms": 15696
+    },
+    {
+      "set": "control",
+      "article": "Pennsylvania Station (1910–1963)",
+      "url": "https://www.nps.gov/subjects/culturallandscapes/cltimeline4.htm",
+      "accessDate": "2018-09-06",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Laying the Preservation Framework: 1960-1980 - Cultural Landscapes (U.S. National Park Service)",
+      "finalUrl": "https://www.nps.gov/subjects/culturallandscapes/cltimeline4.htm",
+      "registeredAt": "1997-10-02T01:29:27.000Z",
+      "ms": 1625
+    },
+    {
+      "set": "control",
+      "article": "Aashiqui 2",
+      "url": "http://www.filmfare.com/photos/shraddha-and-aditya-at-the-aashiqui-2-concert-2961-7.html",
+      "accessDate": "2013-05-22",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Shraddha and Aditya at the Aashiqui 2 concert | Filmfare.com",
+      "finalUrl": "https://www.filmfare.com/photos/shraddha-and-aditya-at-the-aashiqui-2-concert-2961-7.html",
+      "registeredAt": "2000-12-19T16:13:14Z",
+      "ms": 981
+    },
+    {
+      "set": "control",
+      "article": "Northallerton",
+      "url": "https://www.metoffice.gov.uk/research/climate/maps-and-data/uk-climate-averages/gcwuvhmch",
+      "accessDate": "2023-02-01",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Location-specific long-term averages - Met Office",
+      "finalUrl": "https://www.metoffice.gov.uk/research/climate/maps-and-data/location-specific-long-term-averages",
+      "registeredAt": "2000-08-21T11:00:00Z",
+      "ms": 2387
+    },
+    {
+      "set": "control",
+      "article": "Submarine Escape Training Facility (Australia)",
+      "url": "https://www.theaustralian.com.au/nation/defence/sub-safety-row-spurs-overseas-training/news-story/04e44e9e6399ed294a79bb4d3c002bfd",
+      "accessDate": "2009-01-30",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "finalUrl": "https://www.theaustralian.com.au/nation/defence/sub-safety-row-spurs-overseas-training/news-story/04e44e9e6399ed294a79bb4d3c002bfd",
+      "ms": 10526
+    },
+    {
+      "set": "control",
+      "article": "2022 Alaska's at-large congressional district special election",
+      "url": "https://www.adn.com/politics/2022/04/01/live-updates-alaskas-us-house-race-expands-as-5-pm-deadline-nears/",
+      "accessDate": "2022-04-01",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Live updates: 51 candidates sign up to run in Alaska’s special U.S. House election, including Sarah Palin - Anchorage Da",
+      "finalUrl": "https://www.adn.com/politics/2022/04/01/live-updates-alaskas-us-house-race-expands-as-5-pm-deadline-nears/",
+      "registeredAt": "1994-11-18T05:00:00Z",
+      "ms": 2041
+    },
+    {
+      "set": "control",
+      "article": "Bhajan Lal",
+      "url": "http://www.ndtv.com/india-news/former-haryana-chief-minister-bhajan-lal-dies-of-heart-attack-457534",
+      "accessDate": "2016-04-18",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Access Denied",
+      "finalUrl": "http://www.ndtv.com/india-news/former-haryana-chief-minister-bhajan-lal-dies-of-heart-attack-457534",
+      "registeredAt": "1996-09-26T04:00:00Z",
+      "ms": 10856
+    },
+    {
+      "set": "control",
+      "article": "Sri Lanka Police",
+      "url": "https://www.espn.com/espn/wire?section=oly&id=2653935",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Sri Lankan anti-terror police to advise on Beijing Olympics - Olympics - ESPN",
+      "finalUrl": "https://www.espn.com/espn/wire?section=oly&id=2653935",
+      "registeredAt": "1994-10-04T04:00:00Z",
+      "ms": 11506
+    },
+    {
+      "set": "control",
+      "article": "List of holiday horror films",
+      "url": "https://www.pophorror.com/secret-santa-2018-review/",
+      "accessDate": "2020-11-16",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "'Secret Santa' (2018) - Movie Review - PopHorror",
+      "finalUrl": "https://pophorror.com/secret-santa-2018-review/",
+      "registeredAt": "2016-01-14T23:10:30Z",
+      "ms": 2257
+    },
+    {
+      "set": "control",
+      "article": "Mortal Kombat (1995 film)",
+      "url": "https://www.vulture.com/2021/04/the-mortal-kombat-theme-song-creators-on-their-knockout-hit.html",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "The Mortal Kombat Theme-Song Creators on Their Knockout Hit",
+      "finalUrl": "https://www.vulture.com/2021/04/the-mortal-kombat-theme-song-creators-on-their-knockout-hit.html",
+      "registeredAt": "2004-07-31T18:34:44Z",
+      "ms": 11742
+    },
+    {
+      "set": "control",
+      "article": "Carolyn Maloney",
+      "url": "http://www.aauwaction.org/wp-content/uploads/2012/09/CVR2012.pdf",
+      "verdict": "alive",
+      "confidence": 0.55,
+      "signals": [
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "finalUrl": "https://www.aauwaction.org/wp-content/uploads/2012/09/CVR2012.pdf",
+      "registeredAt": "2009-04-07T18:30:00Z",
+      "ms": 11798
+    },
+    {
+      "set": "control",
+      "article": "Controversial Reddit communities",
+      "url": "https://www.theatlantic.com/technology/archive/2020/09/reddit-qanon-ban-evasion-policy-moderation-facebook/616442/",
+      "accessDate": "2022-09-02",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Please hold a moment… – The Atlantic",
+      "finalUrl": "https://www.theatlantic.com/technology/archive/2020/09/reddit-qanon-ban-evasion-policy-moderation-facebook/616442/",
+      "registeredAt": "1995-08-15T04:00:00Z",
+      "ms": 11489
+    },
+    {
+      "set": "control",
+      "article": "Excalibur (film)",
+      "url": "http://www.thebigpicturemagazine.com/index.php?option=com_content&view=article&id=181:brilliant-failures-excalibur-john-boorman-1981&catid=34:film-reviews&Itemid=60",
+      "accessDate": "2011-03-22",
+      "verdict": "alive",
+      "confidence": 0.55,
+      "signals": [
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "The Big Picture Magazine",
+      "finalUrl": "http://thebigpicturemagazine.com/?option=com_content&view=article&id=181:brilliant-failures-excalibur-john-boorman-1981&catid=34:film-reviews&Itemid=60",
+      "registeredAt": "2008-09-19T10:06:08Z",
+      "ms": 18995
+    },
+    {
+      "set": "control",
+      "article": "Lompoc, California",
+      "url": "https://www.latimes.com/entertainment-arts/movies/story/2019-11-25/last-black-man-jonathan-majors",
+      "accessDate": "2020-09-03",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Jonathan Majors finds a unique spirit in 'Last Black Man' - Los Angeles Times",
+      "finalUrl": "https://www.latimes.com/entertainment-arts/movies/story/2019-11-25/last-black-man-jonathan-majors",
+      "ms": 558
+    },
+    {
+      "set": "control",
+      "article": "University of Malaya",
+      "url": "http://www.malaysiacentral.com/information-directory/university-of-malaya-the-oldest-university-in-malaysia/",
+      "accessDate": "2017-09-25",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "University of Malaya - The oldest university in Malaysia - MALAYSIA CENTRAL (ID)",
+      "finalUrl": "http://www.malaysiacentral.com/information-directory/university-of-malaya-the-oldest-university-in-malaysia/",
+      "registeredAt": "2004-02-13T06:32:47Z",
+      "ms": 1739
+    },
+    {
+      "set": "control",
+      "article": "Dalmatian dog",
+      "url": "https://www.thekennelclub.org.uk/breed-standards/utility/dalmatian/",
+      "verdict": "alive",
+      "confidence": 0.6,
+      "signals": [
+        "title-present"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Dalmatian | Breed Standards | The Kennel Club",
+      "finalUrl": "https://www.royalkennelclub.com/breed-standards/utility/dalmatian/",
+      "registeredAt": "2002-07-30T08:56:05Z",
+      "ms": 12997
+    },
+    {
+      "set": "control",
+      "article": "Music sequencer",
+      "url": "https://www.anerd.com/fairlight/fairlightstory.htm",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Fairlight The Whole Story",
+      "finalUrl": "https://www.anerd.com/fairlight/fairlightstory.htm",
+      "registeredAt": "2002-06-25T11:14:28Z",
+      "ms": 771
+    },
+    {
+      "set": "control",
+      "article": "Charles Koch",
+      "url": "https://www.newyorker.com/reporting/2010/08/30/100830fa_fact_mayer",
+      "accessDate": "2012-01-05",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "The Koch Brothers’ Covert Ops | The New Yorker",
+      "finalUrl": "https://www.newyorker.com/magazine/2010/08/30/covert-operations?currentPage=1",
+      "registeredAt": "1993-11-15T05:00:00Z",
+      "ms": 972
+    },
+    {
+      "set": "control",
+      "article": "Rube Goldberg machine",
+      "url": "http://web.mit.edu/museum/programs/fat.html",
+      "accessDate": "2011-05-06",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-429"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 429), so a person should check it.",
+      "liveTitle": "Vercel Security Checkpoint",
+      "finalUrl": "https://mitmuseum.mit.edu/fat",
+      "ms": 18233
+    },
+    {
+      "set": "control",
+      "article": "American Psycho",
+      "url": "https://www.theguardian.com/books/2010/jun/27/imperial-bedrooms-bret-easton-ellis-book-review",
+      "accessDate": "2010-07-28",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Imperial Bedrooms by Bret Easton Ellis | Bret Easton Ellis | The Guardian",
+      "finalUrl": "https://www.theguardian.com/books/2010/jun/27/imperial-bedrooms-bret-easton-ellis-book-review",
+      "registeredAt": "1994-07-06T04:00:00Z",
+      "ms": 618
+    },
+    {
+      "set": "control",
+      "article": "Wadi Halfa",
+      "url": "https://www.globalsecurity.org/military/world/war/turkiyah.htm",
+      "accessDate": "2019-10-21",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Attention Required! | Cloudflare",
+      "finalUrl": "https://www.globalsecurity.org/military/world/war/turkiyah.htm",
+      "registeredAt": "1999-04-30T09:15:44.155Z",
+      "ms": 10611
+    },
+    {
+      "set": "control",
+      "article": "Stirling engine",
+      "url": "https://ntrs.nasa.gov/citations/19880002196",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Automotive Stirling engine: Mod 2 design report - NASA Technical Reports Server (NTRS)",
+      "finalUrl": "https://ntrs.nasa.gov/citations/19880002196",
+      "registeredAt": "1997-10-02T01:29:26.000Z",
+      "ms": 1674
+    },
+    {
+      "set": "control",
+      "article": "HM Prison Maze",
+      "url": "https://news.bbc.co.uk/2/hi/uk_news/northern_ireland/4663512.stm",
+      "accessDate": "2006-10-18",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "BBC NEWS | UK | Northern Ireland | First peek at Maze masterplan",
+      "finalUrl": "http://news.bbc.co.uk/2/hi/uk_news/northern_ireland/4663512.stm",
+      "registeredAt": "1994-12-13T03:49:48Z",
+      "ms": 2840
+    },
+    {
+      "set": "control",
+      "article": "Operation Euphrates Shield",
+      "url": "http://www.militarytimes.com/articles/us-halts-military-support-for-turkeys-fight-in-key-islamic-state-town",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "liveTitle": "Page not found - Military Times",
+      "finalUrl": "https://www.militarytimes.com/articles/us-halts-military-support-for-turkeys-fight-in-key-islamic-state-town",
+      "registeredAt": "2001-06-25T10:42:46Z",
+      "ms": 11002
+    },
+    {
+      "set": "control",
+      "article": "RTÉ One",
+      "url": "https://about.rte.ie/commissioning/commissioning-briefs/rte-claracha-gaeilge/",
+      "accessDate": "2021-08-17",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Just a moment...",
+      "finalUrl": "https://about.rte.ie/commissioning/commissioning-briefs/rte-claracha-gaeilge/",
+      "ms": 10498
+    },
+    {
+      "set": "control",
+      "article": "Stan (song)",
+      "url": "https://www.theguardian.com/culture/2001/jan/29/artsfeatures",
+      "accessDate": "2011-08-25",
+      "verdict": "alive",
+      "confidence": 0.55,
+      "signals": [
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "What went right? | Culture | The Guardian",
+      "finalUrl": "https://www.theguardian.com/culture/2001/jan/29/artsfeatures",
+      "registeredAt": "1994-07-06T04:00:00Z",
+      "ms": 532
+    },
+    {
+      "set": "control",
+      "article": "Garrett County, Maryland",
+      "url": "https://www.census.gov/population/www/cen2000/briefs/phc-t4/tables/tab02.pdf",
+      "accessDate": "2014-09-12",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Attention Required! | Cloudflare",
+      "finalUrl": "https://www.census.gov/population/www/cen2000/briefs/phc-t4/tables/tab02.pdf",
+      "registeredAt": "1997-10-02T01:29:21.000Z",
+      "ms": 15952
+    },
+    {
+      "set": "control",
+      "article": "Clemson Tigers",
+      "url": "https://theacc.com/documents/2020/9/18/ACC_Men_s_Wrestling_Records.pdf",
+      "accessDate": "2023-10-12",
+      "verdict": "alive",
+      "confidence": 0.55,
+      "signals": [
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "ACC_WRESTLING_RECORDS (PDF) - Atlantic Coast Conference",
+      "finalUrl": "https://theacc.com/documents/2020/9/18/ACC_Men_s_Wrestling_Records.pdf",
+      "registeredAt": "1996-10-08T04:00:00Z",
+      "ms": 1696
+    },
+    {
+      "set": "control",
+      "article": "Bombay (film)",
+      "url": "https://www.indiatoday.in/magazine/indiascope/story/19950430-mani-ratnams-film-bombay-incenses-muslim-leaders-of-city-808273-1995-04-30",
+      "accessDate": "2021-07-23",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Bombay touches a raw nerve - India Today",
+      "finalUrl": "https://www.indiatoday.in/magazine/indiascope/story/19950430-mani-ratnams-film-bombay-incenses-muslim-leaders-of-city-808273-1995-04-29",
+      "registeredAt": "2005-01-06T03:26:32.000Z",
+      "ms": 1224
+    },
+    {
+      "set": "control",
+      "article": "Fustat",
+      "url": "http://www.egyptvoyager.com/towns_cairo_history_islamic_fustat.htm",
+      "accessDate": "2007-08-13",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Just a moment...",
+      "finalUrl": "https://sawsells.com/domain/hoax.com",
+      "registeredAt": "1999-01-28T05:00:00Z",
+      "ms": 12075
+    },
+    {
+      "set": "control",
+      "article": "Russian-occupied territories in Georgia",
+      "url": "https://cominf.org/node/1166524407",
+      "accessDate": "2024-09-15",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Президент Южной Осетии: 95% наших граждан имеют паспорта РФ | Государственное информационное агентство \"Рес\"",
+      "finalUrl": "https://cominf.org/node/1166524407",
+      "registeredAt": "2004-01-09T01:35:46.293Z",
+      "ms": 1261
+    },
+    {
+      "set": "control",
+      "article": "Thad Cochran",
+      "url": "https://www.djournal.com/news/bruising-senate-battle-nears-finish/article_7f3c228d-e8ad-5b30-bf13-1c0da533ecbc.html",
+      "accessDate": "2014-06-03",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-429"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 429), so a person should check it.",
+      "finalUrl": "https://www.djournal.com/news/bruising-senate-battle-nears-finish/article_7f3c228d-e8ad-5b30-bf13-1c0da533ecbc.html",
+      "registeredAt": "1995-12-20T05:00:00Z",
+      "ms": 11497
+    },
+    {
+      "set": "control",
+      "article": "Kozhikode",
+      "url": "https://kozhikodecorporation.lsgkerala.gov.in/ml/about",
+      "accessDate": "2020-06-10",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "ആമുഖം | കോഴിക്കോട് മുനിസിപ്പല്‍ കോര്‍പ്പറേഷന്‍",
+      "finalUrl": "https://kozhikodecorporation.lsgkerala.gov.in/ml/about",
+      "registeredAt": "2009-12-04T12:02:00.806Z",
+      "ms": 1653
+    },
+    {
+      "set": "control",
+      "article": "Penalty (ice hockey)",
+      "url": "https://www.nhl.com/gamecenter/ott-vs-phi/2004/03/05/2003021001",
+      "verdict": "alive",
+      "confidence": 0.55,
+      "signals": [
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Ottawa Senators - Philadelphia Flyers - Mar 5, 2004 | NHL.com",
+      "finalUrl": "https://www.nhl.com/gamecenter/ott-vs-phi/2004/03/05/2003021001",
+      "registeredAt": "1994-10-18T04:00:00Z",
+      "ms": 1016
+    },
+    {
+      "set": "control",
+      "article": "Lost film",
+      "url": "http://www.copyright.gov/reports/annual/archive/ar-1913.pdf",
+      "accessDate": "2021-11-20",
+      "verdict": "alive",
+      "confidence": 0.55,
+      "signals": [
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "finalUrl": "https://www.copyright.gov/reports/annual/archive/ar-1913.pdf",
+      "registeredAt": "2000-04-11T20:00:20.000Z",
+      "ms": 13066
+    },
+    {
+      "set": "control",
+      "article": "Creatine",
+      "url": "http://www.cancer.gov/cancertopics/factsheet/Risk/heterocyclic-amines",
+      "accessDate": "2007-08-09",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Chemicals in Meat Cooked at High Temperatures and Cancer Risk - NCI",
+      "finalUrl": "https://www.cancer.gov/about-cancer/causes-prevention/risk/diet/cooked-meats-fact-sheet",
+      "registeredAt": "1999-08-23T20:37:15.000Z",
+      "ms": 1661
+    },
+    {
+      "set": "control",
+      "article": "Dylan and Cole Sprouse",
+      "url": "https://www.cbsnews.com/news/the-suite-life-of-the-sprouse-twins/",
+      "accessDate": "2006-03-01",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "The 'Suite Life' Of The Sprouse Twins - CBS News",
+      "finalUrl": "https://www.cbsnews.com/news/the-suite-life-of-the-sprouse-twins/",
+      "registeredAt": "1994-10-04T04:00:00Z",
+      "ms": 2102
+    },
+    {
+      "set": "control",
+      "article": "North Korea and weapons of mass destruction",
+      "url": "http://www.southkoreanews.net/news/252821671/north-korea-shows-off-new-missiles-in-display-of-military-might-vows-to-strike-foes-down",
+      "verdict": "buried",
+      "confidence": 0.96,
+      "signals": [
+        "http-404"
+      ],
+      "summary": "Buried: The server answers 404 Not Found.",
+      "finalUrl": "http://www.southkoreanews.net/news/252821671/north-korea-shows-off-new-missiles-in-display-of-military-might-vows-to-strike-foes-down",
+      "registeredAt": "1999-06-26T11:57:54Z",
+      "ms": 11236
+    },
+    {
+      "set": "control",
+      "article": "Chiapas",
+      "url": "http://www.latinamericanstudies.org/mexico/lacandones.htm",
+      "accessDate": "2011-05-08",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "Unusual battle lines form around jungle",
+      "finalUrl": "https://www.latinamericanstudies.org/mexico/lacandones.htm",
+      "registeredAt": "2003-03-12T23:39:20.306Z",
+      "ms": 1206
+    },
+    {
+      "set": "control",
+      "article": "Webcomic",
+      "url": "https://archive.boston.com/lifestyle/articles/2011/08/02/the_new_webcomic_entrepreneurs/",
+      "accessDate": "2017-11-17",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "The new webcomic entrepreneurs - The Boston Globe",
+      "finalUrl": "https://archive.boston.com/lifestyle/articles/2011/08/02/the_new_webcomic_entrepreneurs/",
+      "registeredAt": "1995-06-26T04:00:00Z",
+      "ms": 1675
+    },
+    {
+      "set": "control",
+      "article": "Jim Steranko",
+      "url": "http://www.inkwellawards.com/?p=5345",
+      "verdict": "ghost",
+      "confidence": 0.75,
+      "signals": [
+        "redirect-to-home"
+      ],
+      "summary": "Ghost: The deep link now quietly redirects to the site's home page.",
+      "liveTitle": "Inkwell Awards | Celebrating Excellence in Comic Book Inking",
+      "finalUrl": "https://inkwellawards.com/",
+      "registeredAt": "2008-01-20T00:10:50Z",
+      "ms": 14293
+    },
+    {
+      "set": "control",
+      "article": "Sar-e-Pol Province",
+      "url": "https://www.nsia.gov.af:8080/wp-content/uploads/2021/06/Estimated-Population-of-Afghanistan1-1400.pdf",
+      "accessDate": "2021-06-21",
+      "verdict": "unknown",
+      "confidence": 0.5,
+      "signals": [
+        "timeout"
+      ],
+      "summary": "Unknown: The server did not answer in time.",
+      "ms": 13526
+    },
+    {
+      "set": "control",
+      "article": "Doctor Who season 1 (1963–1964)",
+      "url": "https://thereelbits.com/2013/09/19/doctor-who-50th-anniversary-marathon-recap-season-1-1963-1964/",
+      "accessDate": "2018-09-23",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "‘Doctor Who’ 50th Anniversary Marathon Recap: Season 1 (1963 – 1964) – The Reel Bits",
+      "finalUrl": "https://thereelbits.com/2013/09/19/doctor-who-50th-anniversary-marathon-recap-season-1-1963-1964/",
+      "registeredAt": "2010-10-21T23:37:37Z",
+      "ms": 1500
+    },
+    {
+      "set": "control",
+      "article": "Ben Askren",
+      "url": "https://www.independent.co.uk/sport/ufc/ben-askren-pneumonia-symptoms-health-update-hospital-b2772249.html",
+      "accessDate": "2025-06-23",
+      "verdict": "alive",
+      "confidence": 0.82,
+      "signals": [
+        "title-present",
+        "http-ok"
+      ],
+      "summary": "Alive: the page answers 200 and still looks like what was cited.",
+      "liveTitle": "What happened to Ben Askren? Wife ‘praying for miracle’ as MMA veteran battles pneumonia | The Independent",
+      "finalUrl": "https://www.independent.co.uk/sport/ufc/ben-askren-pneumonia-symptoms-health-update-hospital-b2772249.html",
+      "registeredAt": "1996-02-02T14:30:52Z",
+      "ms": 1339
+    },
+    {
+      "set": "control",
+      "article": "LAV III",
+      "url": "http://www.defenseindustrydaily.com/Canada-Up-Armoring-its-LAV-IIIs-05181/",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Just a moment...",
+      "finalUrl": "https://www.defenseindustrydaily.com/Canada-Up-Armoring-its-LAV-IIIs-05181/",
+      "registeredAt": "2004-12-06T16:56:03Z",
+      "ms": 10659
+    },
+    {
+      "set": "control",
+      "article": "Erich von Falkenhayn",
+      "url": "https://www.tandfonline.com/doi/full/10.1111/hisn.12247",
+      "accessDate": "2023-01-24",
+      "verdict": "unknown",
+      "confidence": 0.6,
+      "signals": [
+        "http-403"
+      ],
+      "summary": "Unknown: The site turned away an automated visitor (HTTP 403), so a person should check it.",
+      "liveTitle": "Just a moment...",
+      "finalUrl": "https://www.tandfonline.com/doi/full/10.1111/hisn.12247",
+      "registeredAt": "2005-08-30T11:21:27Z",
+      "ms": 10496
+    },
+    {
+      "set": "control",
+      "article": "Visa requirements for Polish citizens",
+      "url": "https://www.resmigazete.gov.tr/eskiler/2022/04/20220419-9.pdf",
+      "verdict": "unknown",
+      "confidence": 0.5,
+      "signals": [
+        "timeout"
+      ],
+      "summary": "Unknown: The server did not answer in time.",
+      "ms": 19204
+    }
+  ]
+}

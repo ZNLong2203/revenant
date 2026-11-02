@@ -12,7 +12,8 @@
     "typecheck": "next typegen && tsc --noEmit",
     "benchmark": "tsx scripts/benchmark.ts",
     "revenant": "tsx bin/revenant.ts",
-    "mcp": "tsx bin/revenant-mcp.ts"
+    "mcp": "tsx bin/revenant-mcp.ts",
+    "featured": "tsx scripts/featured.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",
