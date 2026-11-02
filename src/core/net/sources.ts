@@ -15,63 +15,84 @@ const DAY = 86_400;
 /** Current registration date of a domain, via the rdap.org bootstrap. */
 export async function lookupDomain(domain: string): Promise<DomainObservation> {
   if (!domain) return { domain, rdapAvailable: false };
-  return cached(`rdap:${domain}`, 7 * DAY, async () => {
-    try {
+  try {
+    return await cached(`rdap:${domain}`, 7 * DAY, async () => {
       const r = await safeFetch(`https://rdap.org/domain/${encodeURIComponent(domain)}`, {
         trusted: true,
         timeoutMs: 8000,
         headers: { accept: "application/rdap+json, application/json" },
       });
-      if (r.status !== 200) return { domain, rdapAvailable: false };
+      // 404: the registry has no record (unregistered, or a TLD without RDAP); that answer is stable
+      if (r.status === 404) return { domain, rdapAvailable: false };
+      if (r.status !== 200) throw new UpstreamBusy(`RDAP answered ${r.status}`);
       const data = JSON.parse(r.body) as { events?: { eventAction?: string; eventDate?: string }[] };
       const reg = data.events?.find((e) => e.eventAction === "registration")?.eventDate;
       return { domain, registeredAt: reg, rdapAvailable: true };
-    } catch {
-      return { domain, rdapAvailable: false };
-    }
-  });
+    });
+  } catch {
+    return { domain, rdapAvailable: false };
+  }
 }
 
-/** Up to `limit` 200-status snapshots, closest to `target` first. */
+class UpstreamBusy extends Error {}
+
+/**
+ * GET a Wayback CDX query. Retries politely on 429/503 (honouring
+ * Retry-After, capped) and throws on failure so callers never cache an
+ * outage as "no snapshots".
+ */
+async function cdx(query: URLSearchParams): Promise<string> {
+  for (let attempt = 0; ; attempt++) {
+    const r = await safeFetch(`https://web.archive.org/cdx/search/cdx?${query}`, {
+      trusted: true,
+      timeoutMs: 20_000,
+      headers: { accept: "application/json" },
+    });
+    if (r.status === 200) return r.body;
+    if ((r.status === 429 || r.status === 503) && attempt < 2) {
+      const wait = Math.min(8, Number(r.headers.get("retry-after")) || 2 * (attempt + 1));
+      await new Promise((res) => setTimeout(res, wait * 1000));
+      continue;
+    }
+    throw new UpstreamBusy(`CDX answered ${r.status}`);
+  }
+}
+
+/** Up to `limit` 200-status snapshots, closest to `target` first. Empty on outage (not cached). */
 export async function listSnapshots(url: string, target?: string, limit = 12): Promise<Snapshot[]> {
   const ts = target ? isoToTimestamp(target) : isoToTimestamp(new Date().toISOString());
   const key = `cdx:${url}:${ts.slice(0, 8)}`;
-  return cached(key, 3 * DAY, async () => {
-    const q = new URLSearchParams({
-      url,
-      output: "json",
-      fl: "timestamp,original,statuscode,mimetype,digest",
-      filter: "statuscode:200",
-      closest: ts,
-      sort: "closest",
-      limit: String(limit),
+  try {
+    return await cached(key, 3 * DAY, async () => {
+      const body = await cdx(
+        new URLSearchParams({
+          url,
+          output: "json",
+          fl: "timestamp,original,statuscode,mimetype,digest",
+          filter: "statuscode:200",
+          closest: ts,
+          sort: "closest",
+          limit: String(limit),
+        }),
+      );
+      return body.trim() ? parseCdx(JSON.parse(body)) : [];
     });
-    try {
-      const r = await safeFetch(`https://web.archive.org/cdx/search/cdx?${q}`, {
-        trusted: true,
-        timeoutMs: 20_000,
-        headers: { accept: "application/json" },
-      });
-      if (r.status !== 200 || !r.body.trim()) return [];
-      return parseCdx(JSON.parse(r.body));
-    } catch {
-      return [];
-    }
-  });
+  } catch {
+    return [];
+  }
 }
 
 /** Earliest snapshot of a URL (any status), as an ISO date. */
 export async function firstSeen(url: string): Promise<string | undefined> {
-  return cached(`first:${url}`, 30 * DAY, async () => {
-    const q = new URLSearchParams({ url, output: "json", fl: "timestamp", limit: "1" });
-    try {
-      const r = await safeFetch(`https://web.archive.org/cdx/search/cdx?${q}`, { trusted: true, timeoutMs: 15_000 });
-      const rows = JSON.parse(r.body) as string[][];
-      return rows[1]?.[0] ? timestampToIsoDate(rows[1][0]) : undefined;
-    } catch {
-      return undefined;
-    }
-  });
+  try {
+    return await cached(`first:${url}`, 30 * DAY, async () => {
+      const body = await cdx(new URLSearchParams({ url, output: "json", fl: "timestamp", limit: "1" }));
+      const rows = (body.trim() ? JSON.parse(body) : []) as string[][];
+      return rows[1]?.[0] ? timestampToIsoDate(rows[1][0]) : "";
+    });
+  } catch {
+    return undefined;
+  }
 }
 
 /** Raw bytes of one snapshot, reduced to title + visible text. */
@@ -98,19 +119,30 @@ export async function findArchive(url: string, opts: SelectOptions & { firstSeen
   const ranked = rankSnapshots(snaps, opts);
   const seenDates = snaps.map((s) => s.timestamp).sort();
   const first = opts.firstSeenHint ?? (seenDates[0] ? timestampToIsoDate(seenDates[0]) : undefined);
-  for (const snap of ranked.slice(0, 3)) {
-    const page = await readSnapshot(snap);
-    if (!page) continue;
-    const spam = spamScore(`${page.title ?? ""} ${page.text}`);
-    if (spam.score >= 0.5) continue;
-    return {
-      snapshot: snap,
-      url: waybackUrl(snap.timestamp, snap.original),
-      title: page.title,
-      text: page.text,
-      candidates: ranked.length,
-      firstSeen: first,
-    };
+
+  let spamUntil: string | undefined;
+  const tryCandidates = async (list: Snapshot[]): Promise<ArchiveObservation | undefined> => {
+    for (const snap of list) {
+      const page = await readSnapshot(snap);
+      if (!page) continue;
+      if (spamScore(`${page.title ?? ""} ${page.text}`).score >= 0.5) {
+        // the archive already holds the squatter's page here; remember the earliest such copy
+        if (!spamUntil || snap.timestamp < spamUntil) spamUntil = snap.timestamp;
+        continue;
+      }
+      return { snapshot: snap, url: waybackUrl(snap.timestamp, snap.original), title: page.title, text: page.text, candidates: ranked.length, firstSeen: first };
+    }
+    return undefined;
+  };
+
+  const found = await tryCandidates(ranked.slice(0, 3));
+  if (found) return found;
+  if (spamUntil) {
+    // every nearby copy was spam: step three years back from the earliest spam copy and look again
+    const back = new Date(Date.parse(`${timestampToIsoDate(spamUntil)}T00:00:00Z`) - 3 * 365 * 86_400_000).toISOString().slice(0, 10);
+    const older = rankSnapshots(await listSnapshots(url, back), { target: back, notAfter: timestampToIsoDate(spamUntil) });
+    const again = await tryCandidates(older.slice(0, 3));
+    if (again) return again;
   }
   return { candidates: ranked.length, firstSeen: first };
 }

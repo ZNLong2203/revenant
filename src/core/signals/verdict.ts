@@ -15,7 +15,7 @@ import type {
 } from "../types";
 import { coverage, jaccard } from "../text";
 import { crossedDomains, isRootRedirect, timestampToIsoDate, waybackUrl } from "../url";
-import { isParkingHost, parkingHits, soft404Hits, spamScore } from "./lexicon";
+import { isParkingHost, isSpamHost, parkingHits, soft404Hits, spamScore } from "./lexicon";
 
 export interface Observations {
   url: string;
@@ -90,7 +90,7 @@ export function decide(o: Observations): Decision {
       default:
         if (live.status === 404 || live.status === 410) {
           add(`http-${live.status}`, "buried", 0.96, `The server answers ${live.status} ${live.status === 410 ? "Gone" : "Not Found"}.`);
-        } else if (live.status && [401, 403, 405, 406, 429, 451, 999].includes(live.status)) {
+        } else if (live.status && [401, 402, 403, 405, 406, 429, 451, 999].includes(live.status)) {
           add(`http-${live.status}`, "unknown", 0.6, `The site turned away an automated visitor (HTTP ${live.status}), so a person should check it.`);
         } else if (live.status && live.status >= 500) {
           add(`http-${live.status}`, "buried", 0.5, `The server is failing (HTTP ${live.status}). It may be temporary.`);
@@ -102,6 +102,9 @@ export function decide(o: Observations): Decision {
     }
     if (rereg && live.errorKind !== "dns") {
       add("rdap-reregistered", "possessed", 0.35, `The domain was registered again on ${takeoverDate}, after it was cited.`);
+    }
+    if (live.finalUrl && crossedDomains(o.url, live.finalUrl) && isSpamHost(live.finalUrl)) {
+      add("spam-redirect", "possessed", 0.88, `The link redirects to ${safeHost(live.finalUrl)}, a gambling-site domain.`);
     }
     return finish(ev, o, takeoverDate);
   }
@@ -151,7 +154,9 @@ export function decide(o: Observations): Decision {
   }
 
   // left for another site
-  if (crossedDomains(o.url, finalUrl) && !isParkingHost(finalUrl)) {
+  if (crossedDomains(o.url, finalUrl) && isSpamHost(finalUrl)) {
+    add("spam-redirect", "possessed", 0.88, `The link now redirects to ${safeHost(finalUrl)}, a gambling-site domain.`);
+  } else if (crossedDomains(o.url, finalUrl) && !isParkingHost(finalUrl)) {
     add("cross-domain-redirect", "changeling", 0.25, `The link now redirects to a different site, ${safeHost(finalUrl)}.`);
   }
 
@@ -257,7 +262,10 @@ function summarise(v: Verdict, ev: Evidence[], o: Observations): string {
 }
 
 function describeSpam(hits: string[]): string {
-  const gambling = ["casino", "slot", "judi", "togel", "toto", "bandar", "poker", "bet", "jackpot", "gacor", "maxwin", "sbobet", "situs", "scatter"];
+  const gambling = [
+    "casino", "slot", "judi", "togel", "toto", "bandar", "poker", "bet", "jackpot", "gacor", "maxwin", "sbobet", "situs", "scatter",
+    "ufa", "สล็อต", "คาสิโน", "บาคาร่า", "แทงบอล", "หวย", "nhà cái", "cá cược", "nổ hũ", "博彩", "百家乐", "赌场", "카지노", "토토", "カジノ",
+  ];
   return hits.some((h) => gambling.some((g) => h.includes(g))) ? "online-gambling" : "spam";
 }
 

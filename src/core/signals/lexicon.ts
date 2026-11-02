@@ -20,7 +20,9 @@ export const PARKING_PHRASES = [
   "domain has expired", "renew this domain", "parked free", "parked domain", "this web page is parked",
   "related searches", "sponsored listings", "inquire about this domain", "get this domain",
   "the owner of this domain", "hugedomains", "domain name is for sale", "this page is provided courtesy of godaddy",
-  "check out the domain", "premium domain", "lease to own",
+  "check out the domain", "premium domain", "lease to own", "domain registered", "this domain is registered",
+  "this domain was recently registered", "registered at dynadot", "dynadot", "namecheap parking", "parkingpage",
+  "domain parking", "parked by", "is parked free", "courtesy of namecheap", "future home of something quite cool",
 ];
 
 /**
@@ -39,7 +41,20 @@ export const SPAM_TERMS = [
   // essay mills, loans, crypto pumps, knock-offs
   "essay writing service", "write my essay", "payday loan", "cash advance", "replica watches",
   "crypto signals", "forex signals", "binary options", "cheap jerseys", "seo backlinks", "buy followers",
+  // brand names that only ever appear on gambling pages
+  "ufabet", "pg slot", "w88", "fun88", "188bet", "dafabet", "betflik", "jili", "joker123", "slot pg",
+  "sv388", "ae888", "kubet", "jun88", "okvip", "789bet", "new88", "shbet", "f8bet", "hi88",
+  // Thai
+  "สล็อต", "คาสิโน", "บาคาร่า", "เว็บตรง", "แทงบอล", "หวย", "เครดิตฟรี", "ฝากถอน", "แตกหนัก", "ยูฟ่าเบท",
+  // Vietnamese
+  "nhà cái", "cá cược", "tài xỉu", "nổ hũ", "đá gà", "xổ số", "lô đề", "game bài", "bắn cá",
+  // Chinese, Japanese, Korean
+  "博彩", "娱乐城", "百家乐", "老虎机", "赌场", "彩票", "体育投注", "真人视讯", "オンラインカジノ", "カジノ",
+  "카지노", "토토", "바카라", "슬롯", "먹튀",
 ];
+
+/** Words in registrable domains that squatters pick for gambling sites. */
+export const SPAM_HOST = /(slot|togel|casino|kasino|judi|gacor|poker|ufabet|bet\d|\dbet|bandar|maxwin|sbobet|baccarat|toto\d|qq\d|bola|jackpot)/i;
 
 export const SOFT_404_PHRASES = [
   "page not found", "404 not found", "error 404", "404 error", "not found", "page cannot be found",
@@ -48,6 +63,7 @@ export const SOFT_404_PHRASES = [
   "we couldn't find", "we can't find", "we could not find", "sorry, this page", "oops", "file not found",
   "the requested url was not found", "resource not found", "page unavailable", "this page isn't available",
   "this page is no longer", "article not found", "no results found", "page missing",
+  "account suspended", "website is not available", "this site is under construction", "site not found",
 ];
 
 export function isParkingHost(url: string): boolean {
@@ -55,16 +71,28 @@ export function isParkingHost(url: string): boolean {
   return PARKING_HOSTS.some((p) => (p.endsWith(".") ? host.startsWith(p) : host === p || host.endsWith(`.${p}`)));
 }
 
+/** Scripts written without spaces between words (Thai, CJK) cannot use word boundaries. */
+const UNSPACED = /[฀-๿぀-ヿ㐀-鿿가-힯]/;
+
 function countHits(haystack: string, phrases: readonly string[]): string[] {
   const h = ` ${haystack.toLowerCase()} `;
   return phrases.filter((p) => {
-    const i = h.indexOf(p);
-    if (i === -1) return false;
+    if (UNSPACED.test(p)) return h.includes(p);
     // require word boundaries so "toto" doesn't match "pothoto"
-    const before = h[i - 1];
-    const after = h[i + p.length];
-    return !/[\p{L}\p{N}]/u.test(before ?? " ") && !/[\p{L}\p{N}]/u.test(after ?? " ");
+    let i = h.indexOf(p);
+    while (i !== -1) {
+      const before = h[i - 1];
+      const after = h[i + p.length];
+      if (!/[\p{L}\p{N}]/u.test(before ?? " ") && !/[\p{L}\p{N}]/u.test(after ?? " ")) return true;
+      i = h.indexOf(p, i + 1);
+    }
+    return false;
   });
+}
+
+/** The final host looks like a gambling site's domain. */
+export function isSpamHost(url: string): boolean {
+  return SPAM_HOST.test(hostOf(url));
 }
 
 export function parkingHits(text: string): string[] {

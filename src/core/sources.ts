@@ -9,7 +9,7 @@ import type { DocumentFormat, DocumentOrigin, SourceDocument } from "./types";
 import { htmlTitle } from "./text";
 import { shortHash } from "./url";
 
-export const MAX_LINKS = Number(process.env.REVENANT_MAX_LINKS ?? 250);
+export const MAX_LINKS = Number(process.env.REVENANT_MAX_LINKS ?? 600);
 
 const WIKI_UA = "RevenantBot/0.1 (https://github.com/ZNLong2203/revenant; citation health research)";
 

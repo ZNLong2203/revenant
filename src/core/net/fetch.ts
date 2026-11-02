@@ -97,14 +97,15 @@ export async function safeFetch(url: string, opts: FetchOptions = {}): Promise<R
   const { timeoutMs = 12_000, maxBytes = 1_500_000, maxRedirects = 6, headers = {}, trusted = false } = opts;
   const redirects: string[] = [];
   let current = url;
-  const deadline = AbortSignal.timeout(timeoutMs);
   try {
     for (let hop = 0; hop <= maxRedirects; hop++) {
       if (!trusted) await assertPublicUrl(current);
+      // the clock starts once this hop holds a host slot, not while it waits in
+      // the per-host queue (waiting used to time requests out before they ran)
       const res = await withHostLimit(hostOf(current), () =>
         fetch(current, {
           redirect: "manual",
-          signal: deadline,
+          signal: AbortSignal.timeout(timeoutMs),
           headers: {
             "user-agent": USER_AGENT,
             accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",

@@ -69,3 +69,24 @@ export async function cached<T>(key: string, ttlSeconds: number, fn: () => Promi
 export function cacheBackend(): "redis" | "memory" {
   return getRedis() ? "redis" : "memory";
 }
+
+/** CLI only: persist the memory cache between runs (hooks run often). */
+export async function loadDiskCache(path: string): Promise<void> {
+  const { readFile } = await import("node:fs/promises");
+  try {
+    const data = JSON.parse(await readFile(path, "utf8")) as Record<string, Entry>;
+    const now = Date.now();
+    for (const [k, e] of Object.entries(data)) if (e.expires > now) memory.set(k, e);
+  } catch {
+    // no cache yet
+  }
+}
+
+export async function saveDiskCache(path: string): Promise<void> {
+  const { mkdir, writeFile } = await import("node:fs/promises");
+  const { dirname } = await import("node:path");
+  const now = Date.now();
+  const keep = Object.fromEntries([...memory.entries()].filter(([, e]) => e.expires > now).slice(-3000));
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, JSON.stringify(keep));
+}
