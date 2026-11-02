@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
+/*
+ * Revenant's palette: ink, bone and candlelight, with one colour per verdict.
+ * Every verdict colour clears 4.5:1 against --ink and --crypt, and verdicts
+ * are always shown with a glyph and a word too, never colour alone.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #0b0a0e;
+  --crypt: #131118;
+  --vault: #1b1822;
+  --seam: #2c2836;
+  --seam-strong: #3d3849;
+  --bone: #ece6d8;
+  --bone-dim: #b9b1a4;
+  --ash: #8d8698;
+  --candle: #f0b44c;
+  --candle-deep: #c98a24;
+  --ember: #ff7a45;
+
+  --v-possessed: #ff5c63;
+  --v-changeling: #b79cff;
+  --v-ghost: #8fd3f4;
+  --v-buried: #a3a0aa;
+  --v-unknown: #e2c46b;
+  --v-alive: #7fd17f;
+
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-crypt: var(--crypt);
+  --color-vault: var(--vault);
+  --color-seam: var(--seam);
+  --color-seam-strong: var(--seam-strong);
+  --color-bone: var(--bone);
+  --color-bone-dim: var(--bone-dim);
+  --color-ash: var(--ash);
+  --color-candle: var(--candle);
+  --color-candle-deep: var(--candle-deep);
+  --color-ember: var(--ember);
+  --color-possessed: var(--v-possessed);
+  --color-changeling: var(--v-changeling);
+  --color-ghost: var(--v-ghost);
+  --color-buried: var(--v-buried);
+  --color-unknown: var(--v-unknown);
+  --color-alive: var(--v-alive);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-fell);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgb(240 180 76 / 0.07), transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, rgb(183 156 255 / 0.05), transparent 60%),
+    var(--ink);
+  color: var(--bone);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
+
+::selection {
+  background: rgb(240 180 76 / 0.35);
+  color: var(--bone);
+}
+
+:focus-visible {
+  outline: 2px solid var(--candle);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* faint film grain so flat surfaces feel like old paper under candlelight */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 6px rgb(240 180 76 / 0.55)); }
+  42% { opacity: 0.86; filter: drop-shadow(0 0 3px rgb(240 180 76 / 0.35)); }
+  47% { opacity: 1; }
+  71% { opacity: 0.92; filter: drop-shadow(0 0 8px rgb(240 180 76 / 0.6)); }
+}
+.candle-flicker { animation: flicker 3.2s infinite ease-in-out; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 420ms cubic-bezier(.2,.7,.2,1) both; }
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.8; }
+}
+.pending { animation: pulse-soft 1.4s infinite ease-in-out; }
+
+@keyframes drift {
+  from { transform: translateX(-4%); }
+  to { transform: translateX(4%); }
+}
+.fog { animation: drift 18s infinite alternate ease-in-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .candle-flicker, .rise, .pending, .fog { animation: none !important; }
+}
+
+.diff-add { background: rgb(127 209 127 / 0.12); color: #c9f0c9; }
+.diff-del { background: rgb(255 92 99 / 0.12); color: #ffc9cb; }
+.diff-hunk { color: var(--candle); }
