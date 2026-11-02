@@ -119,6 +119,14 @@ export function ScanView() {
                   {state.finishedAt && state.startedAt && !("featured" in source) ? ` · ${Math.max(1, Math.round((state.finishedAt - state.startedAt) / 1000))}s` : ""}
                 </span>
               ) : null}
+              {state.doc.origin.type === "wikipedia" && (
+                <>
+                  {" · "}
+                  <a href={state.doc.origin.url} target="_blank" rel="noreferrer" className="text-ash underline decoration-seam-strong underline-offset-4 hover:text-bone">
+                    article text by Wikipedia contributors, CC BY-SA 4.0
+                  </a>
+                </>
+              )}
             </p>
           )}
         </div>

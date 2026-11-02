@@ -16,12 +16,12 @@ export function Sigil({ className = "" }: { className?: string }) {
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-seam/70 bg-ink/80 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center gap-6 px-4 py-3 sm:px-6" aria-label="Main">
+      <nav className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:gap-6 sm:px-6" aria-label="Main">
         <Link href="/" className="flex items-center gap-2 text-bone">
           <Sigil className="h-7 w-7 text-bone" />
           <span className="font-display text-2xl leading-none tracking-wide">Revenant</span>
         </Link>
-        <div className="ml-auto flex items-center gap-1 text-sm text-bone-dim sm:gap-2">
+        <div className="ml-auto flex items-center gap-0.5 whitespace-nowrap text-sm text-bone-dim sm:gap-2">
           <Link className="rounded px-2 py-1 hover:text-bone" href="/method">
             Method
           </Link>
