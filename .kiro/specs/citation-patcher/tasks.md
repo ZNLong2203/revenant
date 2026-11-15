@@ -1,4 +1,10 @@
-# Implementation Plan
+# Implementation Plan: Citation Patcher
+
+## Overview
+
+Edit citation templates byte-faithfully first, then plan fixes for every link kind, then hand the result to a person as a diff, a file or an editor link.
+
+## Tasks
 
 - [x] 1. Template editing
   - [x] 1.1 `setTemplateParams` with in-place rewrite, legacy alias handling and style-matched append
@@ -27,3 +33,57 @@
 - [ ] 4. Next
   - [ ] 4.1 Open a GitHub pull request from the CLI with the user's own `gh` login (never a server token)
     - _Requirements: 3.2, 3.4_
+
+## Notes
+
+- Tasks marked `*` are property tests (Properties 1–5 and 22).
+- Task 4.1 is open: a pull request would be opened with the user's own `gh` login, never with a server token.
+
+## Task Dependency Graph
+
+```json
+{
+  "waves": [
+    {
+      "id": 0,
+      "tasks": [
+        "1.1",
+        "1.2",
+        "1.3"
+      ]
+    },
+    {
+      "id": 1,
+      "tasks": [
+        "1.4",
+        "2.1"
+      ]
+    },
+    {
+      "id": 2,
+      "tasks": [
+        "2.2"
+      ]
+    },
+    {
+      "id": 3,
+      "tasks": [
+        "2.3",
+        "3.1"
+      ]
+    },
+    {
+      "id": 4,
+      "tasks": [
+        "3.2"
+      ]
+    },
+    {
+      "id": 5,
+      "tasks": [
+        "4.1"
+      ]
+    }
+  ]
+}
+```

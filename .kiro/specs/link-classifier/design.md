@@ -4,6 +4,8 @@
 
 Classification is split into an **impure observation phase** (`examine.ts`: live page, RDAP, Wayback, sibling probe, claim check) and a **pure decision phase** (`signals/verdict.ts`: observations → decision). The split lets property tests explore the decision space without the network, and lets the browser, CLI and MCP server share one engine.
 
+## Architecture
+
 ```mermaid
 flowchart LR
   A[ExtractedLink] --> B[observeLive]
@@ -17,7 +19,7 @@ flowchart LR
   G2 --> J[remedyFor]
 ```
 
-## Components
+## Components and Interfaces
 
 ### Extractors (`src/core/extract/`)
 - `wikitext.ts`: a brace/bracket-aware template scanner (`findTemplateEnd`, `parseTemplate`) that records parameter spans; `claimBefore` walks back over adjacent `<ref>`s to the sentence they support.
@@ -45,25 +47,57 @@ flowchart LR
 | archive matched title, live does not | changeling | 0.6 |
 | claim check: archive supports, live does not | changeling | 0.85 |
 
+## Data Models
+
+```ts
+interface ExtractedLink { id: string; rawUrl: string; url: string; kind: LinkKind; span: Span; urlSpan: Span;
+  title?: string; context: string; accessDate?: string; existingArchive?: { url: string; date?: string }; existingStatus?: string; quote?: string }
+interface LiveObservation { ok: boolean; status?: number; finalUrl?: string; redirects: string[]; title?: string; text?: string; errorKind?: string; fetchedAt: string }
+interface Evidence { signal: string; detail: string; points: Verdict; weight: number }
+interface Examination { linkId: string; url: string; verdict: Verdict; confidence: number; summary: string; evidence: Evidence[];
+  live?: LiveObservation; domain?: DomainObservation; archive?: ArchiveObservation; claim?: ClaimCheck; remedy: Remedy }
+```
+
+The full definitions are in `src/core/types.ts`.
+
 ## Correctness Properties
 
 Each property is a fast-check test in `tests/property/verdict.test.ts` or `tests/property/extract-and-guard.test.ts`.
 
-- **Property 10: A 404 or 410 is always buried.** _Validates: Requirement 2.1_
-- **Property 11: A domain that no longer resolves is always buried.** _Validates: Requirement 2.1_
-- **Property 12: A page that answered is never buried, and a page that failed is never alive.** _Validates: Requirements 2.1, 2.8_
-- **Property 13: Turning a page into a parked domain never leaves it alive.** _Validates: Requirement 2.2_
-- **Property 14: A gambling takeover the archive never had is possessed.** _Validates: Requirement 2.3_
-- **Property 15: Confidence is within [0, 1] and every verdict has a summary.** _Validates: Requirement 2.9_
-- **Property 17: URL normalisation is idempotent.** _Validates: Requirement 1.5_
-- **Property 19: Every Markdown link's span slices to its raw URL.** _Validates: Requirement 1.5_
-- **Property 20: URLs inside code blocks are never extracted.** _Validates: Requirement 1.4_
-- **Property 21: Every wikitext link's span slices to its raw URL.** _Validates: Requirements 1.1, 1.5_
+### Property 10: A 404 or 410 is always buried
+**Validates: Requirements 2.1**
 
-## Error handling
+### Property 11: A domain that no longer resolves is always buried
+**Validates: Requirements 2.1**
+
+### Property 12: A page that answered is never buried, and a page that failed is never alive
+**Validates: Requirements 2.1, 2.8**
+
+### Property 13: Turning a page into a parked domain never leaves it alive
+**Validates: Requirements 2.2**
+
+### Property 14: A gambling takeover the archive never had is possessed
+**Validates: Requirements 2.3**
+
+### Property 15: Confidence is within [0, 1] and every verdict has a summary
+**Validates: Requirements 2.9**
+
+### Property 17: URL normalisation is idempotent
+**Validates: Requirements 1.5**
+
+### Property 19: Every Markdown link's span slices to its raw URL
+**Validates: Requirements 1.5**
+
+### Property 20: URLs inside code blocks are never extracted
+**Validates: Requirements 1.4**
+
+### Property 21: Every wikitext link's span slices to its raw URL
+**Validates: Requirements 1.1, 1.5**
+
+## Error Handling
 
 Network failures never throw out of `examine`: they become `LiveObservation.errorKind` (`dns`, `timeout`, `refused`, `tls`, `blocked`, `other`) and therefore evidence. A failing claim check falls back to the lexical check.
 
-## Testing strategy
+## Testing Strategy
 
 Property tests for invariants; regression tests (`tests/unit/takeover-patterns.test.ts`) quote real pages the benchmark misjudged; the benchmark (`scripts/benchmark.ts`) measures recall on editor-labelled `usurped` citations and the false-possessed rate on `live` ones.

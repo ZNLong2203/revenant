@@ -24,6 +24,8 @@ The Graveyard Census scans a whole set of Wikipedia articles (a category, a Wiki
 
 ### Requirement 2: Run politely and resumably
 
+**User Story:** As a WikiProject coordinator, I want a long census to be gentle on the services it reads and to survive interruptions, so that I can run it on hundreds of articles.
+
 #### Acceptance Criteria
 
 1. THE SYSTEM SHALL examine one article at a time with the existing per-host limits, and SHALL NOT examine a URL twice in one census.
@@ -42,6 +44,8 @@ The Graveyard Census scans a whole set of Wikipedia articles (a category, a Wiki
 4. THE SYSTEM SHALL never edit Wikipedia.
 
 ### Requirement 4: Verify before publishing
+
+**User Story:** As an editor, I want every listed citation backed by enough evidence and a checked archive copy, so that I do not waste time on false alarms.
 
 #### Acceptance Criteria
 

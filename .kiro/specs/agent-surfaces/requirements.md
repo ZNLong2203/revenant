@@ -4,6 +4,11 @@
 
 Revenant should catch possessed links where they are written, not months later. The same engine is exposed to people (web app, CLI), to agents (MCP over stdio and HTTP, a Kiro Power) and to automation (agent hook, GitHub Action).
 
+## Glossary
+- **MCP**: Model Context Protocol, the way agents call Revenant's tools.
+- **Power**: a Kiro package that bundles an MCP server and skills, activated by keywords in the conversation.
+- **Hook**: a Kiro rule that runs a command or prompt when an event happens, such as saving a file.
+
 ## Requirements
 
 ### Requirement 1: MCP server
@@ -38,6 +43,8 @@ Revenant should catch possessed links where they are written, not months later. 
 4. THE SYSTEM SHALL persist its cache between CLI runs.
 
 ### Requirement 4: Continuous integration
+
+**User Story:** As a maintainer, I want pull requests checked for possessed links and the code checked on every change, so that a takeover or a regression never lands unnoticed.
 
 #### Acceptance Criteria
 

@@ -1,4 +1,10 @@
-# Implementation Plan
+# Implementation Plan: Link Classifier
+
+## Overview
+
+Define the vocabulary, extract links with their context, decide verdicts with a pure function, wire the observations, then measure the result against editors' own tags.
+
+## Tasks
 
 - [x] 1. Shared vocabulary
   - [x] 1.1 Define `Verdict`, `ExtractedLink`, `Examination`, `Evidence`, `Remedy` in `src/core/types.ts`
@@ -52,3 +58,82 @@
     - _Requirements: 2.3_
   - [ ]* 6.2 Property test: adding spam terms that the archive also contains never flips a page to possessed
     - **Validates: Requirement 2.3**
+
+## Notes
+
+- Tasks marked `*` are property tests (Properties 10–15, 17 and 19–21).
+- Seeds 2026, 1031 and 3110 were used to find gaps; only seed 4040 is quoted, and it is now development data too.
+- Tasks 6.1 and 6.2 are open.
+
+## Task Dependency Graph
+
+```json
+{
+  "waves": [
+    {
+      "id": 0,
+      "tasks": [
+        "1.1"
+      ]
+    },
+    {
+      "id": 1,
+      "tasks": [
+        "1.2",
+        "2.2",
+        "3.1"
+      ]
+    },
+    {
+      "id": 2,
+      "tasks": [
+        "1.3",
+        "2.1",
+        "2.3",
+        "2.4",
+        "3.2"
+      ]
+    },
+    {
+      "id": 3,
+      "tasks": [
+        "2.5",
+        "3.3",
+        "4.1",
+        "4.2"
+      ]
+    },
+    {
+      "id": 4,
+      "tasks": [
+        "4.3"
+      ]
+    },
+    {
+      "id": 5,
+      "tasks": [
+        "5.1"
+      ]
+    },
+    {
+      "id": 6,
+      "tasks": [
+        "5.2"
+      ]
+    },
+    {
+      "id": 7,
+      "tasks": [
+        "5.3",
+        "6.1"
+      ]
+    },
+    {
+      "id": 8,
+      "tasks": [
+        "6.2"
+      ]
+    }
+  ]
+}
+```

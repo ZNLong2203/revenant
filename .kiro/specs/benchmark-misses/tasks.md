@@ -1,4 +1,10 @@
-# Implementation Plan
+# Implementation Plan: Benchmark Misses
+
+## Overview
+
+Each defect in `bugfix.md` gets a failing regression test from the real page first, then the fix, then a fresh benchmark seed to confirm the unchanged behaviour.
+
+## Tasks
 
 - [x] 1. Write failing regression tests from the real pages (jaschaheifetzsociety.org, adherents.com, jaguarssp.com, fourdir.com) and multilingual vocabulary
   - _Bugfix: Current Behavior 3, 4, 5_
@@ -18,3 +24,8 @@
   - _Bugfix: Unchanged Behavior 3_
 - [x] 9. Held-out misses on seed 4040: "website is for sale" phrasing and Indonesian game-site brands, with regression tests; numbers stay as published
   - _Bugfix: Expected Behavior 9, 10_
+
+## Notes
+
+- Bugfix tasks run as a linear sequence, so there is no dependency graph.
+- Seed 4040 was used once for the published numbers; the two misses it found (task 9) were fixed afterwards and are not counted.

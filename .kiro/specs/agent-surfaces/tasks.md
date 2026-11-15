@@ -1,4 +1,10 @@
-# Implementation Plan
+# Implementation Plan: Agent Surfaces
+
+## Overview
+
+Expose the engine to agents and automation: shared MCP tools over two transports, the CLI and hook, the Kiro integration in this repository, the Power and CI.
+
+## Tasks
 
 - [x] 1. MCP tools shared by both transports
   - [x] 1.1 `createRevenantServer` with four tools and annotations
@@ -33,3 +39,50 @@
     - _Requirements: 4.2_
   - [x] 5.2 `.github/workflows/revenant.yml`: scan changed Markdown, fail on possessed
     - _Requirements: 4.1_
+
+## Notes
+
+- Tasks marked `*` are unit tests.
+- Task 4.2 is open: the Power was installed from a clone of the public repository with `kiro-cli powers install` and used in Kiro IDE, but not yet imported through the Powers panel or recorded for the demo.
+- `census_category` was added later by the graveyard-census spec.
+
+## Task Dependency Graph
+
+```json
+{
+  "waves": [
+    {
+      "id": 0,
+      "tasks": [
+        "1.1",
+        "2.1"
+      ]
+    },
+    {
+      "id": 1,
+      "tasks": [
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.2",
+        "5.1"
+      ]
+    },
+    {
+      "id": 2,
+      "tasks": [
+        "3.1",
+        "3.2",
+        "4.1",
+        "5.2"
+      ]
+    },
+    {
+      "id": 3,
+      "tasks": [
+        "4.2"
+      ]
+    }
+  ]
+}
+```

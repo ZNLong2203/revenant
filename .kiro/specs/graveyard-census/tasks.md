@@ -1,4 +1,10 @@
-# Implementation Plan
+# Implementation Plan: Graveyard Census
+
+## Overview
+
+Build the census in layers: targets, the run engine with its property tests, the report and exports, then the CLI, web and MCP surfaces, and finally a real census published on the home page.
+
+## Tasks
 
 - [x] 1. Census targets
   - [x] 1.1 Category members (namespace 0, paginated, limit)
@@ -13,9 +19,9 @@
     - _Requirements: 2.2, 2.3_
   - [x] 2.2 Article loop with cross-article URL de-duplication
     - _Requirements: 2.1_
-  - [x]* 2.3 Property test C1: each URL examined at most once per run
+  - [x]* 2.3 Property test 24: each URL examined at most once per run
     - **Validates: Requirement 2.1**
-  - [x]* 2.4 Property test C2: resume after any prefix gives the same report
+  - [x]* 2.4 Property test 25: resume after any prefix gives the same report
     - **Validates: Requirement 2.2**
 
 - [x] 3. Report
@@ -23,7 +29,7 @@
     - _Requirements: 3.1, 4.1, 4.2_
   - [x] 3.2 CSV and wikitext table exports
     - _Requirements: 3.2_
-  - [x]* 3.3 Property tests C3, C4, C5
+  - [x]* 3.3 Property tests 26, 27, 28
     - **Validates: Requirements 3.2, 4.2**
 
 - [x] 4. Surfaces
@@ -37,3 +43,56 @@
 - [x] 5. First real census
   - [x] 5.1 Run on one WikiProject category and publish the totals on the home page with the date (`npm run census:publish`; two runs in docs/CENSUS.md)
     - _Requirements: 3.3_
+
+## Notes
+
+- Tasks marked `*` are property tests (Properties 24–28 in the design).
+- Task 5.1 produced the two runs in `docs/CENSUS.md`; both were chosen before their results were known.
+
+## Task Dependency Graph
+
+```json
+{
+  "waves": [
+    {
+      "id": 0,
+      "tasks": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "2.1"
+      ]
+    },
+    {
+      "id": 1,
+      "tasks": [
+        "2.2",
+        "3.1"
+      ]
+    },
+    {
+      "id": 2,
+      "tasks": [
+        "2.3",
+        "2.4",
+        "3.2"
+      ]
+    },
+    {
+      "id": 3,
+      "tasks": [
+        "3.3",
+        "4.1",
+        "4.2",
+        "4.3"
+      ]
+    },
+    {
+      "id": 4,
+      "tasks": [
+        "5.1"
+      ]
+    }
+  ]
+}
+```

@@ -1,20 +1,26 @@
 # Design Document: Graveyard Census
 
 ## Overview
-A census reuses `loadDocument` (Wikipedia) and the examine pipeline from `src/core`. New pieces:
-- `src/core/census/targets.ts`: resolve a category, domain or title list into article titles (`list=categorymembers`, `list=exturlusage`, both paginated with `continue`).
-- `src/core/census/run.ts`: the loop. It iterates articles, examines each distinct URL once and builds worklist rows. Loading and examining are injected, so it runs in the CLI, in the browser and in tests.
-- `src/core/census/report.ts`: pure functions from a run to totals, worklist and review lists, CSV and a wikitext table.
-- `src/core/census/store.ts`: `.revenant/census/<id>.json` for the CLI. `src/core/census/server.ts` wires the real network.
-- `bin/revenant.ts census <category|domain:example.com|titles.txt>` (`src/cli/census.ts`).
-- `src/app/census/page.tsx` with `POST /api/census/targets` and `POST /api/census/article`: start a census of up to 2,000 articles, watch it, export the worklist.
-- MCP tool `census_category` (read-only, at most 50 articles, stops after about four minutes).
+
+A census reuses `loadDocument` (Wikipedia) and the examine pipeline from `src/core` to scan many articles, examining each distinct URL once, and turns the results into a worklist of possessed citations nobody has tagged. It runs in the CLI, in the hosted app (driven from the browser) and as an MCP tool.
+
+## Architecture
 
 ```mermaid
 flowchart LR
   T[targets] --> R[run: for each article] --> E[examine each new URL] --> P[(progress: file or localStorage)]
   P --> W[report: worklist / CSV / wikitext]
 ```
+
+## Components and Interfaces
+
+- `src/core/census/targets.ts`: `parseCensusSource(raw, lang)` and `resolveTargets(target, limit)` turn a category, domain or title list into article titles (`list=categorymembers`, `list=exturlusage`, both paginated with `continue`).
+- `src/core/census/run.ts`: `createRun(source, articles)` and `runCensus(run, deps)`, the loop. It iterates articles, examines each distinct URL once and builds worklist rows. Loading and examining are injected (`CensusDeps`), so it runs in the CLI, in the browser and in tests.
+- `src/core/census/report.ts`: `buildReport(run)`, `toCsv(rows)`, `parseCsv(csv)` and `toWikitext(report)`, pure functions from a run to totals, worklist and review lists and exports.
+- `src/core/census/store.ts`: `saveRun` / `loadRun` for `.revenant/census/<id>.json` in the CLI. `src/core/census/server.ts` wires the real network.
+- `bin/revenant.ts census <category|domain:example.com|titles.txt>` (`src/cli/census.ts`), and `npm run census:publish -- <id>` for the home page.
+- `src/app/census/page.tsx` with `POST /api/census/targets` and `POST /api/census/article`: start a census of up to 2,000 articles, watch it, export the worklist.
+- MCP tool `census_category` (read-only, at most 50 articles, stops after about four minutes).
 
 ## Decisions
 - **The browser drives the hosted run.** A serverless function ends with its request, and one article can take longer than a function may run, so `/census` loads one article and examines its links through the existing routes, and keeps the run in localStorage. Resuming, exporting and opening a CLI run file all work from there. Because of this, **Upstash Redis is not used for census progress**; the first draft of this design listed it.
@@ -29,13 +35,27 @@ flowchart LR
 
 ## Correctness Properties
 
-- **Property C1: A URL appears at most once among the examinations of a run.** _Validates: Requirement 2.1_
-- **Property C2: Resuming a run after any prefix of articles yields the same final report as an uninterrupted run (given the same examinations).** _Validates: Requirement 2.2_
-- **Property C3: Every row in the main worklist has ≥ 2 evidence items pointing to its verdict; others are in review.** _Validates: Requirement 4.2_
-- **Property C4: The CSV round-trips: parsing the CSV gives back the rows (titles and claims may contain commas, quotes and newlines).** _Validates: Requirement 3.2_
-- **Property C5: The wikitext table escapes `|` and `}}` in cells so it never breaks the page.** _Validates: Requirement 3.2_
+In `tests/property/census.test.ts`. Properties 24 and 25 run the real engine against generated articles and a stand-in examine step; 26 to 28 test the report on generated rows.
 
-## Data model
+### Property 24: A URL appears at most once among the examinations of a run
+**Validates: Requirements 2.1**
+
+### Property 25: Resuming a run after any prefix of articles yields the same final report as an uninterrupted run
+Given the same examinations.
+**Validates: Requirements 2.2**
+
+### Property 26: Every row in the main worklist has at least two independent signals; the others are in review
+**Validates: Requirements 4.2, 3.1**
+
+### Property 27: The CSV round-trips
+Parsing the CSV gives back the rows, including commas, quotes, newlines and text that starts like a spreadsheet formula.
+**Validates: Requirements 3.2**
+
+### Property 28: The wikitext table escapes markup in every cell, so it never breaks the page
+**Validates: Requirements 3.2**
+
+## Data Models
+
 ```ts
 interface CensusRun {
   id: string;
@@ -63,3 +83,16 @@ interface CensusRow {
 }
 ```
 `review` is not stored: a row is on the worklist when it is untagged and has at least two evidence lines, and in review otherwise.
+
+## Error Handling
+
+- Wikipedia answering 429 or 5xx, or not answering at all, raises `CensusPaused`: the run stops with its progress saved and the article is redone on resume.
+- A missing article goes to `errors` and the run continues.
+- An examination that throws counts as `unknown`; one that takes longer than two minutes (`examineTimeoutMs`) also counts as `unknown`, so one stuck request cannot hold the census.
+- A citation with no sentence of its own (inside an infobox or `{{Reflist}}`) is shown as `Cited page: "<title>"` instead of template text, and the same sentence citing the same URL twice is one row.
+- The hosted app refuses more than 2,000 articles and points to the CLI; a run file opened in the browser is validated with zod before it is trusted.
+
+## Testing Strategy
+
+Property tests 24–28 and unit tests (`tests/unit/census-run.test.ts`, `tests/unit/census-targets.test.ts`) run offline against stand-in articles and a stubbed MediaWiki API. Breaking the de-duplication or the resume on purpose made Properties 24 and 25 fail. Two real censuses (`docs/CENSUS.md`) were run after the tests passed.
+

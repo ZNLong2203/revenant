@@ -4,6 +4,10 @@
 
 The citation patcher turns verdicts into a reviewable change to the user's own document: a patched source and a unified diff. It runs in the browser and in the CLI. It never saves or submits anything.
 
+## Glossary
+- **CS1 template**: a Wikipedia citation template such as `{{cite web}}`, whose `url-status`, `archive-url` and `archive-date` parameters control which link readers see.
+- **Patch**: the patched source plus a unified diff of it. Revenant produces it; a person applies it.
+
 ## Requirements
 
 ### Requirement 1: Minimal, faithful wikitext edits
@@ -20,6 +24,8 @@ The citation patcher turns verdicts into a reviewable change to the user's own d
 6. WHEN the same patch is applied twice THE SYSTEM SHALL produce the same text as applying it once.
 
 ### Requirement 2: Other formats
+
+**User Story:** As a README or docs maintainer, I want fixes to Markdown, HTML and plain-text links too, so that the same tool works outside Wikipedia.
 
 #### Acceptance Criteria
 

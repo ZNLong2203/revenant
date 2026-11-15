@@ -2,7 +2,9 @@
 
 ## Overview
 
-`net/sources.ts` talks to two public services: **RDAP** (`rdap.org/domain/<d>`, registration events) and the **Wayback CDX API** (`/cdx/search/cdx?closest=<ts>&sort=closest&filter=statuscode:200`). Snapshot choice is a pure function (`archive/select.ts`); reading a snapshot uses the raw `id_` form so no toolbar markup leaks into the text.
+`net/sources.ts` talks to two public services: **RDAP** (`rdap.org/domain/<d>`, registration events) and the **Wayback CDX API** (`/cdx/search/cdx?closest=<ts>&sort=closest&filter=statuscode:200`). Snapshot choice is a pure function (`archive/select.ts`); reading a snapshot uses the raw `id_` form so no toolbar markup leaks into the text. The chosen copy is then checked against the citing sentence, and the decision becomes a remedy in Wikipedia's CS1 vocabulary.
+
+## Architecture
 
 ```mermaid
 sequenceDiagram
@@ -26,6 +28,24 @@ sequenceDiagram
   E->>L: does the copy support the citing sentence?
 ```
 
+## Components and Interfaces
+
+- `lookupDomain(domain)` (`net/sources.ts`): current registration date from RDAP.
+- `listSnapshots(url, target)`, `firstSeen(url)`, `readSnapshot(s)`, `findArchive(url, opts)` (`net/sources.ts`): CDX queries with a circuit breaker, snapshot text, and the full selection loop above.
+- `parseCdx`, `rankSnapshots`, `selectSnapshot` (`archive/select.ts`): pure ranking by distance to the target, never on or after `notAfter`.
+- `checkClaim(input)` (`claim/llm.ts`): picks Gemini, Claude or the lexical check; `claim/prompt.ts` holds the shared prompt, schema and quote check.
+- `remedyFor(decision, archive)` (`signals/verdict.ts`): maps a verdict to a `Remedy`.
+- `safeFetch`, `assertPublicUrl`, `withHostLimit` (`net/fetch.ts`, `net/guard.ts`, `net/limiter.ts`): bounded, SSRF-checked, per-host-limited requests.
+
+## Data Models
+
+```ts
+interface Snapshot { timestamp: string; original: string; status: number; mimetype?: string; digest?: string }
+interface ArchiveObservation { snapshot?: Snapshot; url?: string; title?: string; text?: string; candidates: number; firstSeen?: string }
+interface ClaimCheck { archive: ClaimSupport; live?: ClaimSupport; quote?: string; rationale: string; method: "llm" | "lexical"; model?: string }
+interface Remedy { action: "none" | "archive" | "manual"; urlStatus?: UrlStatus; archiveUrl?: string; archiveDate?: string; note?: string }
+```
+
 ## Claim check
 
 - Provider (`claim/llm.ts`, `claimProvider`): Gemini when `GEMINI_API_KEY` is set (default model `gemini-3.8-flash`, `responseJsonSchema`, thinking level low), otherwise Claude when `ANTHROPIC_API_KEY` is set (`claude-opus-5-5`, `client.beta.messages.parse` with a zod schema, effort low, `fallbacks: "default"`), otherwise lexical. `REVENANT_LLM` forces a provider or `off`; `REVENANT_MODEL` overrides the model.
@@ -35,14 +55,25 @@ sequenceDiagram
 
 ## Correctness Properties
 
-In `tests/property/snapshot-selection.test.ts`, `tests/property/extract-and-guard.test.ts`, `tests/property/verdict.test.ts`:
+In `tests/property/snapshot-selection.test.ts`, `tests/property/extract-and-guard.test.ts` and `tests/property/verdict.test.ts`.
 
-- **Property 6: Never selects a copy captured on or after the takeover date.** _Validates: Requirement 1.4_
-- **Property 7: Only selects 200 responses with a readable type.** _Validates: Requirement 1.3_
-- **Property 8: The selected copy is the closest eligible one to the target.** _Validates: Requirement 1.1_
-- **Property 9: If any eligible copy predates the takeover, one is selected.** _Validates: Requirements 1.4, 3.3_
-- **Property 16: Possessed links are hidden (usurped/unfit), changelings are deviated.** _Validates: Requirements 3.1, 3.2_
-- **Property 23: Every RFC 1918, loopback and link-local IPv4 address is refused.** _Validates: Requirement 4.1_
+### Property 6: Never selects a copy captured on or after the takeover date
+**Validates: Requirements 1.4**
+
+### Property 7: Only selects 200 responses with a readable type
+**Validates: Requirements 1.3**
+
+### Property 8: The selected copy is the closest eligible one to the target
+**Validates: Requirements 1.1**
+
+### Property 9: If any eligible copy predates the takeover, one is selected
+**Validates: Requirements 1.4, 3.3**
+
+### Property 16: Possessed links are hidden (usurped/unfit), changelings are deviated
+**Validates: Requirements 3.1, 3.2**
+
+### Property 23: Every RFC 1918, loopback and link-local IPv4 address is refused
+**Validates: Requirements 4.1**
 
 ## Caching
 
@@ -53,3 +84,14 @@ In `tests/property/snapshot-selection.test.ts`, `tests/property/extract-and-guar
 | `cdx:<url>:<day>` | 3 days | failures throw, never cached |
 | `snap:<ts>:<url>` | 30 days | |
 | `exam:v2:<url>:<access>:<ctx>` | 12 h (10 min if unknown) | |
+
+## Error Handling
+
+- Upstream failures (429, 5xx, timeouts) throw inside `cached(...)`, so nothing is stored; the caller returns an empty result for this request only.
+- After three CDX failures in a row the archive is left alone for a minute (`cdxPaused`), and remedies say the archive is not answering instead of "no copy exists".
+- Every body read has its own deadline, so a server that answers 200 and then goes quiet becomes a timeout.
+- Any LLM error falls back to the lexical check; a quote that is not verbatim in the archived text is dropped.
+
+## Testing Strategy
+
+Property tests cover snapshot selection, the remedy vocabulary and the SSRF guard. Unit tests cover provider selection (`tests/unit/claim-provider.test.ts`) and the stalled-body deadline (`tests/unit/fetch-deadline.test.ts`). The benchmark measures the whole pipeline against editors' own tags.

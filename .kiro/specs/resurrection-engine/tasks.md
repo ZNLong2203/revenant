@@ -1,4 +1,10 @@
-# Implementation Plan
+# Implementation Plan: Resurrection Engine
+
+## Overview
+
+Build a polite, safe network layer, then archive selection that never resurrects a squatter, then the claim check and the remedy vocabulary.
+
+## Tasks
 
 - [x] 1. Network foundation
   - [x] 1.1 SSRF guard checked on every redirect hop
@@ -46,3 +52,65 @@
     - _Requirements: 1.5, 3.3_
   - [ ] 5.2 Offer Save Page Now for alive citations that have no archive copy yet (needs user-supplied IA keys)
     - _Requirements: 3.3_
+
+## Notes
+
+- Tasks marked `*` are property tests (Properties 6–9, 16 and 23).
+- Task 3.4 (Gemini) was added after 3.3 and keeps its number.
+- Tasks 5.1 and 5.2 are open.
+
+## Task Dependency Graph
+
+```json
+{
+  "waves": [
+    {
+      "id": 0,
+      "tasks": [
+        "1.1",
+        "2.1",
+        "3.1",
+        "4.1"
+      ]
+    },
+    {
+      "id": 1,
+      "tasks": [
+        "1.2",
+        "1.5",
+        "2.4",
+        "4.2"
+      ]
+    },
+    {
+      "id": 2,
+      "tasks": [
+        "1.3",
+        "1.4",
+        "3.2"
+      ]
+    },
+    {
+      "id": 3,
+      "tasks": [
+        "2.2",
+        "2.3",
+        "3.4"
+      ]
+    },
+    {
+      "id": 4,
+      "tasks": [
+        "3.3",
+        "5.1"
+      ]
+    },
+    {
+      "id": 5,
+      "tasks": [
+        "5.2"
+      ]
+    }
+  ]
+}
+```

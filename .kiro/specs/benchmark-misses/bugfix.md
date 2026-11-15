@@ -1,8 +1,12 @@
-# Bugfix: benchmark misses (seeds 2026, 1031 and 3110)
+# Bugfix Requirements Document: benchmark misses (seeds 2026, 1031, 3110 and 4040)
+
+## Introduction
 
 The first label-blind benchmark against Wikipedia citations that editors had tagged `usurped` exposed ten defects. Each is reproduced by a test that quotes the real page.
 
-## Current Behavior (Defect)
+## Bug Analysis
+
+### Current Behavior (Defect)
 
 1. WHEN the Wayback CDX API answered 429 or timed out THEN the system cached "no snapshots" for three days, so possessed links got no archive copy for the rest of the run.
 2. WHEN a document cited one host 50 times THEN the system started each fetch's timeout before the request left the per-host queue, so most of them timed out unsent (66 unknown verdicts on the PHP article, 53 of them on wiki.php.net).
@@ -15,7 +19,7 @@ The first label-blind benchmark against Wikipedia citations that editors had tag
 9. WHEN a page said "This website is for sale!" THEN the system classified it as alive (held-out seed 4040; fixed after the published run).
 10. WHEN an Indonesian game-site page used brand names outside the lexicon (`Superliga168`, `Ligaciputra`) THEN the system classified it as alive (held-out seed 4040; fixed after the published run).
 
-## Expected Behavior (Correct)
+### Expected Behavior (Correct)
 
 1. WHEN an upstream service fails THEN the system SHALL return an empty result for this request and SHALL NOT cache it; it SHALL retry 429/503 up to twice honouring `Retry-After`.
 2. WHEN requests wait in the per-host queue THEN the system SHALL start each timeout only once the request holds a slot, and SHALL retry a timed-out page once with a longer timeout.
@@ -28,7 +32,7 @@ The first label-blind benchmark against Wikipedia citations that editors had tag
 9. WHEN a page says the website or site is for sale THEN the system SHALL treat it as a parking page.
 10. WHEN a page uses known Indonesian game-site brand names THEN the system SHALL count them as gambling vocabulary.
 
-## Unchanged Behavior (Regression Prevention)
+### Unchanged Behavior (Regression Prevention)
 
 1. WHEN a page mentions one gambling word in ordinary prose (a history of the Monte Carlo Casino) THEN the system SHALL CONTINUE TO classify it as alive.
 2. WHEN a page answers 404 or its domain does not resolve THEN the system SHALL CONTINUE TO classify it as buried.

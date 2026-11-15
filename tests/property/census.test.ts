@@ -1,7 +1,7 @@
 /**
  * Property tests for the Graveyard Census (spec: .kiro/specs/graveyard-census).
- * Property C1 and C2 run the real engine against pretend articles and a
- * pretend examine step; C3 to C5 test the report on generated rows.
+ * Properties 24 and 25 run the real engine against pretend articles and a
+ * pretend examine step; 26 to 28 test the report on generated rows.
  */
 import fc from "fast-check";
 import { describe, expect, it } from "vitest";
@@ -14,7 +14,7 @@ import { article, fakeExamination, type CiteSpec } from "../helpers/census-fixtu
 
 const NOW = new Date("2026-11-03T00:00:00Z");
 
-// ---- C1 and C2: the engine ---------------------------------------------------
+// ---- Properties 24 and 25: the engine ---------------------------------------------------
 
 /** A census input: articles, each a list of cited site numbers (a small pool, so URLs repeat). */
 const articlesArb = fc.array(fc.array(fc.integer({ min: 0, max: 14 }), { maxLength: 8 }), { minLength: 1, maxLength: 7 });
@@ -35,7 +35,7 @@ function setup(shape: number[][]) {
 }
 
 describe("census engine properties", () => {
-  it("Property C1: a URL is examined at most once in a run", async () => {
+  it("Property 24: a URL is examined at most once in a run", async () => {
     await fc.assert(
       fc.asyncProperty(articlesArb, fc.integer({ min: 1, max: 5 }), async (shape, concurrency) => {
         const { run, deps, calls } = setup(shape);
@@ -46,7 +46,7 @@ describe("census engine properties", () => {
     );
   });
 
-  it("Property C2: resuming after any prefix of articles gives the report of an uninterrupted run", async () => {
+  it("Property 25: resuming after any prefix of articles gives the report of an uninterrupted run", async () => {
     await fc.assert(
       fc.asyncProperty(articlesArb, fc.integer({ min: 1, max: 8 }), fc.integer({ min: 1, max: 4 }), async (shape, stopAfter, concurrency) => {
         const whole = setup(shape);
@@ -76,7 +76,7 @@ describe("census engine properties", () => {
   });
 });
 
-// ---- C3 to C5: the report ----------------------------------------------------
+// ---- Properties 26 to 28: the report ----------------------------------------------------
 
 /** Text built from the pieces that break CSV and wikitext. */
 const PIECES = ["a", "b", " ", ",", '"', "'", "\n", "\r", "\t", "=", "+", "-", "@", "|", "{{", "}}", "[[", "]]", "<ref>", "-->", "&", "#", ":", "|-", "http://x.org/?a=b|c"];
@@ -100,7 +100,7 @@ function runWith(rows: CensusRow[], value = "Category"): CensusRun {
 }
 
 describe("census report properties", () => {
-  it("Property C3: every worklist row has at least two independent signals; the rest wait in review", () => {
+  it("Property 26: every worklist row has at least two independent signals; the rest wait in review", () => {
     fc.assert(
       fc.property(fc.array(rowArb, { maxLength: 25 }), (rows) => {
         const report = buildReport(runWith(rows));
@@ -118,7 +118,7 @@ describe("census report properties", () => {
     );
   });
 
-  it("Property C3: untagged possessed rows come before ghosts and changelings", () => {
+  it("Property 26: untagged possessed rows come before ghosts and changelings", () => {
     fc.assert(
       fc.property(fc.array(rowArb, { maxLength: 25 }), (rows) => {
         const { worklist } = buildReport(runWith(rows));
@@ -128,7 +128,7 @@ describe("census report properties", () => {
     );
   });
 
-  it("Property C4: the CSV round-trips, including commas, quotes, newlines and formula-looking text", () => {
+  it("Property 27: the CSV round-trips, including commas, quotes, newlines and formula-looking text", () => {
     fc.assert(
       fc.property(fc.array(rowArb, { maxLength: 12 }), (rows) => {
         expect(parseCsv(toCsv(rows))).toEqual(rows);
@@ -137,7 +137,7 @@ describe("census report properties", () => {
     );
   });
 
-  it("Property C5: the wikitext table never lets a cell break the page", () => {
+  it("Property 28: the wikitext table never lets a cell break the page", () => {
     fc.assert(
       fc.property(fc.array(rowArb, { maxLength: 12 }), nastyArb, (rows, category) => {
         const run = runWith(rows, category);
