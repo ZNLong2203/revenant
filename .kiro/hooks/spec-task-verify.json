@@ -4,7 +4,7 @@
     {
       "name": "Verify after each spec task",
       "description": "When Kiro finishes a task from a spec's tasks.md, run the test suite so the next task starts from green.",
-      "trigger": "PostTaskExecution",
+      "trigger": "PostTaskExec",
       "action": { "type": "command", "command": "npx vitest run --reporter=dot" },
       "timeout": 180,
       "enabled": true

@@ -8,11 +8,14 @@ permissions:
     - capability: write
       match: ["**"]
       effect: deny
+    # Kiro evaluates rules deny-overrides, so a plain deny on "*" would also
+    # block the allowed commands; the exclude list carves them out instead.
     - capability: shell
       match: ["git diff*", "git log*", "npx vitest*", "npm test*"]
       effect: allow
     - capability: shell
       match: ["*"]
+      exclude: ["git diff*", "git log*", "npx vitest*", "npm test*"]
       effect: deny
 ---
 You review changes to `src/core/signals/**` and `src/core/examine.ts`.

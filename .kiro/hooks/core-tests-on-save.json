@@ -3,7 +3,7 @@
   "hooks": [
     {
       "name": "Run unit and property tests when the engine changes",
-      "description": "Every agent edit to src/core or tests reruns vitest (23 fast-check properties + regression tests). Failures are fed back to the agent with the shrunk counterexample.",
+      "description": "Every agent edit to src/core or tests reruns vitest (29 fast-check properties + regression tests). Failures are fed back to the agent with the shrunk counterexample.",
       "trigger": "PostFileSave",
       "matcher": "(src/core/.*|tests/.*)\\.ts$",
       "action": { "type": "command", "command": "npx vitest run --reporter=dot" },
