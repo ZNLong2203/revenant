@@ -15,7 +15,7 @@ Revenant visits thousands of third-party pages plus two public-interest services
 ## Limits
 
 - Per-host concurrency goes through `withHostLimit` (Wayback: 3, RDAP: 4, everything else: 2).
-- The fetch timeout starts when the request holds its host slot, per redirect hop, never while it waits in the queue.
+- The fetch timeout starts when the request holds its host slot, per redirect hop, never while it waits in the queue. It covers the body too, and every body read races its own timer: an abort signal alone did not end a server that answers 200 and then goes quiet.
 - CDX: retry 429/503 at most twice, honouring `Retry-After` (capped at 8 s).
 - The public web app rate-limits `/api/examine`, `/api/exhume` and `/api/mcp` per IP.
 

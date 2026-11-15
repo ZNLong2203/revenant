@@ -57,18 +57,41 @@ function charsetOf(contentType: string | null): string {
   return m ? m[1].toLowerCase() : "utf-8";
 }
 
-async function readBounded(res: Response, maxBytes: number): Promise<string> {
+/**
+ * Reject when `promise` has not settled by `deadline` (epoch ms). The abort
+ * signal given to fetch is supposed to end a stalled body too, but a server that
+ * answers 200 and then goes quiet has been seen to leave `read()` waiting for
+ * ever (zeusnews.it, found by a census), so every read also races a timer.
+ */
+function before<T>(promise: Promise<T>, deadline: number, onTimeout: () => void): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
+    const give = () => {
+      onTimeout();
+      reject(new FetchFailure("timeout", "timed out"));
+    };
+    const left = deadline - Date.now();
+    if (left <= 0) return give();
+    const timer = setTimeout(give, left);
+    promise.then(
+      (v) => (clearTimeout(timer), resolve(v)),
+      (e) => (clearTimeout(timer), reject(e)),
+    );
+  });
+}
+
+async function readBounded(res: Response, maxBytes: number, deadline: number): Promise<string> {
   if (!res.body) return "";
   const reader = res.body.getReader();
+  const stop = () => void reader.cancel().catch(() => {});
   const chunks: Uint8Array[] = [];
   let size = 0;
   for (;;) {
-    const { done, value } = await reader.read();
+    const { done, value } = await before(reader.read(), deadline, stop);
     if (done) break;
     size += value.byteLength;
     chunks.push(value);
     if (size >= maxBytes) {
-      await reader.cancel().catch(() => {});
+      stop();
       break;
     }
   }
@@ -102,8 +125,10 @@ export async function safeFetch(url: string, opts: FetchOptions = {}): Promise<R
       if (!trusted) await assertPublicUrl(current);
       // the clock starts once this hop holds a host slot, not while it waits in
       // the per-host queue (waiting used to time requests out before they ran)
-      const res = await withHostLimit(hostOf(current), () =>
-        fetch(current, {
+      let deadline = 0;
+      const res = await withHostLimit(hostOf(current), () => {
+        deadline = Date.now() + timeoutMs;
+        return fetch(current, {
           redirect: "manual",
           signal: AbortSignal.timeout(timeoutMs),
           headers: {
@@ -112,18 +137,19 @@ export async function safeFetch(url: string, opts: FetchOptions = {}): Promise<R
             "accept-language": "en;q=0.9,*;q=0.5",
             ...headers,
           },
-        }),
-      );
+        });
+      });
       if (res.status >= 300 && res.status < 400 && res.headers.get("location")) {
         const next = new URL(res.headers.get("location")!, current).toString();
-        await res.body?.cancel().catch(() => {});
+        void res.body?.cancel().catch(() => {});
         redirects.push(next);
         current = next;
         continue;
       }
       const type = res.headers.get("content-type") ?? "";
       const textual = !type || /text|html|xml|json|javascript/i.test(type);
-      const body = textual ? await readBounded(res, maxBytes) : (await res.body?.cancel().catch(() => {}), "");
+      if (!textual) void res.body?.cancel().catch(() => {});
+      const body = textual ? await readBounded(res, maxBytes, deadline) : "";
       return { status: res.status, finalUrl: current, redirects, headers: res.headers, body };
     }
     throw new FetchFailure("other", "too many redirects");
