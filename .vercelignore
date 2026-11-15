@@ -7,3 +7,4 @@ private
 node_modules
 coverage
 benchmark/raw
+.revenant
