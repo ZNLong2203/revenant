@@ -13,12 +13,22 @@ interface Entry {
 const MAX_ENTRIES = 5000;
 const memory = new Map<string, Entry>();
 
+/**
+ * Redis credentials from the environment. Empty strings count as unset (a
+ * blank UPSTASH_* line in .env must not hide the KV_* variables that Vercel's
+ * Upstash integration injects).
+ */
+export function redisConfig(env: Record<string, string | undefined> = process.env): { url: string; token: string } | null {
+  const url = env.UPSTASH_REDIS_REST_URL?.trim() || env.KV_REST_API_URL?.trim();
+  const token = env.UPSTASH_REDIS_REST_TOKEN?.trim() || env.KV_REST_API_TOKEN?.trim();
+  return url && token ? { url, token } : null;
+}
+
 let redis: Redis | null | undefined;
 function getRedis(): Redis | null {
   if (redis !== undefined) return redis;
-  const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
-  redis = url && token ? new Redis({ url, token }) : null;
+  const cfg = redisConfig();
+  redis = cfg ? new Redis(cfg) : null;
   return redis;
 }
 

@@ -31,7 +31,7 @@ Expose the engine to agents and automation: shared MCP tools over two transports
 - [x] 4. Kiro Power
   - [x] 4.1 `powers/revenant/plugin.json`, `mcp.json`, skills `link-hygiene` and `wikipedia-citations`
     - _Requirements: 2.1, 2.2_
-  - [ ] 4.2 Import the Power from the public GitHub repo in Kiro's Powers panel and record the activation in the demo
+  - [x] 4.2 Install the Power from the public GitHub repo (`kiro-cli powers install`), see it under Installed in Kiro's Powers panel, and record the activation in a project that has nothing to do with Revenant (`private/kiro-logs/power.md`)
     - _Requirements: 2.1, 2.2_
 
 - [x] 5. CI
