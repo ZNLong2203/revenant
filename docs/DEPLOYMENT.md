@@ -26,6 +26,8 @@ All optional. See [`.env.example`](../.env.example).
 | `APP_URL` | Public URL, used for metadata and the MCP snippet on /agents |
 | `REVENANT_MAX_LINKS` | Links extracted per document (default 600) |
 | `REVENANT_EXAMINE_PER_HOUR`, `REVENANT_MCP_PER_HOUR` | Per-IP limits on the public endpoints |
+| `REVENANT_CENSUS_ARTICLES_PER_HOUR` | Per-IP limit on articles the census page loads (default 400) |
+| `REVENANT_CENSUS_DIR` | Where the CLI keeps census runs (default `.revenant/census`) |
 
 ## Vercel
 

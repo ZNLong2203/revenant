@@ -41,10 +41,17 @@ flowchart TB
 
 `examine()` takes its network functions as a parameter (`ExamineDeps`), so the whole pipeline can run offline in tests.
 
+## Graveyard census
+`src/core/census` walks a list of articles and examines every distinct URL once.
+- `targets.ts` turns a category, a domain (`list=exturlusage`) or a list of titles into article titles (server only).
+- `run.ts` is the loop. Loading and examining are injected, so the same code runs in the CLI (direct calls), in the browser (calls to `/api/census/article` and `/api/examine`) and in tests. An article is committed all at once, so a stopped run resumes from `run.done` with nothing half recorded.
+- `report.ts` is pure: totals, the worklist and review split, CSV and a wikitext table.
+- The hosted app cannot keep a run on the server (a serverless function ends with its request), so `/census` runs in the browser and saves to localStorage. The CLI saves JSON files in `.revenant/census/`.
+
 ## Safety and politeness
 
 - **SSRF:** every redirect hop of a user-supplied URL is resolved and refused if it points at a private, loopback, link-local or metadata address, or a non-web port.
-- **Bounded fetches:** per-hop timeout (started when the request holds its host slot), 1.5 MB body cap, non-text bodies not read.
+- **Bounded fetches:** per-hop timeout (started when the request holds its host slot) that also covers reading the body, 1.5 MB body cap, non-text bodies not read.
 - **Per-host limits:** Wayback 3, RDAP 4, everyone else 2 concurrent requests.
 - **Honest identity:** `RevenantBot/0.1` with a link to this repo. Bot walls become `unknown`; Revenant never tries to get past them. A Kiro `PreToolUse` hook blocks agents from spoofing browsers while working on this repo.
 - **No cached failures:** upstream errors throw inside the cache wrapper, so an outage is never remembered as "no snapshots".

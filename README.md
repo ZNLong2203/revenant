@@ -36,7 +36,7 @@ Link checkers ask one question: does the URL answer 200? Wikipedia's PHP article
    Evidence comes from the live page, **RDAP** registration dates (a domain registered after the citation date has a new owner), the **Wayback Machine** capture nearest the access date, multilingual spam and parking signatures, and a soft-404 sibling probe.
 3. **Raise the dead.** Revenant picks the archived copy closest to when the author read the page, **never one captured after the takeover** (the archive keeps crawling squatters). It checks with Gemini (or Claude), or by word overlap without a key, that the copy supports the citing sentence. Then it writes the fix: `archive-url`, `archive-date` in the citation's own date style, and `url-status`. Every other byte is untouched. You copy the patch, download a `.patch`, or open the Wikipedia or GitHub editor. Revenant never edits anything for you.
 
-![Scanning the PHP article: a graveyard of 347 links and the autopsy of a possessed citation](docs/images/scan.jpg)
+![Scanning the PHP article: a graveyard of 350 links and the autopsy of a possessed citation](docs/images/scan.jpg)
 
 ## Measured, not claimed
 
@@ -47,9 +47,15 @@ Wikipedia editors' own tags are ground truth. On a held-out sample (seed 4040, n
 
 Method, per-row results and the misses we found and fixed along the way: [docs/BENCHMARK.md](docs/BENCHMARK.md).
 
+Census, 2026-11-15 (two categories, not a random sample): in the first 60 articles of *Category:Defunct websites* (1,297 citations) Revenant listed **12 possessed citations no editor had tagged**, and 9 of them were confirmed by opening the live page. In *Category:PHP* (732 citations) it found none, and found again the one that editors had tagged. Rows, hand checks and caveats: [docs/CENSUS.md](docs/CENSUS.md).
+
+## Graveyard census
+Scan a whole Wikipedia category, every article that links to a domain, or a list of titles, and get a worklist of possessed citations nobody has tagged yet: the sentence, the evidence, the fix, as CSV or as a wikitext table for a WikiProject page. Revenant examines each distinct URL once and never edits Wikipedia.
+- **Web:** [/census](https://revenant-links.vercel.app/census), up to 2,000 articles, driven from your browser and saved in it.
+- **CLI:** `npx tsx bin/revenant.ts census "Category:Internet Archive" --limit 50 --csv worklist.csv`. Progress is saved after every article in `.revenant/census/`; continue a stopped run with `--resume <id>`.
 ## Use it from your agent
 
-- **MCP server** with `examine_link`, `scan_document`, `scan_source` and `raise_patch`, over stdio (`npm run mcp`) or Streamable HTTP (`/api/mcp`).
+- **MCP server** with `examine_link`, `scan_document`, `scan_source`, `raise_patch` and `census_category`, over stdio (`npm run mcp`) or Streamable HTTP (`/api/mcp`).
 - **Kiro Power** in [`powers/revenant`](powers/revenant): import from GitHub in Kiro's Powers panel.
 - **Agent hook**: Revenant checks the Markdown your agent just saved ([`.kiro/hooks/docs-link-check.json`](.kiro/hooks/docs-link-check.json)).
 - **CLI**: `npx tsx bin/revenant.ts scan README.md --fail-on possessed` exits 1 when it finds one; `--fix` rewrites local files.
@@ -66,7 +72,7 @@ The [`/.kiro`](.kiro) directory holds what Kiro reads: seven steering files (alw
 ```bash
 npm install
 npm run dev        # http://localhost:3000
-npm test           # 52 tests, including 23 fast-check properties
+npm test           # 99 tests, including 29 fast-check properties
 ```
 
 Everything works without keys. Optional: `GEMINI_API_KEY` (or `ANTHROPIC_API_KEY`) for model claim checks, Upstash Redis for a shared cache. See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).

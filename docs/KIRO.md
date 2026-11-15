@@ -23,7 +23,7 @@ Everything Kiro reads lives in [`/.kiro`](../.kiro). This page explains what eac
 | `citation-patcher` | feature | Byte-preserving wikitext edits; Properties 1–5 and 22. |
 | `agent-surfaces` | feature | MCP tools, CLI, hook, Power, CI. |
 | `benchmark-misses` | **bugfix** | Eight real defects found by benchmarking against Wikipedia editors' own labels, in Current / Expected / Unchanged form. |
-| `graveyard-census` | feature, **open** | The next feature: census a Wikipedia category and publish a worklist of untagged possessed citations. All tasks are open. |
+| `graveyard-census` | feature | Census a Wikipedia category, domain or title list and publish a worklist of untagged possessed citations. All tasks are done; the first two published censuses are in [CENSUS.md](CENSUS.md). |
 
 Every property in a design document is a real test: `Property N` in the design is `it("Property N: …")` in `tests/property/`.
 
@@ -36,7 +36,7 @@ Every property in a design document is a real test: `Property N` in the design i
 | `docs-link-check` | PostFileSave `*.md` | **Revenant checks the links the agent just wrote** (`revenant hook` reads the payload on stdin) |
 | `signal-change-needs-evidence` | PostFileSave `src/core/signals/**` | agent prompt: name the real page, keep the invariants, pick an unused seed |
 | `guard-bot-etiquette` | PreToolUse `shell` | blocks spoofed browser user agents, anti-bot tooling and staging `private/` or `.env` |
-| `spec-task-verify` | PostTaskExecution | tests after each spec task |
+| `spec-task-verify` | PostTaskExec | tests after each spec task |
 | `stop-run-tests` | Stop (with confirm) | offers typecheck + lint + tests before the agent hands back |
 
 ## Custom agents: `.kiro/agents/`
@@ -55,7 +55,7 @@ Every property in a design document is a real test: `Property N` in the design i
 
 ## Property-based testing
 
-`tests/property/` holds 23 fast-check properties, numbered to match the spec designs. Two found real bugs while the engine was being built:
+`tests/property/` holds 29 fast-check properties, numbered to match the spec designs. Two found real bugs while the engine was being built:
 
 - **Property 17** (URL normalisation is idempotent) shrank to `http://a.aa?#`: an empty query left a dangling `?` that a second pass stripped. The fix iterates normalisation to a fixed point.
 - The same run showed that returning `expect(...)` from a predicate makes fast-check report a false failure, which is now a rule in `tech.md`.
