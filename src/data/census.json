@@ -1,0 +1,59 @@
+[
+  {
+    "runId": "defunct-websites-20261115-1irr3c5",
+    "scope": "Category:Defunct websites",
+    "lang": "en",
+    "measuredOn": "2026-11-15",
+    "version": "0.1.0",
+    "articles": 60,
+    "moreArticles": true,
+    "citations": 1297,
+    "urls": 1241,
+    "counts": {
+      "possessed": 14,
+      "changeling": 12,
+      "ghost": 35,
+      "buried": 144,
+      "unknown": 310,
+      "alive": 726
+    },
+    "untaggedPossessed": 12,
+    "taggedPossessed": 3,
+    "worklist": 10,
+    "review": 40,
+    "checked": {
+      "on": "2026-11-15",
+      "rows": 12,
+      "confirmed": 9
+    },
+    "shareAffected": 0.009252120277563608,
+    "notChecked": 0,
+    "articleErrors": 0
+  },
+  {
+    "runId": "php-20261115-195ar1",
+    "scope": "Category:PHP",
+    "lang": "en",
+    "measuredOn": "2026-11-15",
+    "version": "0.1.0",
+    "articles": 26,
+    "moreArticles": false,
+    "citations": 732,
+    "urls": 667,
+    "counts": {
+      "possessed": 1,
+      "changeling": 11,
+      "ghost": 7,
+      "buried": 92,
+      "unknown": 56,
+      "alive": 500
+    },
+    "untaggedPossessed": 0,
+    "taggedPossessed": 1,
+    "worklist": 8,
+    "review": 10,
+    "shareAffected": 0,
+    "notChecked": 0,
+    "articleErrors": 0
+  }
+]

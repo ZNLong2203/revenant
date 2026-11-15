@@ -1,0 +1,17 @@
+{
+  "checkedOn": "2026-11-15",
+  "how": "Each URL was opened on the live web with an honest bot user agent and the final address and page title read. 'confirmed' means the address now belongs to someone else (parked, for sale, gambling spam or an unrelated site). 'not-confirmed' means that could not be shown from the live page.",
+  "urls": [
+    { "url": "http://abcnews.com.co/", "outcome": "confirmed", "note": "redirects to greatglen.org, an Indonesian toto/togel gambling site" },
+    { "url": "http://www.aiqinhai.org/common/declare.asp", "outcome": "not-confirmed", "note": "answers 200 with a blank page; the domain was registered again on 2026-10-27" },
+    { "url": "http://www.aiqinhai.org/aqh/aboutus.htm", "outcome": "not-confirmed", "note": "answers 200 with a blank page; the domain was registered again on 2026-10-27" },
+    { "url": "http://www.aljazeerausannouncement.com/", "outcome": "confirmed", "note": "redirects to gawvi.com, an unrelated biography site; registered again in 2020" },
+    { "url": "http://www.uftree.com/UFT/UFTProductInfo/aboutuft.html", "outcome": "confirmed", "note": "redirects to familyfriendlyhotels.org, a hotel site; registered again in 2023" },
+    { "url": "http://www.seo-article.com/seo-articles/how-to-get-a-top-google-ranking.htm", "outcome": "not-confirmed", "note": "still an SEO-articles site; registered again on 2025-12-01 and the page at this address is now a 2025 article, which is replaced content rather than a squatter" },
+    { "url": "http://fractalcow.com/bert/bert4.htm", "outcome": "confirmed", "note": "redirects to hotel-maastricht.net, a hotel page titled with the old domain name" },
+    { "url": "http://www.fractalcow.com/bert/bert.htm", "outcome": "confirmed", "note": "redirects to hotel-maastricht.net, a hotel page titled with the old domain name" },
+    { "url": "https://trimfeed.com/", "outcome": "confirmed", "note": "redirects to parlayserokbos.com, an Indonesian slot-gambling site" },
+    { "url": "http://eq.org.nz/", "outcome": "confirmed", "note": "redirects to ministryoffood.co.nz, titled 'Mafia Casino Australia'" },
+    { "url": "http://www.itnews.it/news/2001/0111124700548/portali-mondadori-com-vicino-chiusura-ciaoweb-in-crisi.html", "outcome": "confirmed", "note": "title reads 'This website is for sale!'" }
+  ]
+}

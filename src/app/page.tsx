@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { REPO_URL } from "@/components/site";
 import { SummonForm } from "@/components/summon-form";
 import { Tombstone, VERDICT_META, VerdictBadge } from "@/components/verdict";
 import type { Verdict } from "@/core/types";
 import { BENCHMARK } from "@/data/benchmark";
+import { CENSUS } from "@/data/census";
 import { EXHIBIT, FACTS } from "@/data/facts";
 import { FEATURED } from "@/data/featured";
 
@@ -131,6 +133,54 @@ export default function Home() {
           <p className="text-xs text-ash md:col-span-3">Wikipedia counts measured with the search API on {FACTS.measuredOn}.</p>
         </div>
       </section>
+
+      {/* ---- census: only once a finished run has been published ------------ */}
+      {CENSUS.length > 0 && (
+        <section aria-labelledby="census" className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+          <h2 id="census" className="font-display text-4xl text-bone">
+            Graveyard census
+          </h2>
+          <p className="mt-3 max-w-3xl text-bone-dim">
+            Revenant can scan a whole Wikipedia category and list the possessed citations that no editor has tagged <span className="font-mono text-bone">usurped</span> or{" "}
+            <span className="font-mono text-bone">unfit</span>. These are the runs published so far. Each covers the articles it names, not Wikipedia as a whole.
+          </p>
+          <div className="mt-8 grid gap-4 lg:grid-cols-2">
+            {CENSUS.map((c) => (
+              <article key={c.runId} className="rounded-2xl border border-seam bg-crypt/60 p-5 sm:p-6">
+                <h3 className="font-mono text-sm text-bone">{c.scope}</h3>
+                <p className="mt-1 text-xs text-ash">
+                  {c.measuredOn} · {c.moreArticles ? `first ${nf.format(c.articles)} articles of a larger category` : `${nf.format(c.articles)} articles`} · {nf.format(c.citations)} citations ·{" "}
+                  {nf.format(c.urls)} distinct links examined once each
+                </p>
+                <p className="mt-4 text-5xl font-semibold tabular-nums text-possessed">{nf.format(c.untaggedPossessed)}</p>
+                <p className="mt-1 text-sm text-bone-dim">
+                  possessed citations nobody has tagged ({(c.shareAffected * 100).toFixed(2)}% of the citations)
+                </p>
+                {c.checked && (
+                  <p className="mt-3 text-sm text-bone-dim">
+                    <span className="text-bone">{nf.format(c.checked.confirmed)} of {nf.format(c.checked.rows)}</span> were opened and read on {c.checked.on}: the address now
+                    belongs to someone else. The rest could not be confirmed from the live page.
+                  </p>
+                )}
+                <p className="mt-3 text-sm text-bone-dim">
+                  {nf.format(c.taggedPossessed)} more {c.taggedPossessed === 1 ? "was" : "were"} already tagged by editors and found again without being told.
+                </p>
+                <a href={`${REPO_URL}/blob/main/census/${c.runId}.csv`} target="_blank" rel="noreferrer" className="mt-4 inline-block text-xs text-candle underline underline-offset-4">
+                  Every row, with its evidence (CSV) ↗
+                </a>
+              </article>
+            ))}
+          </div>
+          <p className="mt-5 text-sm">
+            <Link href="/census" className="text-candle underline underline-offset-4">
+              Run a census of your own →
+            </Link>
+            <a href={`${REPO_URL}/blob/main/docs/CENSUS.md`} target="_blank" rel="noreferrer" className="ml-4 text-xs text-ash underline decoration-seam-strong underline-offset-4 hover:text-bone">
+              Method and caveats ↗
+            </a>
+          </p>
+        </section>
+      )}
 
       {/* ---- featured ------------------------------------------------------- */}
       {FEATURED.length > 0 && (
