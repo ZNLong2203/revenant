@@ -16,11 +16,12 @@ src/core/            the engine, shared by web, CLI and MCP (no Next imports)
   net/               fetch (SSRF guard, limits), cache, RDAP + Wayback sources
   examine.ts         one link end to end, network injected (testable)
   server.ts          production wiring + caching
+  census/            Graveyard Census: types, run (the loop), report (pure), targets (MediaWiki API), store (CLI files)
   scan.ts            whole-document scan for CLI and MCP
   sources.ts         load Wikipedia / GitHub / web / paste
 src/mcp/tools.ts     MCP tool definitions (stdio + HTTP)
-src/app/             pages (/, /scan, /method, /agents) and API routes
-src/components/      UI; scan/ holds the scan view, autopsy, raise panel
+src/app/             pages (/, /scan, /census, /method, /agents) and API routes
+src/components/      UI; scan/ holds the scan view, autopsy, raise panel; census/ the census page
 bin/                 revenant.ts (CLI) and revenant-mcp.ts (stdio MCP)
 scripts/             benchmark.ts, featured.ts, hooks/
 powers/revenant/     the Kiro Power (plugin.json, mcp.json, skills/)
@@ -33,5 +34,5 @@ private/             gitignored: submission drafts, demo script, video
 
 Rules:
 - `src/core/**` must not import from `src/app`, `src/components` or `next/*`.
-- Pure modules (`extract`, `signals`, `archive`, `patch`, `claim/lexical`, `text`, `url`, `dates`, `group`) must not import `node:*` or `net/*`: the browser bundles them.
+- Pure modules (`extract`, `signals`, `archive`, `patch`, `claim/lexical`, `text`, `url`, `dates`, `group`, `census/types`, `census/run`, `census/report`) must not import `node:*` or `net/*`: the browser bundles them.
 - New network access goes through `net/fetch.ts` (`safeFetch`), never raw `fetch`.

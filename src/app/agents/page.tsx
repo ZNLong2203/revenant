@@ -27,9 +27,10 @@ export default function AgentsPage() {
       <section className="mt-12">
         <h2 className="font-display text-3xl text-bone">MCP server</h2>
         <p className="mt-2 text-bone-dim">
-          Four read-only tools: <span className="font-mono text-bone">examine_link</span>, <span className="font-mono text-bone">scan_document</span>,{" "}
-          <span className="font-mono text-bone">scan_source</span> and <span className="font-mono text-bone">raise_patch</span> (returns the fixed document and a
-          diff; writes nothing).
+          Five read-only tools: <span className="font-mono text-bone">examine_link</span>, <span className="font-mono text-bone">scan_document</span>,{" "}
+          <span className="font-mono text-bone">scan_source</span>, <span className="font-mono text-bone">raise_patch</span> (returns the fixed document and a
+          diff; writes nothing) and <span className="font-mono text-bone">census_category</span> (up to 50 articles of a Wikipedia category: the possessed
+          citations nobody has tagged).
         </p>
         <Code label="Remote (Streamable HTTP): .kiro/settings/mcp.json or any MCP client">{`{
   "mcpServers": {

@@ -11,7 +11,7 @@ import { shortHash } from "./url";
 
 export const MAX_LINKS = Number(process.env.REVENANT_MAX_LINKS ?? 600);
 
-const WIKI_UA = "RevenantBot/0.1 (https://github.com/ZNLong2203/revenant; citation health research)";
+export const WIKI_UA = "RevenantBot/0.1 (https://github.com/ZNLong2203/revenant; citation health research)";
 
 export type ScanInput =
   | { kind: "wikipedia"; lang: string; title: string }

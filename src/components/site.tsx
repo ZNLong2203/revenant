@@ -25,6 +25,9 @@ export function SiteHeader() {
           <Link className="rounded px-2 py-1 hover:text-bone" href="/method">
             Method
           </Link>
+          <Link className="rounded px-2 py-1 hover:text-bone" href="/census">
+            Census
+          </Link>
           <Link className="rounded px-2 py-1 hover:text-bone" href="/agents">
             For agents
           </Link>

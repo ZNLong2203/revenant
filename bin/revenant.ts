@@ -5,8 +5,11 @@
  *   revenant scan <file | url | wiki:Title>...  [--fail-on possessed,ghost] [--max 60] [--json] [--fix] [--diff]
  *   revenant check <url> [--access-date YYYY-MM-DD] [--json]
  *   revenant hook                       read a Kiro/agent hook payload on stdin, scan the files it names
+ *   revenant census <Category:Name | domain:example.com | titles.txt> [--limit 200] [--lang en] [--max-links N]
+ *                   [--csv out.csv] [--wikitext out.txt] [--json]
+ *   revenant census --resume <run id>   continue a stopped census (saved in .revenant/census/)
  *
- * Exit codes: 0 clean, 1 a --fail-on verdict was found, 2 usage or input error.
+ * Exit codes: 0 clean, 1 a --fail-on verdict was found, 2 usage or input error, 3 a census stopped before the end.
  */
 import { readFile, writeFile } from "node:fs/promises";
 import { extname, resolve } from "node:path";
@@ -17,6 +20,7 @@ import { examineLink } from "../src/core/server";
 import { loadDocument, parseInput } from "../src/core/sources";
 import type { DocumentFormat, Examination, Verdict } from "../src/core/types";
 import { normalizeUrl } from "../src/core/url";
+import { censusCommand } from "../src/cli/census";
 import { pathsFromPayload } from "../src/cli/payload";
 
 const CACHE = resolve(process.env.REVENANT_CACHE ?? ".revenant/cache.json");
@@ -135,8 +139,24 @@ async function cmdHook(): Promise<number> {
   return 0; // never block the agent; the report is the feedback
 }
 
+async function cmdCensus(args: string[]): Promise<number> {
+  const valueFlags = new Set(["--limit", "--lang", "--max-links", "--resume", "--csv", "--wikitext"]);
+  const target = args.find((a, i) => !a.startsWith("--") && !valueFlags.has(args[i - 1] ?? ""));
+  const num = (name: string) => (flag(args, name) === undefined ? undefined : Number(flag(args, name)));
+  if (!target && !flag(args, "resume")) return usage();
+  return censusCommand({
+    target,
+    resume: flag(args, "resume"),
+    limit: num("limit"),
+    lang: flag(args, "lang"),
+    maxLinks: num("max-links"),
+    csv: flag(args, "csv"),
+    wikitext: flag(args, "wikitext"),
+    json: has(args, "json"),
+  });
+}
 function usage(): number {
-  console.error("usage: revenant scan <file|url|wiki:Title>... [--fail-on possessed,ghost] [--max 60] [--json] [--fix] [--diff] [--verbose]\n       revenant check <url> [--access-date YYYY-MM-DD] [--json]\n       revenant hook < payload.json");
+  console.error("usage: revenant scan <file|url|wiki:Title>... [--fail-on possessed,ghost] [--max 60] [--json] [--fix] [--diff] [--verbose]\n       revenant check <url> [--access-date YYYY-MM-DD] [--json]\n       revenant hook < payload.json\n       revenant census <Category:Name|domain:example.com|titles.txt> [--limit 200] [--lang en] [--max-links N] [--csv out.csv] [--wikitext out.txt] [--json]\n       revenant census --resume <run id>");
   return 2;
 }
 
@@ -148,6 +168,7 @@ async function main() {
     if (cmd === "scan") code = await cmdScan(rest);
     else if (cmd === "check") code = await cmdCheck(rest);
     else if (cmd === "hook") code = await cmdHook();
+    else if (cmd === "census") code = await cmdCensus(rest);
     else code = usage();
   } catch (e) {
     console.error(`revenant: ${(e as Error).message}`);

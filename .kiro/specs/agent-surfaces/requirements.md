@@ -12,7 +12,7 @@ Revenant should catch possessed links where they are written, not months later. 
 
 #### Acceptance Criteria
 
-1. THE SYSTEM SHALL expose `examine_link`, `scan_document`, `scan_source` and `raise_patch` with zod-validated inputs and read-only, open-world annotations.
+1. THE SYSTEM SHALL expose `examine_link`, `scan_document`, `scan_source`, `raise_patch` and `census_category` with zod-validated inputs and read-only, open-world annotations.
 2. THE SYSTEM SHALL serve the same tools over stdio (`bin/revenant-mcp.ts`) and stateless Streamable HTTP (`/api/mcp`).
 3. WHEN `raise_patch` is called THE SYSTEM SHALL return the patched text and a unified diff and SHALL NOT write any file.
 4. WHEN the HTTP endpoint is called more than its hourly limit from one IP THE SYSTEM SHALL answer 429 with Retry-After.

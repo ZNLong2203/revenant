@@ -13,6 +13,7 @@ Status codes lie: a domain that expired and was bought by a squatter still answe
 - Finished editing **a document** → `scan_document` with the full text. Read `counts` and `problems`.
 - User wants **fixes** → `raise_patch`; show the `diff`, and write `patched` only if the user agrees.
 - Asked about **a Wikipedia article, a GitHub README or a web page** by name or URL → `scan_source`.
+- Asked to audit **a Wikipedia category** for possessed citations nobody has tagged → `census_category`. It is slow: start with `limit` 3 to 5 and tell the user it can take minutes.
 
 ## Reading verdicts
 

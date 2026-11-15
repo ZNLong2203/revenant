@@ -5,14 +5,19 @@
  */
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
+import { buildReport } from "../core/census/report";
+import { createRun } from "../core/census/run";
+import { runLiveCensus } from "../core/census/server";
+import { isLang, parseCensusSource, resolveTargets } from "../core/census/targets";
+import { MCP_MAX_ARTICLES } from "../core/census/types";
 import { detectFormat } from "../core/extract";
 import { examineLink } from "../core/server";
 import { patchScan, scanDocument, type ScanResult } from "../core/scan";
-import { loadDocument } from "../core/sources";
+import { loadDocument, SourceError } from "../core/sources";
 import type { DocumentFormat, Examination } from "../core/types";
 import { normalizeUrl } from "../core/url";
+import { REVENANT_VERSION } from "../core/version";
 
-const VERSION = "0.1.0";
 const FORMAT = z.enum(["auto", "wikitext", "markdown", "html", "text"]).default("auto");
 
 function brief(ex: Examination) {
@@ -46,7 +51,7 @@ const json = (value: unknown) => ({ content: [{ type: "text" as const, text: JSO
 
 export function createRevenantServer(): McpServer {
   const server = new McpServer(
-    { name: "revenant", version: VERSION },
+    { name: "revenant", version: REVENANT_VERSION },
     {
       instructions:
         "Revenant checks cited links for link rot that status-code checkers miss: domains taken over by squatters (possessed), soft 404s (ghost), replaced content (changeling) and plain dead links (buried). Use examine_link for one URL, scan_document for Markdown/wikitext/HTML you are editing, and raise_patch to get a corrected document plus a unified diff. Verdicts map to Wikipedia url-status values.",
@@ -137,5 +142,41 @@ export function createRevenantServer(): McpServer {
     },
   );
 
+  server.registerTool(
+    "census_category",
+    {
+      title: "Census a Wikipedia category",
+      description:
+        "Scan the articles of a Wikipedia category and list the possessed, ghost and changeling citations nobody has tagged yet, each with its evidence and the proposed citation fix. Read-only. Slow: every distinct URL is examined, so start with a small limit. Stops after about four minutes and reports what it finished.",
+      inputSchema: {
+        category: z.string().describe("Category name or URL, e.g. 'Category:PHP' or https://en.wikipedia.org/wiki/Category:PHP"),
+        lang: z.string().refine(isLang, "a Wikipedia language code such as en").default("en"),
+        limit: z.number().int().min(1).max(MCP_MAX_ARTICLES).default(5).describe(`Articles to scan, at most ${MCP_MAX_ARTICLES}`),
+        maxLinksPerArticle: z.number().int().min(1).max(150).default(30),
+      },
+      annotations: { readOnlyHint: true, openWorldHint: true },
+    },
+    async ({ category, lang, limit, maxLinksPerArticle }) => {
+      try {
+        const target = parseCensusSource(category, lang);
+        if (target.source.kind !== "category") return { ...json({ error: "census_category takes a category name or a Wikipedia category URL." }), isError: true };
+        const { articles, more } = await resolveTargets(target, limit);
+        const run = createRun(target.source, articles, { moreArticles: more });
+        const outcome = await runLiveCensus(run, { maxLinks: maxLinksPerArticle, concurrency: 6, signal: AbortSignal.timeout(240_000) });
+        const report = buildReport(run);
+        return json({
+          category: target.source.value,
+          finished: outcome.stop === "finished",
+          stoppedBecause: outcome.stop === "finished" ? undefined : (outcome.reason ?? "time limit"),
+          totals: report.totals,
+          worklist: report.worklist.slice(0, 60),
+          needsCloserLook: report.review.slice(0, 20),
+        });
+      } catch (error) {
+        if (error instanceof SourceError) return { ...json({ error: error.message }), isError: true };
+        throw error;
+      }
+    },
+  );
   return server;
 }

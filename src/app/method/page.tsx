@@ -76,6 +76,32 @@ export default function MethodPage() {
         </li>
       </ul>
 
+      <h2 id="census" className="mt-14 scroll-mt-24 font-display text-3xl text-bone">
+        Graveyard census
+      </h2>
+      <p className="mt-4 text-bone-dim">
+        A census runs the same examination over many Wikipedia articles (a category, the articles that link to a domain, or a list of titles) and keeps the citations
+        no editor has handled yet.
+      </p>
+      <ul className="mt-4 list-disc space-y-2 pl-5 text-bone-dim">
+        <li>
+          <span className="text-bone">Each distinct URL is examined once.</span> Later citations of the same URL get their own row, with the same verdict and archived copy
+          and their own citing sentence.
+        </li>
+        <li>
+          <span className="text-bone">Untagged means no matching <span className="font-mono">url-status</span>.</span> A possessed citation already marked{" "}
+          <span className="font-mono">usurped</span> or <span className="font-mono">unfit</span> is counted but is not on the worklist.
+        </li>
+        <li>
+          <span className="text-bone">Two independent signals or it waits.</span> A row goes on the worklist when at least two different kinds of evidence point to its
+          verdict (for example a new registration date and gambling terms the archive never had). Rows with one go to a &quot;needs a closer look&quot; list.
+        </li>
+        <li>
+          <span className="text-bone">An archived copy checked against the sentence, or &quot;needs a new source&quot;.</span> Rows without one say so.
+        </li>
+        <li>Dead links (buried) and unknown links are counted but not listed: existing tools already find the dead ones, and unknown means a person has to look.</li>
+        <li>A census can be stopped and resumed. Nothing is written to Wikipedia; the output is a CSV and a wikitext table for an editor to review.</li>
+      </ul>
       <h2 id="benchmark" className="mt-14 scroll-mt-24 font-display text-3xl text-bone">
         Benchmark
       </h2>

@@ -44,22 +44,30 @@ export function planFix(link: ExtractedLink, exam: Examination, takeoverDate?: s
   return { link, verdict: exam.verdict, remedy };
 }
 
+/**
+ * The CS1 parameters a fix writes into a citation template. Shared by the
+ * patcher and by the census worklist, so both show exactly the same change.
+ */
+export function citeUpdates(text: string, fix: PlannedFix): Record<string, string> {
+  const { link, remedy } = fix;
+  const updates: Record<string, string> = {};
+  if (remedy.archiveUrl && remedy.archiveDate) {
+    const example = param(parseTemplate(text, link.span), "access-date", "accessdate", "date")?.value;
+    updates["archive-url"] = remedy.archiveUrl;
+    updates["archive-date"] = formatDateLike(remedy.archiveDate, example);
+  }
+  if (remedy.urlStatus && (remedy.archiveUrl || remedy.urlStatus === "usurped" || remedy.urlStatus === "unfit")) {
+    // CS1 only honours url-status when archive-url is present; usurped/unfit still warn editors
+    updates["url-status"] = remedy.urlStatus;
+  }
+  return updates;
+}
 function editsFor(text: string, fix: PlannedFix): { edits: TextEdit[]; change: string } | { reason: string } {
   const { link, remedy } = fix;
   const archiveUrl = remedy.archiveUrl;
   switch (link.kind) {
     case "cite-template": {
-      const t = parseTemplate(text, link.span);
-      const updates: Record<string, string> = {};
-      if (archiveUrl && remedy.archiveDate) {
-        const example = param(t, "access-date", "accessdate", "date")?.value;
-        updates["archive-url"] = archiveUrl;
-        updates["archive-date"] = formatDateLike(remedy.archiveDate, example);
-      }
-      if (remedy.urlStatus && (archiveUrl || remedy.urlStatus === "usurped" || remedy.urlStatus === "unfit")) {
-        // CS1 only honours url-status when archive-url is present; usurped/unfit still warn editors
-        updates["url-status"] = remedy.urlStatus;
-      }
+      const updates = citeUpdates(text, fix);
       const edits = setTemplateParams(text, link.span, updates);
       return { edits, change: describe(updates) };
     }

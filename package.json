@@ -12,6 +12,8 @@
     "typecheck": "next typegen && tsc --noEmit",
     "benchmark": "tsx scripts/benchmark.ts",
     "revenant": "tsx bin/revenant.ts",
+    "census": "tsx bin/revenant.ts census",
+    "census:publish": "tsx scripts/census-publish.ts",
     "mcp": "tsx bin/revenant-mcp.ts",
     "featured": "tsx scripts/featured.ts"
   },
