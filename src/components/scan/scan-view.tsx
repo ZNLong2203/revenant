@@ -130,7 +130,7 @@ export function ScanView() {
             </p>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex min-w-0 flex-col gap-2 sm:flex-row">
           {plan?.patch && (
             <button
               onClick={() => setRaising(true)}
@@ -139,7 +139,7 @@ export function ScanView() {
               Raise the dead · {plan.patch.applied.length}
             </button>
           )}
-          <div className="w-full min-w-[260px] lg:w-[360px]">
+          <div className="w-full min-w-0 sm:min-w-[260px] lg:w-[360px]">
             <SummonForm compact initial={"q" in source ? source.q : ""} />
           </div>
         </div>

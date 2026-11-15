@@ -16,22 +16,22 @@ export function Sigil({ className = "" }: { className?: string }) {
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-seam/70 bg-ink/80 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:gap-6 sm:px-6" aria-label="Main">
+      <nav className="mx-auto flex max-w-6xl items-center gap-2 px-4 py-3 sm:gap-6 sm:px-6" aria-label="Main">
         <Link href="/" className="flex items-center gap-2 text-bone">
-          <Sigil className="h-7 w-7 text-bone" />
-          <span className="font-display text-2xl leading-none tracking-wide">Revenant</span>
+          <Sigil className="h-6 w-6 text-bone sm:h-7 sm:w-7" />
+          <span className="font-display text-xl leading-none tracking-wide sm:text-2xl">Revenant</span>
         </Link>
-        <div className="ml-auto flex items-center gap-0.5 whitespace-nowrap text-sm text-bone-dim sm:gap-2">
-          <Link className="rounded px-2 py-1 hover:text-bone" href="/method">
+        <div className="ml-auto flex items-center whitespace-nowrap text-[13px] text-bone-dim sm:gap-2 sm:text-sm">
+          <Link className="rounded px-1.5 py-1 hover:text-bone sm:px-2" href="/method">
             Method
           </Link>
-          <Link className="rounded px-2 py-1 hover:text-bone" href="/census">
+          <Link className="rounded px-1.5 py-1 hover:text-bone sm:px-2" href="/census">
             Census
           </Link>
-          <Link className="rounded px-2 py-1 hover:text-bone" href="/agents">
+          <Link className="rounded px-1.5 py-1 hover:text-bone sm:px-2" href="/agents">
             For agents
           </Link>
-          <a className="rounded px-2 py-1 hover:text-bone" href={REPO_URL} target="_blank" rel="noreferrer">
+          <a className="hidden rounded px-2 py-1 hover:text-bone sm:inline-block" href={REPO_URL} target="_blank" rel="noreferrer">
             GitHub
           </a>
         </div>

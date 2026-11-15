@@ -48,7 +48,7 @@ export default function AgentsPage() {
         <h2 className="font-display text-3xl text-bone">Kiro Power</h2>
         <p className="mt-2 text-bone-dim">
           In Kiro, open the Powers panel, choose <span className="text-bone">Add Custom Power → Import power from GitHub</span> and point it at{" "}
-          <span className="font-mono text-bone">{REPO_URL}/tree/main/powers/revenant</span>. It wires up the remote MCP server and two skills (link hygiene and
+          <span className="break-all font-mono text-bone">{REPO_URL}/tree/main/powers/revenant</span>. It wires up the remote MCP server and two skills (link hygiene and
           Wikipedia citations) that activate when a conversation mentions dead links, citations or link rot.
         </p>
       </section>
