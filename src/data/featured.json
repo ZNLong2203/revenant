@@ -1,1 +1,52 @@
-[]
+[
+  {
+    "slug": "php",
+    "kind": "Wikipedia",
+    "title": "PHP",
+    "note": "The language's own article: a Microsoft developer page it cites now sells lottery tickets.",
+    "links": 350,
+    "counts": {
+      "possessed": 1,
+      "changeling": 8,
+      "ghost": 2,
+      "buried": 41,
+      "unknown": 18,
+      "alive": 280
+    },
+    "untaggedPossessed": 0,
+    "recordedOn": "2026-11-15"
+  },
+  {
+    "slug": "supreme-court-demographics",
+    "kind": "Wikipedia",
+    "title": "Demographics of the Supreme Court of the United States",
+    "note": "Religious statistics cited from adherents.com, a domain that now serves a Thai online casino.",
+    "links": 129,
+    "counts": {
+      "possessed": 2,
+      "changeling": 2,
+      "ghost": 1,
+      "buried": 17,
+      "unknown": 34,
+      "alive": 73
+    },
+    "untaggedPossessed": 1,
+    "recordedOn": "2026-11-15"
+  },
+  {
+    "slug": "stirling-engine",
+    "kind": "Wikipedia",
+    "title": "Stirling engine",
+    "note": "Engineering references, one of them now a domain-for-sale page.",
+    "links": 45,
+    "counts": {
+      "alive": 20,
+      "buried": 18,
+      "ghost": 1,
+      "unknown": 5,
+      "possessed": 1
+    },
+    "untaggedPossessed": 0,
+    "recordedOn": "2026-11-02"
+  }
+]
